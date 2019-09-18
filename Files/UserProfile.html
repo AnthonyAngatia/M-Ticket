@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Profile</title>
+  </head>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+    * {
+      padding: 0px;
+      margin: 0px;
+      box-sizing: border-box;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: "Montserrat", sans-serif;
+    }
+    h1 {
+      text-align: center;
+    }
+    .container1 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .user-avatar {
+      text-align: center;
+    }
+    .user-info {
+      font-size: 24px;
+    }
+
+    .events-booked {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1em;
+      grid-auto-rows: minmax(300px, auto);
+      margin: 5px;
+    }
+    .events-booked > div {
+      background-color: #ddd;
+      box-shadow: 0 8px 6px -6px black;
+    }
+    .liked-events {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1em;
+      grid-auto-rows: minmax(300px, auto);
+      margin: 5px;
+    }
+    .liked-events > div {
+      background-color: #ddd;
+      box-shadow: 0 8px 6px -6px black;
+    }
+    .events-attended {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1em;
+      grid-auto-rows: minmax(300px, auto);
+      margin: 5px;
+    }
+    .events-attended div {
+      background-color: #ddd;
+      box-shadow: 0 8px 6px -6px black;
+    }
+  </style>
+  <body>
+    <!--
+      !container1
+    -->
+    <div class="container1">
+      <div class="user-avatar">
+        <img src="/Assets/User-avatar.jpg" alt="User-avatar" />
+      </div>
+      <div class="user-info">
+        <h1>BIO</h1>
+        <h4>Name:</h4>
+        <span>Anthony Angatia.</span>
+        <br />
+        <h4>Reward Points:</h4>
+        <span>120</span>
+      </div>
+    </div>
+    <!--
+      !container2
+    -->
+    <h1>Upcoming events</h1>
+    <div class="events-booked">
+      <div class="event1">
+        <img src="" alt="event poster" />
+      </div>
+      <div class="event2">
+        <img src="" alt="event poster" />
+      </div>
+      <div class="event3">
+        <img src="" alt="event poster" />
+      </div>
+    </div>
+    <a href="">See more</a>
+    <!--
+      !container3
+    -->
+    <h1>Liked Events</h1>
+    <div class="liked-events">
+      <div class="liked1">
+        <img src="" alt="liked1" />
+      </div>
+      <div class="liked2">
+        <img src="" alt="liked2" />
+      </div>
+      <div class="liked1">
+        <img src="" alt="liked1" />
+      </div>
+    </div>
+    <a href="">See more</a>
+    <!--
+      !container4
+    -->
+    <h1>Events attended</h1>
+    <div class="events-attended">
+      <div class="event-attended1">
+        <img src="" alt="attended1" />
+      </div>
+      <div class="event-attended2">
+        <img src="" alt="attended2" />
+      </div>
+      <div class="event-attended3">
+        <img src="" alt="attended3" />
+      </div>
+    </div>
+    <a href="">See more</a>
+  </body>
+</html>

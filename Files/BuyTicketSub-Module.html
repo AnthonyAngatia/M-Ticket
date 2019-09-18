@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Buy ticket</title>
+  </head>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0px;
+    }
+    .get-ticket-heading {
+      margin-top: 2em;
+      text-align: center;
+    }
+    .get-ticket-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      margin: 1em;
+      grid-auto-rows: minmax(50px, auto);
+
+      grid-gap: 1px;
+      font-size: 18px;
+    }
+    .get-ticket-container > div {
+      background-color: #ddd;
+      padding: 1em;
+
+      text-align: center;
+    }
+    a {
+      text-decoration: none;
+      display: inline-block;
+      padding: 2px 16px;
+      cursor: pointer;
+    }
+    a:hover {
+      background-color: #80868b;
+      color: black;
+    }
+
+    .previous {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .next {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .checkout {
+      text-align: center;
+      font-size: 18px;
+    }
+    .similar-events-heading {
+      margin-top: 2em;
+      text-align: center;
+    }
+    .similar-events-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: minmax(300px, auto);
+      grid-gap: 1em;
+      margin: 1em;
+    }
+    .similar-events-container > div {
+      background-color: #ddd;
+      box-shadow: 0 8px 6px -6px black;
+    }
+  </style>
+  <body>
+    <div class="get-ticket-heading">
+      <h1>Get Ticket</h1>
+    </div>
+    <div class="get-ticket-container">
+      <div class="container1">
+        <p>Number of people</p>
+      </div>
+      <div class="container2">
+        <a class="previous round">&#8249;</a>
+        100
+        <a class="next round">&#8250;</a>
+      </div>
+      <div class="container3">
+        <p>Total price</p>
+      </div>
+      <div class="container4">
+        <p>Sh 500</p>
+      </div>
+    </div>
+    <div class="checkout">
+      <button class="checkout-button">Checkout</button>
+    </div>
+
+    <div class="similar-events-heading">
+      <h1>Similar events</h1>
+    </div>
+    <div class="similar-events-container">
+      <div class="sec1"></div>
+      <div class="sec2"></div>
+      <div class="sec3"></div>
+    </div>
+  </body>
+</html>
