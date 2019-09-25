@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Cart UI</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">   
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+    <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+    <link href="plugins/colorbox/colorbox.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+    <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+    <style>
+         * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 2px;
+    }
+      .whole-cart {
+       
+        margin: 1em;
+        margin-right: 5em;
+        margin-left: 10em;
+        box-shadow: 
+      }
+      .headings {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+      }
+      .headings > h1 {
+        text-align: center;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: 2fr 1fr 1fr;
+        grid-auto-rows: minmax(200px, auto);
+        grid-gap: 1px;
+        box-shadow: 0 8px 6px -6px black;
+      }
+      .container > div {
+          
+          background-color: #ddd;
+          text-align:center;
+        
+        
+      }
+      
+      .container img {
+        
+        height:150px;
+        max-height: 150px;
+        max-width: 150px;
+      }
+      .price{
+          padding-top: 5em;
+      }
+      a {
+      text-decoration: none;
+      display: inline-block;
+      padding: 2px 16px;
+      
+    }
+    
+
+    .previous {
+      background-color: #ddd;
+      color: black;
+    }
+
+    .next {
+      background-color: #ddd;
+      color: black;
+    }
+    .remove{
+        padding-top: 5em;
+      }
+      .remove button{
+        padding: 5px 25px;
+      background-color: rgb(231, 44, 19);
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      color:white;
+      }
+
+      
+    .checkout {
+          padding-top: 2em;
+      text-align: center;
+      font-size: 18px;
+    }
+    .checkout button {
+      padding: 5px 25px;
+      background-color: cadetblue;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      color:white;
+      font-size: 24px;
+ }
+     button:hover {
+      background-color: black;
+    }
+
+    </style>
+  </head>
+  <body>
+      <header class="header" >
+          <div class="header_inner d-flex flex-row align-items-center justify-content-start">
+            <div class="logo"><a href="#">M-ticket</a></div>
+            <nav class="main_nav">
+              <ul>
+                <li><a href="#">home</a></li>
+                <li><a href="#">events</a></li>
+                <li><a href="#">about us</a></li>
+                <li><a href="#">contact</a></li>
+              </ul>
+            </nav>
+            <div class="header_content ml-auto">
+              <div class="shopping">
+                <!-- Cart -->
+                <a href="#">
+                  <div class="cart">
+                    <img src="/Assets/cart3.png" width="30" height="30" alt="">
+                    <div class="cart_num_container">
+                      <div class="cart_num_inner">
+                        <div class="cart_num">0</div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+      
+            <div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"><div></div><div></div><div></div></div>
+          </div>
+        </header>
+      
+        <!-- Menu -->
+      
+        <div class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400">
+          <div class="menu_close_container"><div class="menu_close"><div></div><div></div></div></div>
+          <div class="logo menu_mm"><a href="#">M-ticket</a></div>
+          <div class="search">
+                    <form action="#">
+                      <input type="search" class="search_input menu_mm" required="required" placeholder="Event name*"aria-label="Search" >
+                      <button type="submit" class="newsletter_button" style="width: 80px !important;">search</button>
+                    </form>
+      
+          </div>
+          <nav class="menu_nav">
+            <ul class="menu_mm">
+              <li class="menu_mm"><a href="#">home</a></li>
+              <li class="menu_mm"><a href="#">Sign in</a></li>
+               <li class="menu_mm"><a href="#">
+                  <div class="avatar">account
+                    <img src="/Assets/account1.png" width="30" height="30" alt="">
+                  </div>
+                </a></li>
+              <li class="menu_mm"><a href="#">browse events</a></li>  
+            </ul>
+          </nav>
+        </div>
+      
+    <div class="whole-cart">
+      <div class="headings">
+        <h1>Item</h1>
+        <h1>Price</h1>
+        <h1>Remove</h1>
+      </div>
+      <div class="container">
+        <div class="item">
+                <h3>The writers Guild</h3>
+          <img src="/Assets/Event-poster.jpg" alt="item" />
+          
+        </div>
+        <div class="price">
+          <a class="previous round">&#8249;</a>
+          <span>100</span>
+          <a class="next round">&#8250;</a>
+        </div>
+        <div class="remove">
+          <button>Remove</button>
+        </div>
+        <div class="item">
+                <h3>Event xyz</h3>
+                <img src="/Assets/concert1.jpg" alt="item" />
+              </div>
+              <div class="price">
+                <a class="previous round">&#8249;</a>
+                <span>100</span>
+                <a class="next round">&#8250;</a>
+              </div>
+              <div class="remove">
+                <button>Remove</button>
+              </div>
+              <div class="item">
+                    <h3>Event xyz</h3>
+                    <img src="/Assets/concert2.jpg" alt="item" />
+                  </div>
+                  <div class="price">
+                    <a class="previous round">&#8249;</a>
+                    <span>100</span>
+                    <a class="next round">&#8250;</a>
+                  </div>
+                  <div class="remove">
+                    <button>Remove</button>
+                  </div>
+        
+    </div>
+    
+    <div class="checkout">
+            <button class="checkout-button">Checkout</button>
+          </div>
+          <script src="js/jquery-3.2.1.min.js"></script>
+          <script src="styles/bootstrap4/popper.js"></script>
+          <script src="styles/bootstrap4/bootstrap.min.js"></script>
+          <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+          <script src="plugins/easing/easing.js"></script>
+          <script src="plugins/parallax-js-master/parallax.min.js"></script>
+          <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
+          <script src="js/custom.js"></script>
+          <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+          <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
