@@ -11,16 +11,18 @@
 </head>
 
 <body>
-    <div id="test">
+    <div class="test">
 
     </div>
 
+
 </body>
 <script>
-    var test = document.getElementById('test');
+    var test = document.querySelector('.test');
     const container = document.createElement('div');
     container.setAttribute('class', 'container');
     test.appendChild(container);
+
     var request = new XMLHttpRequest();
     //Open connection
     var method = 'GET';
@@ -32,7 +34,7 @@
     //receiving response from data.php
     request.onload = function() {
         //Converting JSON back to an array
-        var data = JSON.parse(this.responseText);
+        var data = JSON.parse(this.response);
         if (request.status >= 200 && request.status < 400) {
             //alert(this.responseText);
 
@@ -52,10 +54,6 @@
         } else {
             console.log("Error loading the file");
         }
-
-
-
-
     }
 </script>
 

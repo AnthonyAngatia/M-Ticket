@@ -239,7 +239,7 @@
                 <li class="menu_mm"><a href="#">Sign in</a></li>
                 <li class="menu_mm"><a href="#">
                         <div class="avatar">account
-                            <img src="/Assets/account1.png" width="30" height="30" alt="">
+                            <img src="/Booking_n_Ticketing-master/Assets/account1.png" width="30" height="30" alt="">
                         </div>
                     </a></li>
                 <li class="menu_mm"><a href="#">browse events</a></li>
@@ -247,13 +247,14 @@
         </nav>
     </div>
 
+
     <!-- Home -->
 
     <div class="bd-example">
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="/Assets/festival1.jpg" class="d-block w-100" alt="...">
+                    <img src="/Booking_n_Ticketing-master/Assets/festival1.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>First slide label</h5>
                         <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
@@ -263,7 +264,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/Assets/event2.jpg" class="d-block w-100" alt="...">
+                    <img src="/Booking_n_Ticketing-master/Assets/event2.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Second slide label</h5>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
@@ -273,7 +274,7 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <img src="/Assets/concert5.jpg" class="d-block w-100" alt="...">
+                    <img src="/Booking_n_Ticketing-master/Assets/concert5.jpg" class="d-block w-100" alt="...">
                     <div class="carousel-caption d-none d-md-block">
                         <h5>Third slide label</h5>
                         <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
@@ -318,56 +319,12 @@
     <br>
 
     <div class="card-deck">
-        <div class="card">
-            <?php
-            require("MyDatabase.php");
-            $link = connect();
-            $sql = "SELECT Event_name, Event_description, Event_caption FROM event_tbl LIMIT 1";
-            $result = mysqli_query($link, $sql);
-            if (mysqli_num_rows($result) > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    $image = ($row['Event_caption']);
-                    /**Retrieved image in binary */
-                    echo '<img src= "data:image/jpeg;base64,' . base64_encode($image) . '"  height="420" width = "300" class="card-img-top" > ' . "<br>";
-                }
-            }
-            ?>
-            <!--<img src="/Assets/poster6.jpg" class="card-img-top" height="420"  alt="...1">-->
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Assets/poster7.jpg" class="card-img-top" height="420" alt="...2">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Assets/poster9.jpg" class="card-img-top" height="420" alt="...3">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="/Assets/poster3.jpg" class="card-img-top" height="420" alt="...4">
-            <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-        </div>
+
     </div>
     <br>
     <div class="card-deck">
         <div class="card">
-            <img src="/Assets/poster4.jpg" class="card-img-top" height="420" alt="...">
+            <img src="/Booking_n_Ticketing-master/Assets/poster4.jpg" class="card-img-top" height="420" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
@@ -375,7 +332,7 @@
             </div>
         </div>
         <div class="card">
-            <img src="/Assets/poster5.png" class="card-img-top" height="420" alt="...">
+            <img src="/Booking_n_Ticketing-master/Assets/poster5.png" class="card-img-top" height="420" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
@@ -383,15 +340,16 @@
             </div>
         </div>
         <div class="card">
-            <img src="/Assets/poster8.jpg" class="card-img-top" height="420" alt="...">
+            <img src="/Booking_n_Ticketing-master/Assets/poster8.jpg" class="card-img-top" height="420" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
+        <img src="/Booking_n_Ticketing-master/Assets/concert2.jpg" alt="">
         <div class="card">
-            <img src="/Assets/poster9.jpg" class="card-img-top" height="420" alt="...">
+            <img src="/Booking_n_Ticketing-master/Assets/poster9.jpg" class="card-img-top" height="420" alt="...">
             <div class="card-body">
                 <h5 class="card-title">Card title</h5>
                 <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
@@ -557,6 +515,68 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        var card_deck = document.querySelector('.card-deck');
+        var request = new XMLHttpRequest();
+        //Open connection
+        var method = 'GET';
+        var url = "DatabaseFetch.php";
+        var asynchronus = true;
+
+        request.open(method, url, asynchronus);
+        request.send();
+
+        //receiving response from data.php
+        request.onload = function() {
+            //Converting JSON back to an array
+            var data = JSON.parse(this.response);
+
+
+            if (request.status >= 200 && request.status < 400) {
+                console.log("Im here");
+                console.log(data);
+                data.forEach(event => {
+                    //console.log(event);//?debugging
+                    var card = document.createElement('div');
+                    card.setAttribute('class', 'card');
+                    //!document .createimage here
+                    var posterImage = document.createElement('img');
+                    posterImage.setAttribute('class', 'card-img-top');
+                     posterImage.src = "/Booking_n_Ticketing-master/Assets/poster4.jpg";
+                     posterImage.height = "420";
+
+
+                    var card_body = document.createElement('div');
+                    card_body.setAttribute('class', 'card-body');
+
+                    var h5 = document.createElement('h5');
+                    h5.setAttribute('class', 'card-title');
+                    h5.textContent = event.Event_name;
+
+                    var p = document.createElement('p');
+                    p.setAttribute('class', 'card-text');
+                    event.Event_description = event.Event_description.substring(0, 300);
+                    p.textContent = `${event.Event_description}...`;
+
+                    var small = document.createElement('small');
+                    small.setAttribute('class', 'text-muted');
+                    small.textContent = "Last updated 3 mins ago ";
+
+                    //Appends
+
+                    card_deck.appendChild(card);
+                    card.appendChild(posterImage);
+                    card.appendChild(card_body);
+                    card_body.appendChild(h5);
+                    card_body.appendChild(p);
+                    card_body.appendChild(small);
+
+                });
+            } else {
+                console.log("Error loading the file");
+            }
+        }
+    </script>
 
 </body>
 
