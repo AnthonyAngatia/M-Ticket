@@ -348,7 +348,7 @@
                 <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
             </div>
         </div>
-        <img src="/Booking_n_Ticketing-master/Assets/concert2.jpg" alt="">
+ 
         <div class="card">
             <img src="/Booking_n_Ticketing-master/Assets/poster9.jpg" class="card-img-top" height="420" alt="...">
             <div class="card-body">
@@ -499,6 +499,7 @@
         <br>
 
     </footer>
+  
     <div id="extension">
         <p>Copyright & copy 2019</p>
     </div>
@@ -543,8 +544,9 @@
                     //!document .createimage here
                     var posterImage = document.createElement('img');
                     posterImage.setAttribute('class', 'card-img-top');
-                     posterImage.src = "/Booking_n_Ticketing-master/Assets/poster4.jpg";
-                     posterImage.height = "420";
+                    posterImage.src = "poster2.png";
+                    console.log(event.Image_path);
+                    //posterImage.height = "420";
 
 
                     var card_body = document.createElement('div');

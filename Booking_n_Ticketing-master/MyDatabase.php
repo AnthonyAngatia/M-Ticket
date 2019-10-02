@@ -12,7 +12,7 @@ function connect()
 function getData()
 {
     $link = connect();
-    $sql = "SELECT  Event_name, Event_description  FROM event_tbl";
+    $sql = "SELECT  Event_name, Event_description, Image_path FROM event_tbl";
     $result = mysqli_query($link, $sql);
     // print_r($result);
     $rowData = array();
