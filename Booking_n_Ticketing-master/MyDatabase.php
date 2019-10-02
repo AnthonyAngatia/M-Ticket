@@ -19,15 +19,6 @@ function getData()
     if (mysqli_num_rows($result) > 0) {
         while ($row = $result->fetch_assoc()) {
             $rowData[] = $row;
-            //$image = ($row['Event_caption']);
-            /**Retrieved image in binary */
-            //echo '<img src= "data:image/jpeg;base64,' . base64_encode($image) . '"  height = "300" width = "300" class="img-thumnail" > ' . "<br>";
-            //$event_name = ($row['Event_name']);
-            /**event name/title */
-            // echo $event_name  . "<br>";
-            // $event_description = ($row['Event_description']);
-            /**event description */
-            // echo $event_description  . "<br>";
         }
     }
 

@@ -88,6 +88,9 @@ session_start();
     }
 
     .card-deck {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-row-gap: 5em;
       margin-left: 20px;
       margin-right: 20px;
       cursor: pointer;
@@ -333,11 +336,6 @@ session_start();
   </div>
   <br>
   <br>
-
-  <div class="card-deck">
-  </div>
-
-
   <div class="card-deck">
     <div class="card">
       <img src="poster4.jpg" class="card-img-top" height="420" alt="...">
@@ -349,7 +347,7 @@ session_start();
     </div>
 
     <div class="card">
-      <img src="/Booking_n_Ticketing-master/Assets/poster5.png" class="card-img-top" height="420" alt="...">
+      <img src="poster5.png" class="card-img-top" height="420" alt="...">
       <div class="card-body">
         <h5 class="card-title">Card title</h5>
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
@@ -373,6 +371,7 @@ session_start();
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
     </div>
+
   </div>
   <br>
   <center>
@@ -560,7 +559,7 @@ session_start();
           //!document .createimage here
           var posterImage = document.createElement('img');
           posterImage.setAttribute('class', 'card-img-top');
-          posterImage.src = "poster2.png";
+          posterImage.src = event.Image_path;
           console.log(event.Image_path);
           posterImage.height = "420";
 

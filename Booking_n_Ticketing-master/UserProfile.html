@@ -7,12 +7,52 @@
     <title>Profile</title>
   </head>
   <style>
-    @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
     * {
       padding: 0px;
       margin: 0px;
       box-sizing: border-box;
     }
+    .container {
+      border: 1px solid black;
+      margin: auto;
+      margin-top: 5em;
+      font-size: 24px;
+
+      max-width: 400px;
+      text-align: center;
+    }
+    .container img {
+      margin-bottom: 3em;
+      margin-top: 1em;
+    }
+    .info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .info > span {
+      margin-bottom: 1em;
+      border: 1px;
+      /*text-align: left;*/
+    }
+    .container-2 {
+      border: 1px solid black;
+      margin: auto;
+      margin-top: 5em;
+      font-size: 24px;
+
+      max-width: 600px;
+      text-align: center;
+    }
+    .container-2 img {
+      margin-bottom: 3em;
+      margin-top: 1em;
+    }
+    .info-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+
+    /*
     h1,
     h2,
     h3,
@@ -69,52 +109,59 @@
     .events-attended div {
       background-color: #ddd;
       box-shadow: 0 8px 6px -6px black;
-    }
+    }*/
   </style>
   <body>
-    <!--
-      !container1
-    -->
-    <div class="container1">
-      <div class="user-avatar">
-        <img src="/Assets/User-avatar.jpg" alt="User-avatar" />
-      </div>
-      <div class="user-info">
-        <h1>BIO</h1>
-        <h4>Name:</h4>
-        <span>Anthony Angatia.</span>
-        <br />
-        <h4>Reward Points:</h4>
-        <span>120</span>
-      </div>
-    </div>
-    <!--
-      !container2
-    -->
-    <div class="container2">
-      <h4>Email:</h4>
-      <span>anto@gmail.com</span>
-    </div>
+    <div class="container">
+      <img src="avatar.png" alt="" height="150" width="150" />
+      <br />
+      <div class="info">
+        <span class="label">Username:</span>
+        <span>110426</span>
 
-    <!--
-      !container3
-    -->
+        <span class="label">Name:</span>
+        <span>Anthony</span>
 
-    <!--
-      !container4
-    -->
-    <h1>Events attended</h1>
-    <div class="events-attended">
-      <div class="event-attended1">
-        <img src="" alt="attended1" />
+        <span class="label">PhoneNo:</span>
+        <span>0722222222</span>
+
+        <span class="label">Email:</span>
+        <span>abc@gmail.com</span>
+
+        <span class="label">Password:</span>
+        <span>0000</span>
       </div>
-      <div class="event-attended2">
-        <img src="" alt="attended2" />
-      </div>
-      <div class="event-attended3">
-        <img src="" alt="attended3" />
-      </div>
+
+      <button>Click to Edit</button>
     </div>
-    <a href="">See more</a>
+    <div class="container-2">
+      <img src="avatar.png" alt="" height="150" width="150" />
+      <br />
+      <div class="info-2">
+        <span class="label">Username:</span>
+        <span>110426</span>
+        <input type="text" name="username" id="" />
+
+        <span class="label">Name:</span>
+        <span>Anthony</span>
+        <input type="text" name="name" id="" />
+
+        <span class="label">PhoneNo:</span>
+        <span>0722222222</span>
+        <input type="text" name="phone_no" id="" />
+
+        <span class="label">Email:</span>
+        <span>abc@gmail.com</span>
+        <input type="text" name="email" id="" />
+
+        <span class="label">Password:</span>
+        <span>0000</span>
+        <input type="text" name="Pass" id="" />
+        <span class="label">Confirm Password:</span>
+        <input type="text" name="Pass" id="" />
+      </div>
+
+      <button>Click to Edit</button>
+    </div>
   </body>
 </html>
