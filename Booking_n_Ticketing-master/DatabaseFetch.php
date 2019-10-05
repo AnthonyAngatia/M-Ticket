@@ -1,5 +1,12 @@
+/*
+*
+*
+!This File is out of date
+*
+*
+*/
 <?php
-require('MyDatabase.php');
+require('require.php');
 
 $rowData = getData();
 print_r($rowData);

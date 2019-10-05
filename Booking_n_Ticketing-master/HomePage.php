@@ -88,11 +88,16 @@ session_start();
     }
 
     .card-deck {
+      border: 1px solid red;
+      color: red;
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-column-gap: 1em;
       grid-row-gap: 5em;
-      margin-left: 20px;
-      margin-right: 20px;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+
+    .card {
       cursor: pointer;
     }
 
@@ -171,6 +176,7 @@ session_start();
       width: 20%;
       text-align: center;
       font-size: 17px;
+
     }
 
     button {
@@ -337,15 +343,31 @@ session_start();
   <br>
   <br>
   <div class="card-deck">
-    <div class="card">
-      <img src="poster4.jpg" class="card-img-top" height="420" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
+    <?php
+    require('require.php');
+    $rowsData = getData();
+    foreach ($rowsData as $value) {
+      //echo $value[' Title'];
+      //print_r($value);
+      //echo  "<br>";
+      //echo $value['Poster'];
+      ?>
 
+      <div class="card">
+        <a href="AboutEvent.html?<?php echo $value['Event_id']; ?>">
+          <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
+          <div class="card-body">
+            <h5 class="card-title"><?php echo $value['Title']; ?></h5>
+            <p class="card-text"><?php echo $value['Description1']; ?></p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </a>
+
+      </div>
+    <?php } ?>
+
+  </div>
+  <!--
     <div class="card">
       <img src="poster5.png" class="card-img-top" height="420" alt="...">
       <div class="card-body">
@@ -370,9 +392,11 @@ session_start();
         <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
       </div>
+ 
     </div>
+ -->
 
-  </div>
+
   <br>
   <center>
     <div class="button extra_1_button" style="padding-right: 5px !important; padding-left: 5px !important; width: 150px !important;"><a href="index.html"> see more events </a></div>
@@ -529,6 +553,7 @@ session_start();
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
+    /*
     var card_deck = document.querySelector('.card-deck');
     var request = new XMLHttpRequest();
     //Open connection
@@ -590,12 +615,12 @@ session_start();
           card_body.appendChild(h5);
           card_body.appendChild(p);
           card_body.appendChild(small);
-
         });
       } else {
         console.log("Error loading the file");
       }
     }
+    */
   </script>
 
 

@@ -1,4 +1,12 @@
 <?php
+/*
+*
+*
+!This File is outdated
+*
+*
+*/
+
 function connect()
 {
     $dbserver = "localhost";
@@ -12,6 +20,7 @@ function connect()
 function getData()
 {
     $link = connect();
+    //!THIS sql statement has been replaced in the other file
     $sql = "SELECT  Event_name, Event_description, Image_path FROM event_tbl";
     $result = mysqli_query($link, $sql);
     // print_r($result);
@@ -22,6 +31,6 @@ function getData()
         }
     }
 
-    //print_r($rowData);
+    //!print_r($rowData);
     return json_encode($rowData);
 }
