@@ -1,3 +1,25 @@
+<?php
+session_start();
+require('require.php');
+function getParam() {
+ if (!isset($_GET["w1"])){
+  echo "<script> alert('No param passed')</script>";
+  }
+  else{
+    $param = $_GET["w1"];
+   return $param;
+  }
+  }
+  echo getParam();
+  $param = getParam();
+  $sql = "SELECT *  FROM event WHERE Event_id = ' $param' ";
+ //print_r(getData($sql)) ;
+ $rowData = getData($sql);
+ foreach ($rowData as $value) {
+ 
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -89,22 +111,24 @@
     .nav-links li a :hover {
       color: black;
     }
-    button {
+    .checkout-button {
       padding: 5px 25px;
-      background-color: cadetblue;
+      background-color: #937c6f;
       border: none;
       border-radius: 50px;
       cursor: pointer;
       transition: all 0.3s ease 0s;
     }
-    button:hover {
+    .checkout-button:hover {
       background-color: black;
     }
+  
     .login-signup {
       border-radius: 100px;
       height: 50px;
       cursor: pointer;
     }
+    /*
     .poster-bg {
       height: 500px;
       width: 100%;
@@ -113,20 +137,28 @@
       background-size: cover;
       filter: blur(8px);
       -webkit-filter: blur(8px);
+
     }
+    */
+   
     .event-poster {
       font-weight: bold;
-
-      position: absolute;
-      top: 50%;
+      margin-top:7.5em;
+      margin-left:12em;
+     /*position: absolute;*/
+     /* top: 51%;
       left: 50%;
-      transform: translate(-50%, -50%);
+     /* transform: translate(-50%, -50%);*/
       z-index: 9;
       width: 80%;
       display: flex;
+      border:1px solid green;
     }
     .poster {
-      height: 450px;
+      border:1px solid red;
+      height: 550px;
+      max-height:550px;
+      max-width:400px;
     }
     .poster-details {
       background-color: white;
@@ -142,7 +174,7 @@
       color: grey;
     }
     .get-ticket-heading {
-      margin-top: 2em;
+     /* margin-top: 2em;*/
       text-align: center;
     }
     .get-ticket-container {
@@ -152,12 +184,25 @@
       grid-auto-rows: minmax(50px, auto);
       grid-gap: 1px;
       font-size: 18px;
+     
     }
     .get-ticket-container > div {
       background-color: #ddd;
       padding: 1em;
-
       text-align: center;
+      
+    }
+    .container1{
+      margin-left:30%;
+    }
+    .container2{
+      margin-right:30%;
+    }
+    .container3{
+      margin-left:30%;
+    }
+    .container4{
+      margin-right:30%;
     }
     a {
       text-decoration: none;
@@ -166,7 +211,7 @@
       cursor: pointer;
     }
     a:hover {
-      background-color: #80868b;
+      /*background-color: #80868b;*/
       color: black;
     }
 
@@ -208,7 +253,7 @@
         <div class="logo"><a href="#">M-ticket</a></div>
         <nav class="main_nav">
           <ul>
-            <li><a href="#">home</a></li>
+            <li><a href="HomePage.php">home</a></li>
             <li><a href="#">events</a></li>
             <li><a href="#">about us</a></li>
             <li><a href="#">contact</a></li>
@@ -291,14 +336,17 @@
         </ul>
       </nav>
     </div>
+    
     <div class="event-poster">
       <img
         class="poster"
-        src="/Booking_n_Ticketing-master/Assets/Event-poster.jpg"
+        src="<?php echo  $value['Poster']; } ?>"
         alt="poster"
+       
       />
+
       <div class="poster-details">
-        <h1>The writers Guild</h1>
+        <h1> <?php $value['Title'];?></h1>
         <h4>Description:</h4>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
@@ -323,7 +371,7 @@
       </div>
       <div class="container2">
         <a class="previous round">&#8249;</a>
-        <span>100</span>
+        <span><input type="number" name="quantity" min="1" max="5" value = "1" style = "padding-left:2em;"></span>
         <a class="next round">&#8250;</a>
       </div>
       <div class="container3">

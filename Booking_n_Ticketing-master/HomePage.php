@@ -343,18 +343,16 @@ session_start();
   <br>
   <br>
   <div class="card-deck">
+    <!--!PHP funtion to retrieve info to the database and redirect-->
     <?php
     require('require.php');
-    $rowsData = getData();
+    $sql = "SELECT Poster, Title, Description1, Event_id  FROM event LIMIT 8";
+    $rowsData = getData($sql);
     foreach ($rowsData as $value) {
-      //echo $value[' Title'];
-      //print_r($value);
-      //echo  "<br>";
-      //echo $value['Poster'];
       ?>
 
       <div class="card">
-        <a href="AboutEvent.html?<?php echo $value['Event_id']; ?>">
+        <a href="AboutEvent.php?w1=<?php echo $value['Event_id']; ?>">
           <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
           <div class="card-body">
             <h5 class="card-title"><?php echo $value['Title']; ?></h5>
@@ -367,36 +365,6 @@ session_start();
     <?php } ?>
 
   </div>
-  <!--
-    <div class="card">
-      <img src="poster5.png" class="card-img-top" height="420" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-
-    <div class="card">
-      <img src="poster8.jpg" class="card-img-top" height="420" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="poster10.jpg" class="card-img-top" height="420" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-      </div>
- 
-    </div>
- -->
-
-
   <br>
   <center>
     <div class="button extra_1_button" style="padding-right: 5px !important; padding-left: 5px !important; width: 150px !important;"><a href="index.html"> see more events </a></div>

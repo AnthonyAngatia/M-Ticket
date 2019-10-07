@@ -29,7 +29,7 @@
       padding: 25px;
       width: 550px;
     }
-
+/*
     button {
       font-family: 'Nunito', sans-serif;
       font-weight: 700;
@@ -44,6 +44,7 @@
       -webkit-transition: 0.3s;
       -moz-transition: 0.3s;
     }
+    */
 
     button:hover {
       background: #fff;

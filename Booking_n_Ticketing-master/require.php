@@ -20,10 +20,9 @@ function setData($sql)
 	}
 }
 
-function getData()
+function getData($sql)
 {
 	$link = connect();
-	$sql = "SELECT Poster, Title, Description1, Event_id  FROM event LIMIT 8";
 	$result = mysqli_query($link, $sql);
 	$rowData = array();
 	if (mysqli_num_rows($result) > 0) {
