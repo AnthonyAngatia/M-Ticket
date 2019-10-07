@@ -11,8 +11,12 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
   $time1= $_POST["time1"];
   $date2= $_POST["date2"];
   $time2= $_POST["time2"];
-  $poster= $_FILES["imageupload"]["tmp_name"];
-  $imgContent=addslashes(file_get_contents($poster));
+
+  $pname=$_FILES["file"]["name"];
+  $tname=$_FILES["files"]["tmp_name"];
+  $uploads_dir='/images';
+  move_uploaded_file($tname, $uploads_dir.'/'.$pname);
+
   $desc1= $_POST["description1"]; 
   $desc2= $_POST["description2"];
   $ticket= $_POST["tname"];
@@ -25,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
   $time4= $_POST["2time"];
  
 
-$sql = "INSERT INTO `event` (`Title`,`Type`, `Category`, `Organizers`, `Location`, `Eventstart`, `StartTime1`,`Eventend`, `EndTime1`, `Poster`, `Description1`, `Description2`, `Tickname`,`Quantity`, `Price`, `Gquantity`, `Salestart`, `StartTime2`, `Saleend`, `EndTime2`) VALUES ('$title', '$type','$category', '$organizers', '$location', '$date1', '$time1', '$date2', '$time2', '$imgContent', '$desc1', '$desc2', '$ticket', '$quantity', '$price', '$groupquantity', '$date3', '$time3', '$date4', '$time4')";
+$sql = "INSERT INTO `event` (`Title`,`Type`, `Category`, `Organizers`, `Location`, `Eventstart`, `StartTime1`,`Eventend`, `EndTime1`, `Poster`, `Description1`, `Description2`, `Tickname`,`Quantity`, `Price`, `Gquantity`, `Salestart`, `StartTime2`, `Saleend`, `EndTime2`) VALUES ('$title', '$type','$category', '$organizers', '$location', '$date1', '$time1', '$date2', '$time2', '$pname', '$desc1', '$desc2', '$ticket', '$quantity', '$price', '$groupquantity', '$date3', '$time3', '$date4', '$time4')";
 
 connect();
 upload($sql);

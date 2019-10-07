@@ -1,3 +1,7 @@
+<?php
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -79,10 +83,18 @@
       </nav>
       <div class="header_content ml-auto">
         <div class="shopping">
+           <!-- Avatar -->
+        <a href="account.php" style="color:black;">
+            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]);?></b>
+              <img src="avatar.png" alt="">
+            </div>
+       </a>
+       &emsp;
+       
           <!-- Cart -->
           <a href="#">
             <div class="cart">
-              <img src="cart3.png" width="30" height="30" alt="">
+              <img src="cart3.png" width="27" height="27" alt="">
               <div class="cart_num_container">
                 <div class="cart_num_inner">
                   <div class="cart_num">0</div>
@@ -90,11 +102,11 @@
               </div>
             </div>
           </a>
+        
         </div>
       </div>
-       <div class="avatar">account
-              <img src="account1.png" width="30" height="30" alt="">
-            </div>
+            
+      
     </div>
   </header>
 
@@ -116,8 +128,8 @@
  
   <br>
   <br>
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button</button>
+  <div class="dropdown" style="margin-left: 37px !important;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="#">Action</a>
     <a class="dropdown-item" href="#">Another action</a>

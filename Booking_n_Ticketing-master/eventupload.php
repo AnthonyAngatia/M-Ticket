@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,15 +106,19 @@
       <nav class="main_nav">
         <ul>
           <li><a href="#">browse events</a></li>
-           <li><a href="#">sign in</a></li>
+          
           <li><a href="#"></a></li>
         </ul>
       </nav>
       <div class="header_content ml-auto">
       </div>
-       <div class="avatar">account
-              <img src="account1.png" width="30" height="30" alt="">
+       <!-- Avatar -->
+        <a href="account.php" style="color:black;">
+            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]);?></b>
+              <img src="avatar.png" alt="">
             </div>
+       </a>
+       &emsp;
     </div>
   </header>
   <br>
@@ -191,7 +198,7 @@
     <p>This is the image that the attendees will see when they search for the event.</p> 
     <h4>UPLOAD IMAGE</h4>
     <div class="form-group col-md-6">
-    <input type="file" name="imageupload" id="imageupload">
+    <input type="file" name="file" id="imageupload">
      </div>
 
     <div class="section_subtitle">summary description</div>
