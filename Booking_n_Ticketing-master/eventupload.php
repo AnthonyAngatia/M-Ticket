@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -116,15 +119,27 @@
       <nav class="main_nav">
         <ul>
           <li><a href="#">browse events</a></li>
-          <li><a href="#">sign in</a></li>
           <li><a href="#"></a></li>
         </ul>
       </nav>
       <div class="header_content ml-auto">
       </div>
-      <div class="avatar">account
-        <img src="account1.png" width="30" height="30" alt="">
-      </div>
+       <a href="account.php" style="color:black;">
+            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+              <img src="avatar.png" alt="">
+            </div>
+
+               <!-- session -->
+            <script>
+              if ('<%=Session["username"] == null%>') {
+                //alert('null session');
+               // document.querySelector('.avatar').style.display = 'none';
+              } else {
+                //alert('Session found');
+              }
+            </script>
+
+          </a>
     </div>
   </header>
   <br>

@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -87,7 +86,7 @@ session_start();
       background-color: #3e8e41;
     }
 
-    .card-deck {
+    .carddeck1 {
       border: 1px solid red;
       color: red;
       display: grid;
@@ -96,7 +95,11 @@ session_start();
       grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
-
+    .card-deck{
+        margin-left:20px;
+        margin-right:20px;
+      }
+      
     .card {
       cursor: pointer;
     }
@@ -212,10 +215,12 @@ session_start();
             <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
+
+               <!-- session -->
             <script>
               if ('<%=Session["username"] == null%>') {
                 //alert('null session');
-                document.querySelector('.avatar').style.display = 'none';
+               // document.querySelector('.avatar').style.display = 'none';
               } else {
                 //alert('Session found');
               }
@@ -223,6 +228,7 @@ session_start();
 
           </a>
           &emsp;
+            
 
           <!-- Cart -->
           <a href="#">
@@ -342,7 +348,7 @@ session_start();
   </div>
   <br>
   <br>
-  <div class="card-deck">
+  <div class="carddeck1">
     <!--!PHP funtion to retrieve info to the database and redirect-->
     <?php
     require('require.php');

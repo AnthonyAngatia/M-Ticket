@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -92,9 +95,24 @@
           </a>
         </div>
       </div>
-       <div class="avatar">account
-              <img src="account1.png" width="30" height="30" alt="">
+     <a href="account.php" style="color:black;">
+            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+              <img src="avatar.png" alt="">
             </div>
+            
+               <!-- session -->
+            <script>
+              if ('<%=Session["username"] == null%>') {
+                //alert('null session');
+               // document.querySelector('.avatar').style.display = 'none';
+              } else {
+                //alert('Session found');
+              }
+            </script>
+
+          </a>
+          &emsp;
+
     </div>
   </header>
 
@@ -116,8 +134,8 @@
  
   <br>
   <br>
-  <div class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown button</button>
+  <div class="dropdown" style="margin-left: 36px !important;">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Filter by</button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
     <a class="dropdown-item" href="#">Action</a>
     <a class="dropdown-item" href="#">Another action</a>
