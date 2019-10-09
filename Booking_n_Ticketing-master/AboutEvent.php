@@ -70,12 +70,13 @@ function getParam() {
       box-sizing: border-box;
       margin: 0;
       padding: 0px;
+     /* border:1px solid aqua;*/
     }
     img {
       border: 1px solid tomato;
       margin: 0px;
     }
-    li,
+  li,
     a,
     button {
       font-family: verdana;
@@ -84,6 +85,7 @@ function getParam() {
 
       margin: 5px;
     }
+    
     header {
       border: 1px solid darkkhaki;
       display: flex;
@@ -179,8 +181,8 @@ function getParam() {
     }
     .get-ticket-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin: 1em;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin: 1em 5em;
       grid-auto-rows: minmax(50px, auto);
       grid-gap: 1px;
       font-size: 18px;
@@ -188,21 +190,9 @@ function getParam() {
     }
     .get-ticket-container > div {
       background-color: #ddd;
-      padding: 1em;
+      padding: 0em;
       text-align: center;
       
-    }
-    .container1{
-      margin-left:30%;
-    }
-    .container2{
-      margin-right:30%;
-    }
-    .container3{
-      margin-left:30%;
-    }
-    .container4{
-      margin-right:30%;
     }
     a {
       text-decoration: none;
@@ -224,6 +214,7 @@ function getParam() {
       background-color: #ddd;
       color: black;
     }
+    
 
     .checkout {
       text-align: center;
@@ -340,19 +331,16 @@ function getParam() {
     <div class="event-poster">
       <img
         class="poster"
-        src="<?php echo  $value['Poster']; } ?>"
+        src="<?php echo  $value['Poster'];  ?>"
         alt="poster"
        
       />
 
       <div class="poster-details">
-        <h1> <?php $value['Title'];?></h1>
+        <h1><?php echo $value['Title'];?></h1>
         <h4>Description:</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-          atque modi impedit sed ullam consectetur reprehenderit ducimus
-          distinctio magni sit ad eos et vitae consequuntur libero porro quidem
-          iusto perspiciatis.
+        <?php echo $value['Description2'];} ?>
         </p>
         <h4>Date:</h4>
         <p>September 11th 2019</p>
@@ -366,20 +354,34 @@ function getParam() {
       <h1>Get Ticket</h1>
     </div>
     <div class="get-ticket-container">
-      <div class="container1">
-        <p>Number of people</p>
+      <div class="container">
+        <h4>Type</h4>
       </div>
-      <div class="container2">
-        <a class="previous round">&#8249;</a>
+      <div class="container">
+      <h4>Price</h4>
+      <!--  <button class="previous">&#8249;</button>
         <span><input type="number" name="quantity" min="1" max="5" value = "1" style = "padding-left:2em;"></span>
-        <a class="next round">&#8250;</a>
+        <button class="next">&#8250;</button> -->
       </div>
-      <div class="container3">
-        <p>Total price</p>
+      <div class="container">
+      <h4>Quantity</h4>
       </div>
-      <div class="container4">
-        <p>Sh 500</p>
+      <div class="container">
+      <h4>Total Price</h4>
       </div>
+      <div class="container">
+      <H4>Single</H4>
+      </div>
+      <div class="container"></div>
+      <div class="container"></div>
+      <div class="container"></div>
+
+      <div class="container">
+      <h4>Advanced</h4></div>
+      <div class="container"></div>
+      <div class="container"></div>
+      <div class="container"></div>
+      
     </div>
     <div class="checkout">
       <button class="checkout-button">Checkout</button>

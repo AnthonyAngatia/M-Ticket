@@ -219,9 +219,11 @@ session_start();
                <!-- session -->
             <script>
               if ('<%=Session["username"] == null%>') {
-                //alert('null session');
+                
+               // alert('null session');
                // document.querySelector('.avatar').style.display = 'none';
               } else {
+
                 //alert('Session found');
               }
             </script>
