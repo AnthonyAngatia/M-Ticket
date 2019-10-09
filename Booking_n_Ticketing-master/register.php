@@ -3,11 +3,14 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Ticket system">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->  
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- Load an icon library -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
 
   <title>RegisterPage</title>
@@ -29,7 +32,7 @@
       padding: 25px;
       width: 550px;
     }
-/*
+
     button {
       font-family: 'Nunito', sans-serif;
       font-weight: 700;
@@ -44,7 +47,7 @@
       -webkit-transition: 0.3s;
       -moz-transition: 0.3s;
     }
-    */
+
 
     button:hover {
       background: #fff;
@@ -121,14 +124,9 @@
   </center>
 
 
-  <script src="js/jquery-3.2.1.min.js"></script>
-  <script src="styles/bootstrap4/popper.js"></script>
-  <script src="styles/bootstrap4/bootstrap.min.js"></script>
-  <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-  <script src="plugins/easing/easing.js"></script>
-  <script src="plugins/parallax-js-master/parallax.min.js"></script>
-  <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-  <script src="js/custom.js"></script>
+ <script src="js/jquery.min.js" ></script>
+ <script src="js/popper.min.js" ></script>
+ <script src="js/bootstrap.min.js" ></script>
 </body>
 
 </html>

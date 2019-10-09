@@ -24,110 +24,22 @@ function getParam() {
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.carousel.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/animate.css"
-    />
-    <link
-      href="plugins/colorbox/colorbox.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <link rel="stylesheet" type="text/css" href="styles/main_styles.css" />
-    <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <!-- Bootstrap CSS -->  
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+    <!-- External CSS -->
+    <link rel="stylesheet" type="text/css" href="css/mticket.css">
+
+    <!-- Load an icon library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
+    <title>Event</title>
   </head>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0px;
-    }
-    img {
-      border: 1px solid tomato;
-      margin: 0px;
-    }
-    li,
-    a,
-    button {
-      font-family: verdana;
-      color: aliceblue;
-      text-decoration: none;
-
-      margin: 5px;
-    }
-    header {
-      border: 1px solid darkkhaki;
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      background-color: white;
-    }
-    .logo {
-      cursor: pointer;
-      margin-right: auto;
-      height: 50px;
-      width: auto;
-    }
-
-    .nav-links {
-      list-style: none;
-    }
-    .nav-links li {
-      display: inline-block;
-      padding: 0px 5px;
-    }
-    .nav-links li a {
-      transition: all 0.3s ease 0s;
-    }
-    .nav-links li a :hover {
-      color: black;
-    }
-    .checkout-button {
-      padding: 5px 25px;
-      background-color: #937c6f;
-      border: none;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: all 0.3s ease 0s;
-    }
-    .checkout-button:hover {
-      background-color: black;
-    }
   
-    .login-signup {
-      border-radius: 100px;
-      height: 50px;
-      cursor: pointer;
-    }
     /*
     .poster-bg {
       height: 500px;
@@ -143,8 +55,8 @@ function getParam() {
    
     .event-poster {
       font-weight: bold;
-      margin-top:7.5em;
-      margin-left:12em;
+      margin-top:9em;
+      margin-left:9em;
      /*position: absolute;*/
      /* top: 51%;
       left: 50%;
@@ -152,13 +64,13 @@ function getParam() {
       z-index: 9;
       width: 80%;
       display: flex;
-      border:1px solid green;
+      border:2px solid black;
     }
     .poster {
-      border:1px solid red;
+      
       height: 550px;
       max-height:550px;
-      max-width:400px;
+      max-width:450px;
     }
     .poster-details {
       background-color: white;
@@ -172,10 +84,6 @@ function getParam() {
     .poster-details p {
       margin: 20px;
       color: grey;
-    }
-    .get-ticket-heading {
-     /* margin-top: 2em;*/
-      text-align: center;
     }
     .get-ticket-container {
       display: grid;
@@ -204,16 +112,7 @@ function getParam() {
     .container4{
       margin-right:30%;
     }
-    a {
-      text-decoration: none;
-      display: inline-block;
-      padding: 2px 16px;
-      cursor: pointer;
-    }
-    a:hover {
-      /*background-color: #80868b;*/
-      color: black;
-    }
+  
 
     .previous {
       background-color: #ddd;
@@ -223,11 +122,6 @@ function getParam() {
     .next {
       background-color: #ddd;
       color: black;
-    }
-
-    .checkout {
-      text-align: center;
-      font-size: 18px;
     }
     .similar-events-heading {
       margin-top: 2em;
@@ -246,96 +140,54 @@ function getParam() {
     }
   </style>
   <body>
-    <header class="header">
-      <div
-        class="header_inner d-flex flex-row align-items-center justify-content-start"
-      >
-        <div class="logo"><a href="#">M-ticket</a></div>
-        <nav class="main_nav">
-          <ul>
-            <li><a href="HomePage.php">home</a></li>
-            <li><a href="#">events</a></li>
-            <li><a href="#">about us</a></li>
-            <li><a href="#">contact</a></li>
-          </ul>
-        </nav>
-        <div class="header_content ml-auto">
-          <div class="shopping">
-            <!-- Cart -->
-            <a href="#">
-              <div class="cart">
-                <img src="cart.png" width="30" height="30" alt="" />
-                <div class="cart_num_container">
-                  <div class="cart_num_inner">
-                    <div class="cart_num">0</div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+   
+<div class="super_container">
 
-        <div
-          class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm"
-        >
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Menu -->
-
-    <div
-      class="menu d-flex flex-column align-items-end justify-content-start text-right menu_mm trans_400"
-    >
-      <div class="menu_close_container">
-        <div class="menu_close">
-          <div></div>
-          <div></div>
-        </div>
-      </div>
-      <div class="logo menu_mm"><a href="#">M-ticket</a></div>
-      <div class="search">
-        <form action="#">
-          <input
-            type="search"
-            class="search_input menu_mm"
-            required="required"
-            placeholder="Event name*"
-            aria-label="Search"
-          />
-          <button
-            type="submit"
-            class="newsletter_button"
-            style="width: 80px !important;"
-          >
-            search
-          </button>
-        </form>
-      </div>
-      <nav class="menu_nav">
-        <ul class="menu_mm">
-          <li class="menu_mm"><a href="#">home</a></li>
-          <li class="menu_mm"><a href="#">Sign in</a></li>
-          <li class="menu_mm">
-            <a href="#">
-              <div class="avatar">
-                account
-                <img
-                  src="/Booking_n_Ticketing-master/Assets/account1.png"
-                  width="30"
-                  height="30"
-                  alt=""
-                />
-              </div>
-            </a>
-          </li>
-          <li class="menu_mm"><a href="#">browse events</a></li>
+      <header class="header" >
+    <div class="header_inner d-flex flex-row align-items-center justify-content-start">
+      <div class="logo"><a href="Homepage.php">M-ticket</a></div>
+      <nav class="main_nav">
+        <ul>
+          <li><a href="browse.php">browse events</a></li>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">contact</a></li>
         </ul>
       </nav>
+      <div class="header_content ml-auto">
+        <div class="shopping">
+          <!-- Cart -->
+          <a href="#">
+            <div class="cart">
+              <img src="cart3.png" width="30" height="30" alt="">
+              <div class="cart_num_container">
+                <div class="cart_num_inner">
+                  <div class="cart_num">0</div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+     <a href="account.php" style="color:black;">
+            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+              <img src="avatar.png" alt="">
+            </div>
+            
+               <!-- session -->
+            <script>
+              if ('<%=Session["username"] == null%>') {
+                //alert('null session');
+               // document.querySelector('.avatar').style.display = 'none';
+              } else {
+                //alert('Session found');
+              }
+            </script>
+
+          </a>
+          &emsp;
+
     </div>
+  </header>
     
     <div class="event-poster">
       <img
@@ -362,12 +214,13 @@ function getParam() {
         <p>XYZ Building 4th floor</p>
       </div>
     </div>
-    <div class="get-ticket-heading">
-      <h1>Get Ticket</h1>
-    </div>
+    <br>
+    <center>
+     <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
+   </center>
     <div class="get-ticket-container">
       <div class="container1">
-        <p>Number of people</p>
+        <p>Quantity</p>
       </div>
       <div class="container2">
         <a class="previous round">&#8249;</a>
@@ -381,26 +234,56 @@ function getParam() {
         <p>Sh 500</p>
       </div>
     </div>
-    <div class="checkout">
-      <button class="checkout-button">Checkout</button>
-    </div>
+    <center>
+   <div class="button extra_1_button"><a href="#">add to cart</a></div>
+ </center>
 
-    <div class="similar-events-heading">
-      <h1>Similar events</h1>
-    </div>
+   <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events</div>
     <div class="similar-events-container">
       <div class="sec1"></div>
       <div class="sec2"></div>
       <div class="sec3"></div>
     </div>
-    <script src="js/jquery-3.2.1.min.js"></script>
-    <script src="styles/bootstrap4/popper.js"></script>
-    <script src="styles/bootstrap4/bootstrap.min.js"></script>
-    <script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
-    <script src="plugins/easing/easing.js"></script>
-    <script src="plugins/parallax-js-master/parallax.min.js"></script>
-    <script src="plugins/colorbox/jquery.colorbox-min.js"></script>
-    <script src="js/custom.js"></script>
+  <center>
+   <div class="button extra_1_button"><a href="#">see more</a></div>
+ </center>
+
+
+  <!-- Footer -->
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col text-center">
+          <div class="footer_logo"><a href="HomePage.php">M-ticket</a></div>
+          <nav class="footer_nav">
+           <ul>
+              <li><a href="browse.php">events</a></li>
+              <li><a href="HomePage.php">create event</a></li>
+              <li><a href="about.php">about us</a></li>
+              <li><a href="contact.php">contact</a></li>
+            </ul>
+          </nav>
+          <div class="footer_social">
+            <ul>
+              <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a></li>
+              <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+          <div class="copyright">Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  </div>
+
+     <script src="js/jquery.min.js" ></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
