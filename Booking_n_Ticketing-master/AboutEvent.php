@@ -39,28 +39,11 @@ function getParam() {
     <title>Event</title>
   </head>
   <style>
-  
-    /*
-    .poster-bg {
-      height: 500px;
-      width: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      filter: blur(8px);
-      -webkit-filter: blur(8px);
-
-    }
-    */
    
     .event-poster {
       font-weight: bold;
       margin-top:9em;
       margin-left:9em;
-     /*position: absolute;*/
-     /* top: 51%;
-      left: 50%;
-     /* transform: translate(-50%, -50%);*/
       z-index: 9;
       width: 80%;
       display: flex;
@@ -74,7 +57,6 @@ function getParam() {
     }
     .poster-details {
       background-color: white;
-      /*box-shadow:*/
       font-family: helvetica;
     }
     .poster-details h1,
@@ -87,8 +69,8 @@ function getParam() {
     }
     .get-ticket-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin: 1em;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin: 1em 5em;
       grid-auto-rows: minmax(50px, auto);
       grid-gap: 1px;
       font-size: 18px;
@@ -96,7 +78,7 @@ function getParam() {
     }
     .get-ticket-container > div {
       background-color: #ddd;
-      padding: 1em;
+      padding: 0em;
       text-align: center;
       
     }
@@ -192,19 +174,16 @@ function getParam() {
     <div class="event-poster">
       <img
         class="poster"
-        src="<?php echo  $value['Poster']; } ?>"
+        src="<?php echo  $value['Poster']; ?>"
         alt="poster"
        
       />
 
       <div class="poster-details">
-        <h1> <?php $value['Title'];?></h1>
+        <h1> <?php echo $value['Title'];?></h1>
         <h4>Description:</h4>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-          atque modi impedit sed ullam consectetur reprehenderit ducimus
-          distinctio magni sit ad eos et vitae consequuntur libero porro quidem
-          iusto perspiciatis.
+        <?php echo $value['Description2'];} ?>
         </p>
         <h4>Date:</h4>
         <p>September 11th 2019</p>
@@ -219,20 +198,33 @@ function getParam() {
      <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
    </center>
     <div class="get-ticket-container">
-      <div class="container1">
-        <p>Quantity</p>
+    <div class="container">
+        <h4>Type</h4>
       </div>
-      <div class="container2">
-        <a class="previous round">&#8249;</a>
+      <div class="container">
+      <h4>Price</h4>
+      <!--  <button class="previous">&#8249;</button>
         <span><input type="number" name="quantity" min="1" max="5" value = "1" style = "padding-left:2em;"></span>
-        <a class="next round">&#8250;</a>
+         <button class="next">&#8250;</button> -->
       </div>
-      <div class="container3">
-        <p>Total price</p>
+      <div class="container">
+      <h4>Quantity</h4>
       </div>
-      <div class="container4">
-        <p>Sh 500</p>
+      <div class="container">
+      <h4>Total Price</h4>
       </div>
+      <div class="container">
+      <h4>Single</h4>
+      </div>
+      <div class="container"><?php echo  $value['Price']; ?></div>
+      <div class="container"></div>
+      <div class="container"></div>
+
+      <div class="container">
+      <h4>Advanced</h4></div>
+      <div class="container"></div>
+      <div class="container"></div>
+      <div class="container"></div>
     </div>
     <center>
    <div class="button extra_1_button"><a href="#">add to cart</a></div>
