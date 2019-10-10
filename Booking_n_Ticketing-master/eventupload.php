@@ -204,7 +204,7 @@ session_start();
           <input type="number" class="form-control" name="price" placeholder="Price">
         </div>
         <div class="form-group col-md-6">
-          <input type="number" class="form-control" name="group" placeholder="Group Ticket quantity">
+          <input type="number" class="form-control" name="group" placeholder="Group Ticket quantity" min ="0">
         </div>
 
         <div class="form-row">

@@ -34,11 +34,23 @@ function getData($sql)
 }
 function register($sql)
 {
+	echo "<script>alert('Testing')</script>";
 	$link = connect();
-	$result = mysqli_query($link, $sql);
-
-	if ($result) {
-		echo "<script>alert('User registered successfuly')</script>";
+	// $result = mysqli_query($link, $sql);
+	// if ($result) {
+	// 	echo "<script>alert('User registered successfuly')</script>";
+	// }
+	// else{
+	// 	echo "<script>alert('Not working')</script>";
+	// }
+	// $link->close();
+	if(mysqli_query($link, $sql)){
+		echo "New record created successfully";
+		header("Location:Homepage.php");
+	}
+	else{
+		echo "<script>alert('Not working')</script>";
+		"Error: " . $sql . "<br>" . mysqli_error($link);
 	}
 	$link->close();
 }
