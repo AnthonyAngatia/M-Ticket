@@ -60,20 +60,7 @@ session_start();
       </nav>
       <div class="header_content ml-auto">
         <div class="shopping">
-          <!-- Cart -->
-          <a href="#">
-            <div class="cart">
-              <img src="cart3.png" width="30" height="30" alt="">
-              <div class="cart_num_container">
-                <div class="cart_num_inner">
-                  <div class="cart_num">0</div>
-                </div>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-     <a href="account.php" style="color:black;">
+           <a href="account.php" style="color:black;">
             <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
@@ -87,9 +74,22 @@ session_start();
                 //alert('Session found');
               }
             </script>
-
           </a>
-          &emsp;
+         
+          <!-- Cart -->
+          <a href="#">
+            <div class="cart">
+              <img src="cart3.png" width="30" height="30" alt="">
+              <div class="cart_num_container">
+                <div class="cart_num_inner">
+                  <div class="cart_num">0</div>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    
 
     </div>
   </header>

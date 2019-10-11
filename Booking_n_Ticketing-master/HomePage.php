@@ -198,7 +198,7 @@ session_start();
             
 
           <!-- Cart -->
-          <a href="#">
+          <a href="cart.php">
             <div class="cart">
               <img src="cart3.png" width="27" height="27" alt="">
               <div class="cart_num_container">
