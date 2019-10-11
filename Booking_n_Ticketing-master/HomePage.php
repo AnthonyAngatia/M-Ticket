@@ -179,17 +179,20 @@ session_start();
         <div class="shopping">
           <!-- Avatar -->
           <a href="account.php" style="color:black;">
-            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+            <div class="avatar" id = "avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
 
                <!-- session -->
             <script>
-              if ('<%=Session["username"] == null%>') {
-                //alert('null session');
-               // document.querySelector('.avatar').style.display = 'none';
-              } else {
-                //alert('Session found');
+//!This function is working. 
+//TODO:We need to display the session using javascript
+              if("<?php echo $_SESSION["username"]; ?>" == "null"){
+                alert('null session');
+                document.getElementById('avatar').style.display = 'none';
+              }
+              else{
+                alert(' session found'); 
               }
             </script>
 

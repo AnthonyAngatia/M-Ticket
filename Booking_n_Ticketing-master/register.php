@@ -160,8 +160,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   } else {
     $pass = sha1($password);
     $conf = sha1($passcon);
-    $sql = "INSERT INTO `users` (`Name`, `Username`, `PhoneNo`, `Email`, `Password`, `Password_Confirmation`) VALUES ('$name', '$user', '$phoneno', '$email', '$pass', '$conf')";
-
+   // $sql = "INSERT INTO `users_table` (`Name`, `Username`, `PhoneNo`, `Email`, `Password`, `Password_Confirmation`) VALUES ('$name', '$user', '$phoneno', '$email', '$pass', '$conf')";
+    $sql = "INSERT INTO `user_table`(`Name`, `Username`, `PhoneNo`, `Email`, `Password`, `Password_Confirmation`) VALUES ('$name','$user','$phoneno','$email','$pass','$conf')";
     connect();
     register($sql);
   }

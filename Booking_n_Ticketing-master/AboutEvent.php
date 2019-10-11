@@ -15,6 +15,7 @@ function getParam() {
   $sql = "SELECT *  FROM event WHERE Event_id = ' $param' ";
  //print_r(getData($sql)) ;
  $rowData = getData($sql);
+ $description = "descripton";
  foreach ($rowData as $value) {
  
 
@@ -39,28 +40,11 @@ function getParam() {
     <title>Event</title>
   </head>
   <style>
-  
-    /*
-    .poster-bg {
-      height: 500px;
-      width: 100%;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: cover;
-      filter: blur(8px);
-      -webkit-filter: blur(8px);
-
-    }
-    */
    
     .event-poster {
       font-weight: bold;
       margin-top:9em;
       margin-left:9em;
-     /*position: absolute;*/
-     /* top: 51%;
-      left: 50%;
-     /* transform: translate(-50%, -50%);*/
       z-index: 9;
       width: 80%;
       display: flex;
@@ -74,7 +58,6 @@ function getParam() {
     }
     .poster-details {
       background-color: white;
-      /*box-shadow:*/
       font-family: helvetica;
     }
     .poster-details h1,
@@ -87,8 +70,8 @@ function getParam() {
     }
     .get-ticket-container {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      margin: 1em;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      margin: 1em 5em;
       grid-auto-rows: minmax(50px, auto);
       grid-gap: 1px;
       font-size: 18px;
@@ -96,25 +79,11 @@ function getParam() {
     }
     .get-ticket-container > div {
       background-color: #ddd;
-      padding: 1em;
+      padding: 0em;
       text-align: center;
       
     }
-    .container1{
-      margin-left:30%;
-    }
-    .container2{
-      margin-right:30%;
-    }
-    .container3{
-      margin-left:30%;
-    }
-    .container4{
-      margin-right:30%;
-    }
-  
-
-    .previous {
+     .previous {
       background-color: #ddd;
       color: black;
     }
@@ -192,20 +161,29 @@ function getParam() {
     <div class="event-poster">
       <img
         class="poster"
-        src="<?php echo  $value['Poster']; } ?>"
+        id = "poster"
+        src="<?php echo  $value['Poster']; ?>"
         alt="poster"
-       
+
       />
 
       <div class="poster-details">
-        <h1> <?php $value['Title'];?></h1>
+        <h1> <?php echo $value['Title'];?></h1>
         <h4>Description:</h4>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate,
-          atque modi impedit sed ullam consectetur reprehenderit ducimus
-          distinctio magni sit ad eos et vitae consequuntur libero porro quidem
-          iusto perspiciatis.
+        <p id = "description">
+        <?php 
+        $description = $value['Description2'];
+        echo substr($value['Description2'],0,200);} ?>
+        <a  id = "see-more" onclick = "seeMore()">See more</a>
         </p>
+        <script>
+        function seeMore(){
+          document.getElementById('poster').style.display ="none";
+          const description = document.getElementById('description');
+          description.textContent = "<?php echo $description ?>";
+
+        }
+        </script>
         <h4>Date:</h4>
         <p>September 11th 2019</p>
         <h4>Location:</h4>
@@ -219,21 +197,47 @@ function getParam() {
      <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
    </center>
     <div class="get-ticket-container">
-      <div class="container1">
-        <p>Quantity</p>
+    <div class="container">
+        <h4>Type</h4>
       </div>
-      <div class="container2">
-        <a class="previous round">&#8249;</a>
-        <span><input type="number" name="quantity" min="1" max="5" value = "1" style = "padding-left:2em;"></span>
-        <a class="next round">&#8250;</a>
+      <div class="container">
+      <h4>Price</h4>
       </div>
-      <div class="container3">
-        <p>Total price</p>
+      <div class="container">
+      <h4>Quantity</h4>
       </div>
-      <div class="container4">
-        <p>Sh 500</p>
+      <div class="container">
+      <h4>Total Price</h4>
+      </div>
+      <div class="container">
+      <h4>Single</h4>
+      </div>
+      <div class="container" id = "single-price" data-value = "<?php echo  $value['Price']; ?>"><?php echo  $value['Price']; ?></div>
+      <div class="container"><input type="number" name="input-single-price" id="single-price-input" value = "0" onchange = "getSinglePrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;"></div>
+      <div class="container" id = "single-display"></div>
+
+      <div class="container">
+      <h4>Group Ticket</h4></div>
+      <!--!We need to adjust our DB FOR GROUP-Ticket price-->
+      <div class="container" id = "group-price" data-value = "<?php echo  $value['Price']; ?>"<?php echo  $value['Price']; ?>><?php echo  $value['Price']; ?></div>
+      <div class="container"><input type="number" name="group-price-input" id="group-price-input" value = "0" onchange = "getGroupPrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;"></div>
+      <div class="container" id = "group-display"></div>
+    </div>
+
+    
+
+    <div class="get-ticket-container">
+    <div class="subtotal-box" style = "background-color:white"></div>
+    <div class="subtotal-box" style = "background-color:white"></div>
+    <div class="subtotal-box" style = "background-color:white"></div>
+      <div class="subtotal-box">
+        <h4>Total to Pay</h4>
+        <span id = "total-display"></span>
       </div>
     </div>
+    <script>
+    
+    </script>
     <center>
    <div class="button extra_1_button"><a href="#">add to cart</a></div>
  </center>
@@ -299,5 +303,40 @@ function getParam() {
       integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
       crossorigin="anonymous"
     ></script>
+    <script>
+    function getSinglePrice(){
+      const price = document.getElementById('single-price').getAttribute('data-value');
+      const quantity = document.getElementById('single-price-input').value;
+      if(quantity < 0){
+        alert('Invalid input');
+      }else{
+        var totalPriceSingle = price*quantity;
+        const totalPriceDisplay = document.getElementById('single-display');
+        totalPriceDisplay.textContent = totalPriceSingle;
+      }
+      return totalPriceSingle;
+    }
+    function getGroupPrice(){
+      const price = document.getElementById('group-price').getAttribute('data-value');
+      const quantity = document.getElementById('group-price-input').value;
+      if(quantity < 0){
+       alert('Invalid input');
+     }
+     else{
+      var totalPriceGroup = price*quantity;
+      const totalPriceDisplay = document.getElementById('group-display');
+      totalPriceDisplay.textContent = totalPriceGroup;
+      }
+      return totalPriceGroup;
+    }
+    function totalPay(){
+      const single = getSinglePrice();
+      const group = getGroupPrice();
+      const totalPay = single + group;
+      document.getElementById('total-display').textContent = totalPay;
+    }
+    getSinglePrice();
+    getGroupPrice();
+    </script>
   </body>
 </html>
