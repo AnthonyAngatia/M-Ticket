@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (isset($_POST["add"])) {
+$y=$_SESSION['photo'];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,7 +51,6 @@ session_start();
           background-color: #ddd;
           text-align:center;
         
-        
       }
       
       .cart img {
@@ -90,15 +93,14 @@ session_start();
       }
         button:hover {
       background-color: black;
-    }
+    } 
 
        </style>
     </head>
   <body>
 
 <div class="super_container">
-
-      <header class="header" >
+       <header class="header" >
     <div class="header_inner d-flex flex-row align-items-center justify-content-start">
       <div class="logo"><a href="Homepage.php">M-ticket</a></div>
       <nav class="main_nav">
@@ -127,10 +129,11 @@ session_start();
 
           </a>
       
-        </div>
+        </div>  
       </div>
     </div>
   </header>
+
 
 
    <div class="whole-cart">
@@ -141,13 +144,12 @@ session_start();
         <div class="section_subtitle" style="font-size: 25px !important;">total</div>
         
       </div>
-      <div class="cart">
+      <div class="cart">  
         <div class="item">
-       
-          
+
         </div>
         <div class="quantity">
-               
+              
         
         </div>
         <div class="price">
@@ -162,6 +164,7 @@ session_start();
  
     </div>
   </div>
+
 
             <center>
             <div class="cart_positioning" style="display:inline-flex; ">
@@ -179,11 +182,12 @@ session_start();
               <!-- Cart Coupon -->
         <div class="col-lg-6" style="">
           <div class="cart_coupon">
-            <div class="cart_title">award points code</div>
+            <div class="cart_title">reward points</div>
             <form action="#" class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
-              <input type="text" class="cart_coupon_input" placeholder="Award points code" required="required">
-              <button class="button_clear cart_button_2">apply code</button>
-            </form>
+              <input type="text" class="cart_coupon_input" value="1000"disabled required="required">
+              <input type="text" class="cart_coupon_input" placeholder="Enter points for discount" required="required">
+              <button class="button_clear cart_button_2">apply</button>
+            
           </div>
         </div>
         <br>
@@ -198,7 +202,7 @@ session_start();
                 <div class="cart_total_price ml-auto">3500.00</div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
-                <div class="cart_total_title">Discount (code)</div> 
+                <div class="cart_total_title">discount</div> 
                 <div class="cart_total_price ml-auto">500.00</div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
@@ -213,6 +217,7 @@ session_start();
       </div>
     </div>
     
+   
    <!-- Footer -->
 
   <footer class="footer">
