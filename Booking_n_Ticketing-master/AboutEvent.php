@@ -18,7 +18,6 @@ function getParam() {
  $description = "descripton";
  foreach ($rowData as $value) {
  
-
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +61,7 @@ function getParam() {
     }
     .poster-details h1,
     h4 {
-      margin: 20px;
+      margin: 10px;
     }
     .poster-details p {
       margin: 20px;
@@ -107,6 +106,46 @@ function getParam() {
       background-color: #ddd;
       box-shadow: 0 8px 6px -6px black;
     }
+    #inputstyle-sq{
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+      border:none;
+      background-color: #ddd;
+    }
+     #inputstyle-gq{
+      margin-bottom: 10px;
+      margin-top: 10px;
+      text-align: center;
+      border:none;
+      background-color: #ddd;
+    }
+      #inputstyle-single{
+      margin-top: 18px;
+      text-align: center;
+      border:none;
+      background-color: #ddd;
+    }
+      #inputstyle-group{
+      margin-top: 18px;
+      text-align: center;
+      border:none;
+      background-color: #ddd;
+    }
+    #total-display-input{ 
+       margin-bottom: 10px;
+      text-align: center;
+      border:none;
+      background-color: #ddd;
+
+    }
+    #inputstyle-title{
+      color:black;
+      width: 95%;
+      font-family: timesnewroman;
+      border:none;
+      background-color: white ;
+    }
   </style>
   <body>
    
@@ -125,7 +164,7 @@ function getParam() {
       <div class="header_content ml-auto">
         <div class="shopping">
           <!-- Cart -->
-          <a href="#">
+          <a href="cart.php">
             <div class="cart">
               <img src="cart3.png" width="30" height="30" alt="">
               <div class="cart_num_container">
@@ -158,17 +197,25 @@ function getParam() {
     </div>
   </header>
     
+  <form action="cart.php" method="POST" enctype="multipart/form-data">
+<!-- 
+  <?php
+      session_start();
+      $image= $value['Poster'];
+      $_SESSION['photo']=$image;
+      ?> -->
+
     <div class="event-poster">
       <img
         class="poster"
         id = "poster"
-        src="<?php echo  $value['Poster']; ?>"
+        src="<?php echo  $value['Poster'];?>"
         alt="poster"
-
       />
 
       <div class="poster-details">
-        <h1> <?php echo $value['Title'];?></h1>
+        <h1><input type="text" id="inputstyle-title" name="price" value="<?php echo  $value['Title']; ?>" disabled="true"></h1>
+         
         <h4>Description:</h4>
         <p id = "description">
         <?php 
@@ -196,6 +243,9 @@ function getParam() {
     <center>
      <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
    </center>
+
+   
+
     <div class="get-ticket-container">
     <div class="container">
         <h4>Type</h4>
@@ -212,15 +262,26 @@ function getParam() {
       <div class="container">
       <h4>Single</h4>
       </div>
-      <div class="container" id = "single-price" data-value = "<?php echo  $value['Price']; ?>"><?php echo  $value['Price']; ?></div>
-      <div class="container"><input type="number" name="input-single-price" id="single-price-input" value = "0" onchange = "getSinglePrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;"></div>
+      
+      
+
+      <div class="container" id = "single-price">
+       <input type="text" id="inputstyle-single" name="price" value="<?php echo  $value['Price']; ?>" disabled="true">
+     </div>
+      <div class="container">
+        <input type="number" name="input-single-price" id="inputstyle-sq" value = "0" onchange = "getSinglePrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
+      </div>
       <div class="container" id = "single-display"></div>
 
       <div class="container">
       <h4>Group Ticket</h4></div>
       <!--!We need to adjust our DB FOR GROUP-Ticket price-->
-      <div class="container" id = "group-price" data-value = "<?php echo  $value['Price']; ?>"<?php echo  $value['Price']; ?>><?php echo  $value['Price']; ?></div>
-      <div class="container"><input type="number" name="group-price-input" id="group-price-input" value = "0" onchange = "getGroupPrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;"></div>
+      <div class="container" id = "group-price">
+         <input type="text" id="inputstyle-group" name="price" value="<?php echo  $value['Price']; ?>" disabled="true">
+       </div>
+      <div class="container">
+        <input type="number" name="group-price-input" id="inputstyle-gq" value = "0" onchange = "getGroupPrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
+      </div>
       <div class="container" id = "group-display"></div>
     </div>
 
@@ -232,15 +293,18 @@ function getParam() {
     <div class="subtotal-box" style = "background-color:white"></div>
       <div class="subtotal-box">
         <h4>Total to Pay</h4>
-        <span id = "total-display"></span>
+        <input type="text" id="total-display-input" name="price" value="" disabled="true">
+
       </div>
     </div>
     <script>
     
     </script>
     <center>
-   <div class="button extra_1_button"><a href="#">add to cart</a></div>
+   <button class="button extra_1_button" type="submit" name="add" value='.$description.'><a href="#">add to cart</a></button>
  </center>
+
+
 
    <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events</div>
     <div class="similar-events-container">
@@ -251,6 +315,7 @@ function getParam() {
   <center>
    <div class="button extra_1_button"><a href="#">see more</a></div>
  </center>
+</form>
 
 
   <!-- Footer -->
@@ -305,8 +370,8 @@ function getParam() {
     ></script>
     <script>
     function getSinglePrice(){
-      const price = document.getElementById('single-price').getAttribute('data-value');
-      const quantity = document.getElementById('single-price-input').value;
+      const price = document.getElementById('inputstyle-single').getAttribute('value');
+      const quantity = document.getElementById('inputstyle-sq').value;
       if(quantity < 0){
         alert('Invalid input');
       }else{
@@ -317,8 +382,8 @@ function getParam() {
       return totalPriceSingle;
     }
     function getGroupPrice(){
-      const price = document.getElementById('group-price').getAttribute('data-value');
-      const quantity = document.getElementById('group-price-input').value;
+      const price = document.getElementById('inputstyle-group').getAttribute('value');
+      const quantity = document.getElementById('inputstyle-gq').value;
       if(quantity < 0){
        alert('Invalid input');
      }
@@ -333,7 +398,7 @@ function getParam() {
       const single = getSinglePrice();
       const group = getGroupPrice();
       const totalPay = single + group;
-      document.getElementById('total-display').textContent = totalPay;
+      document.getElementById('total-display-input').setAttribute('value',  totalPay);
     }
     getSinglePrice();
     getGroupPrice();

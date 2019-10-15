@@ -189,10 +189,8 @@ session_start();
                             <script>
                             //!This function is working. 
                             //TODO:We need to display the session using javascript
-                            alert("pop");
-                            var session = "<?php echo $_SESSION["
-                            username "]; ?>";
-                            if (session == null) {
+                            if ("<?php echo $_SESSION["
+                                username "]; ?>" == "null") {
                                 alert('null session');
                                 document.getElementById('avatar').style.display = 'none';
                             } else {
@@ -205,26 +203,22 @@ session_start();
 
 
                         <!-- Cart -->
-                        <a href="#">
+                        <a href="cart.php">
                             <div class="cart">
                                 <img src="cart3.png" width="27" height="27" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
                                         <div class="cart_num">0</div>
                                     </div>
+
+                                    <div
+                                        class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
+                                        <div></div>
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-
-            </div>
         </header>
 
         <!-- Menu -->
