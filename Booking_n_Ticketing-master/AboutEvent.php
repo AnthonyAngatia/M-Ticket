@@ -211,10 +211,6 @@ h4 {
 
             </div>
         </header>
-
-
-        </header>
-
         <form action="cart.php" method="POST" enctype="multipart/form-data">
 
             <div class="event-poster">

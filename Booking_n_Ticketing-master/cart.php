@@ -1,8 +1,26 @@
 <?php
 session_start();
-if (isset($_POST["add"])) {
-$y=$_SESSION['photo'];
+
+include ("require.php");
+connect();
+
+if (isset($_POST["submit"])) {
+  // print_r($_POST);
+$title = ($_POST['ticket']);
+$_SESSION['ticketname']=$title;
+$sql=("SELECT Poster FROM event WHERE Title ='$title'");
+$link=connect();
+$result=mysqli_query($link,$sql);
+while ($row = $result->fetch_assoc()){
+  $poster=$row['Poster'];
 }
+$singleticket = ($_POST['sprice']);
+$singlequantity = ($_POST['squantity']);
+$groupticket = ($_POST['gprice']);
+$groupquantity = ($_POST['gquantity']);
+$total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -36,12 +54,12 @@ $y=$_SESSION['photo'];
       }
       .headings {
         display: grid;
-        grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 2.2fr 1fr 1.4fr 1fr 1fr 1fr;
         text-align: center;
       }
       .cart {
         display: grid;
-        grid-template-columns: 2.5fr 1fr 1fr 1fr 1fr;
+        grid-template-columns: 2.2fr 1fr 1.4fr 1fr 1fr 1fr;
         grid-auto-rows: minmax(200px, auto);
         grid-gap: 1px;
         box-shadow: 0 8px 6px -6px black;
@@ -59,17 +77,17 @@ $y=$_SESSION['photo'];
         max-height: 150px;
         max-width: 150px;
       }
-      .price{
-          padding-top: 5em;
-      }
-      a {
-      text-decoration: none;
-      display: inline-block;
-      padding: 2px 16px;
-      
-    }
-    
 
+      .type{
+        height:200px;
+      }
+      .quantity{
+         height:200px;
+      }
+      .price{
+         height:200px;
+      }
+  
     .previous {
       background-color: #ddd;
       color: black;
@@ -117,7 +135,7 @@ $y=$_SESSION['photo'];
               <img src="avatar.png" alt="">
             </div>
             
-               <!-- session -->
+              <!--  session -->
             <script>
               if ('<%=Session["username"] == null%>') {
                 //alert('null session');
@@ -139,6 +157,7 @@ $y=$_SESSION['photo'];
    <div class="whole-cart">
       <div class="headings">
         <div class="section_subtitle" style="font-size: 25px !important;">ticket</div>
+        <div class="section_subtitle" style="font-size: 25px !important;">Type</div>
         <div class="section_subtitle" style="font-size: 25px !important;">quantity</div>
         <div class="section_subtitle" style="font-size: 25px !important;">price</div>
         <div class="section_subtitle" style="font-size: 25px !important;">total</div>
@@ -146,17 +165,42 @@ $y=$_SESSION['photo'];
       </div>
       <div class="cart">  
         <div class="item">
+            <h5><?php echo($title); ?></h5>
+            <img src= "<?php echo $poster ?>" alt="test"/>
+        </div>
 
+
+        <div class="type">
+          <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
+              <h5>Single</h5>
+            </div>
+            <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
+              <h5>Group</h5>
+            </div>
+        
         </div>
+
         <div class="quantity">
-              
+          <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
+              <h5><?php echo($singlequantity); ?></h5>
+            </div>
+            <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
+              <h5><?php echo($groupquantity); ?></h5>
+            </div>
         
         </div>
+
         <div class="price">
-        
+            <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
+             <h5><?php echo($singleticket); ?></h5>
+            </div>
+              <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
+              <h5><?php echo($groupticket); ?></h5>
+            </div>  
         </div>
-        <div class="totalprice">
-          
+
+        <div class="totalprice" style="padding-top: 90px;">
+              <h5><?php echo($total); ?></h5>
         </div>
         <div class="remove">
           <button>Remove</button>
