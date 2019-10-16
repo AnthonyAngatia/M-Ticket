@@ -47,9 +47,6 @@ function getParam() {
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
     <title>Event</title>
 </head>
-<script>
-alert("check");
-</script>
 <style>
 .event-poster {
     font-weight: bold;
@@ -332,9 +329,6 @@ h4 {
 
                 </div>
             </div>
-            <script>
-
-            </script>
             <center>
                 <button class="button extra_1_button" type="submit" name="add" value='.$description.'><a href="#">add to
                         cart</a></button>

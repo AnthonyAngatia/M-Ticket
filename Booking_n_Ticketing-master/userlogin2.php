@@ -32,7 +32,7 @@ else{
     $sess = "null";
 }
 
-// header("Location: HomePage.php");
+header("Location: HomePage.php");
 exit();
 }
 ?>
