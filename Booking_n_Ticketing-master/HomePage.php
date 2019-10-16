@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+ echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  echo "empty";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -160,10 +169,10 @@ session_start();
 
 <body>
 
+
     <div class="super_container">
 
         <!-- Header -->
-
         <header class="header">
             <div class="header_inner d-flex flex-row align-items-center justify-content-start">
                 <div class="logo"><a href="HomePage.php">M-ticket</a></div>
@@ -185,18 +194,6 @@ session_start();
                                 <img src="avatar.png" alt="">
                             </div>
 
-                            <!-- session -->
-                            <script>
-                            //!This function is working. 
-                            //TODO:We need to display the session using javascript
-                            if ("<?php echo $_SESSION["
-                                username "]; ?>" == "null") {
-                                alert('null session');
-                                document.getElementById('avatar').style.display = 'none';
-                            } else {
-                                alert(' session found');
-                            }
-                            </script>
 
                         </a>
                         &emsp;
@@ -495,6 +492,18 @@ session_start();
     </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script>
+    /*
+    TODO:script to check if session exist
+   */
+    var sess = "<?php echo $sess; ?>";
+    if (sess == "null") {
+        // alert("null");
+        document.getElementById('avatar').style.display = "none";
+    } else {
+        // alert("not null");
+    }
     </script>
     <script>
     /*

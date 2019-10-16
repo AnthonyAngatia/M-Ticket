@@ -1,5 +1,5 @@
 <?php
-session_start();
+// session_start();
 
 include ("require.php");
 connect();
@@ -24,8 +24,15 @@ session_start();
 $_SESSION["loggedin"]=true;
 $_SESSION["username"]=$username;
 
-header("Location: HomePage.php");
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    $sess = $_SESSION["username"];
+//    echo 'Set and not empty, and no undefined index error!';
+}
+else{
+    $sess = "null";
+}
+
+// header("Location: HomePage.php");
 exit();
 }
 ?>
-
