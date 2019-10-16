@@ -212,49 +212,25 @@ h4 {
             </div>
         </header>
 
-        <form action="cart.php" method="POST" enctype="multipart/form-data">
-            <!-- 
-  <?php
-      session_start();
-      $image= $value['Poster'];
-      $_SESSION['photo']=$image;
-      ?> -->
+    </div>
+    </header>
 
-            <div class="event-poster">
-                <img class="poster" id="poster" src="<?php echo  $value['Poster'];?>" alt="poster" />
+    <form action="cart.php" method="POST" enctype="multipart/form-data">
 
-                <div class="poster-details">
-                    <h1><input type="text" id="inputstyle-title" name="price" value="<?php echo  $value['Title']; ?>"
-                            disabled="true"></h1>
+        <div class="event-poster">
+            <img class="poster" id="poster" src="<?php echo  $value['Poster'];?>" alt="poster" />
 
-                    <h4>Description:</h4>
-                    <p id="description">
-                        <?php 
+            <div class="poster-details">
+                <h1><input type="text" id="inputstyle-title" name="ticket-disabled"
+                        value="<?php echo  $value['Title']; ?>" disabled="true"></h1>
+                <h1><input type="text" id="inputstyle-title" name="ticket" value="<?php echo  $value['Title']; ?>"
+                        hidden="true"></h1>
+
+                <h4>Description:</h4>
+                <p id="description">
+                    <?php 
         $description = $value['Description2'];
         echo substr($value['Description2'],0,200);} ?>
-
-                    </p>
-                    <a id="see-more" onclick="seeMore()" style="cursor:pointer; margin-left: 1em;">See
-                        more</a>
-                    <a id="close" onclick="closeFunc()"
-                        style="display:none; cursor:pointer; margin-left: 1em;">Close</a>
-                    <script>
-                    function seeMore() {
-                        document.getElementById('poster').style.display = "none";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php echo $description ?>";
-                        document.getElementById('close').style.display = "unset";
-                        document.getElementById('see-more').style.display = "none";
-
-
-                    }
-
-                    function closeFunc() {
-                        document.getElementById('poster').style.display = "unset";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php  echo substr($value['Description2'],0,200); ?>";
-                        document.getElementById('close').style.display = "none";
-                        document.getElementById('see-more').style.display = "unset";
 
                     }
                     </script>
@@ -264,185 +240,201 @@ h4 {
                     <p>Nairobi</p>
                     <p>Moi avenue</p>
                     <p>XYZ Building 4th floor</p>
-                </div>
             </div>
-            <br>
-            <center>
-                <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
-            </center>
+        </div>
+        <br>
+        <center>
+            <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
+        </center>
 
 
 
-            <div class="get-ticket-container">
-                <div class="container">
-                    <h4>Type</h4>
-                </div>
-                <div class="container">
-                    <h4>Price</h4>
-                </div>
-                <div class="container">
-                    <h4>Quantity</h4>
-                </div>
-                <div class="container">
-                    <h4>Total Price</h4>
-                </div>
-                <div class="container">
-                    <h4>Single</h4>
-                </div>
-
-
-
-                <div class="container" id="single-price">
-                    <input type="text" id="inputstyle-single" name="price" value="<?php echo  $value['Price']; ?>"
-                        disabled="true">
-                </div>
-                <div class="container">
-                    <input type="number" name="input-single-price" id="inputstyle-sq" value="0"
-                        onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px;">
-                </div>
-                <div class="container" id="single-display"></div>
-
-                <div class="container">
-                    <h4>Group Ticket</h4>
-                </div>
-                <!--!We need to adjust our DB FOR GROUP-Ticket price-->
-                <div class="container" id="group-price">
-                    <input type="text" id="inputstyle-group" name="price" value="<?php echo  $value['Price']; ?>"
-                        disabled="true">
-                </div>
-                <div class="container">
-                    <input type="number" name="group-price-input" id="inputstyle-gq" value="0"
-                        onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;">
-                </div>
-                <div class="container" id="group-display"></div>
-            </div>
-
-
-
-            <div class="get-ticket-container">
-                <div class="subtotal-box" style="background-color:white"></div>
-                <div class="subtotal-box" style="background-color:white"></div>
-                <div class="subtotal-box" style="background-color:white"></div>
-                <div class="subtotal-box">
-                    <h4>Total to Pay</h4>
-                    <input type="text" id="total-display-input" name="price" value="" disabled="true">
-
-                </div>
-            </div>
-            <center>
-                <button class="button extra_1_button" type="submit" name="add" value='.$description.'><a href="#">add to
-                        cart</a></button>
-            </center>
-
-
-
-            <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar
-                events</div>
-            <div class="similar-events-container">
-                <div class="sec1"></div>
-                <div class="sec2"></div>
-                <div class="sec3"></div>
-            </div>
-            <center>
-                <div class="button extra_1_button"><a href="#">see more</a></div>
-            </center>
-        </form>
-
-
-        <!-- Footer -->
-
-        <footer class="footer">
+        <div class="get-ticket-container">
             <div class="container">
-                <div class="row">
-                    <div class="col text-center">
-                        <div class="footer_logo"><a href="HomePage.php">M-ticket</a></div>
-                        <nav class="footer_nav">
-                            <ul>
-                                <li><a href="browse.php">events</a></li>
-                                <li><a href="HomePage.php">create event</a></li>
-                                <li><a href="about.php">about us</a></li>
-                                <li><a href="contact.php">contact</a></li>
-                            </ul>
-                        </nav>
-                        <div class="footer_social">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            </ul>
-                        </div>
-                        <div class="copyright">Copyright &copy;<script>
-                            document.write(new Date().getFullYear());
-                            </script> All rights reserved</div>
+                <h4>Type</h4>
+            </div>
+            <div class="container">
+                <h4>Price</h4>
+            </div>
+            <div class="container">
+                <h4>Quantity</h4>
+            </div>
+            <div class="container">
+                <h4>Total Price</h4>
+            </div>
+            <div class="container">
+                <h4>Single</h4>
+            </div>
+
+
+
+            <div class="container" id="single-price">
+                <input type="text" id="inputstyle-single" name="sprice-disabled" value="<?php echo  $value['Price']; ?>"
+                    disabled="true">
+                <input type="text" id="inputstyle-single" name="sprice" value="<?php echo  $value['Price']; ?>"
+                    hidden="true">
+            </div>
+            <div class="container">
+                <input type="number" name="squantity" id="inputstyle-sq" value="0"
+                    onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px;">
+            </div>
+            <div class="container" id="single-display"></div>
+
+            <div class="container">
+                <h4>Group Ticket</h4>
+            </div>
+            <!--!We need to adjust our DB FOR GROUP-Ticket price-->
+            <div class="container" id="group-price">
+                <input type="text" id="inputstyle-group" name="gprice-disabled" value="<?php echo  $value['Price']; ?>"
+                    disabled="true">
+                <input type="text" id="inputstyle-group" name="gprice" value="<?php echo  $value['Price']; ?>"
+                    hidden="true">
+            </div>
+            <div class="container">
+                <input type="number" name="gquantity" id="inputstyle-gq" value="0"
+                    onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;">
+            </div>
+            <div class="container" id="group-display"></div>
+        </div>
+
+
+        <div class="get-ticket-container">
+            <div class="subtotal-box" style="background-color:white"></div>
+            <div class="subtotal-box" style="background-color:white"></div>
+            <div class="subtotal-box" style="background-color:white"></div>
+            <div class="subtotal-box">
+                <h4>Total to Pay</h4>
+                <input type="text" id="total-display-input" name="totalprice" value="" disabled="true">
+            </div>
+        </div>
+        <script>
+
+        </script>
+        <center>
+            <button class="button extra_1_button" type="submit" name="submit" value="add">ADD TO CART</button>
+        </center>
+    </form>
+
+    }
+    </script>
+    <h4>Date:</h4>
+    <p>September 11th 2019</p>
+    <h4>Location:</h4>
+    <p>Nairobi</p>
+    <p>Moi avenue</p>
+    <p>XYZ Building 4th floor</p>
+    </div>
+    </div>
+    <br>
+    <center>
+        <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
+    </center>
+
+
+    <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events</div>
+    <div class="similar-events-container">
+        <div class="sec1"></div>
+        <div class="sec2"></div>
+        <div class="sec3"></div>
+    </div>
+    <center>
+        <div class="button extra_1_button"><a href="#">see more</a></div>
+    </center>
+
+
+
+    <!-- Footer -->
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <div class="footer_logo"><a href="HomePage.php">M-ticket</a></div>
+                    <nav class="footer_nav">
+                        <ul>
+                            <li><a href="browse.php">events</a></li>
+                            <li><a href="HomePage.php">create event</a></li>
+                            <li><a href="about.php">about us</a></li>
+                            <li><a href="contact.php">contact</a></li>
+                        </ul>
+                    </nav>
+                    <div class="footer_social">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-pinterest" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-reddit-alien" aria-hidden="true"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                        </ul>
                     </div>
+                    <div class="copyright">Copyright &copy;<script>
+                        document.write(new Date().getFullYear());
+                        </script> All rights reserved</div>
                 </div>
             </div>
-        </footer>
-    </div>
+        </div>
 
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
-    <script>
-    function getSinglePrice() {
-        const price = document.getElementById('inputstyle-single').getAttribute('value');
-        const quantity = document.getElementById('inputstyle-sq').value;
-        if (quantity < 0) {
-            alert('Invalid input');
-        } else {
-            var totalPriceSingle = price * quantity;
-            const totalPriceDisplay = document.getElementById('single-display');
-            totalPriceDisplay.textContent = totalPriceSingle;
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+            integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+            integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+            integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>
+        <script>
+        function getSinglePrice() {
+            const price = document.getElementById('inputstyle-single').getAttribute('value');
+            const quantity = document.getElementById('inputstyle-sq').value;
+            if (quantity < 0) {
+                alert('Invalid input');
+            } else {
+                var totalPriceSingle = price * quantity;
+                const totalPriceDisplay = document.getElementById('single-display');
+                totalPriceDisplay.textContent = totalPriceSingle;
+            }
+            return totalPriceSingle;
         }
-        return totalPriceSingle;
-    }
 
-    function getGroupPrice() {
-        const price = document.getElementById('inputstyle-group').getAttribute('value');
-        const quantity = document.getElementById('inputstyle-gq').value;
-        if (quantity < 0) {
-            alert('Invalid input');
-        } else {
-            var totalPriceGroup = price * quantity;
-            const totalPriceDisplay = document.getElementById('group-display');
-            totalPriceDisplay.textContent = totalPriceGroup;
+        function getGroupPrice() {
+            const price = document.getElementById('inputstyle-group').getAttribute('value');
+            const quantity = document.getElementById('inputstyle-gq').value;
+            if (quantity < 0) {
+                alert('Invalid input');
+            } else {
+                var totalPriceGroup = price * quantity;
+                const totalPriceDisplay = document.getElementById('group-display');
+                totalPriceDisplay.textContent = totalPriceGroup;
+            }
+            return totalPriceGroup;
         }
-        return totalPriceGroup;
-    }
 
-    function totalPay() {
-        const single = getSinglePrice();
-        const group = getGroupPrice();
-        const totalPay = single + group;
-        document.getElementById('total-display-input').setAttribute('value', totalPay);
-    }
-    getSinglePrice();
-    getGroupPrice();
-    </script>
-    <script>
-    /*
+        function totalPay() {
+            const single = getSinglePrice();
+            const group = getGroupPrice();
+            const totalPay = single + group;
+            document.getElementById('total-display-input').setAttribute('value', totalPay);
+        }
+        getSinglePrice();
+        getGroupPrice();
+        </script>
+        <script>
+        /*
      TODO:script to check if session exist
      */
-    var sess = "<?php echo $sess; ?>";
-    if (sess == "null") {
-        // alert("null");
-        document.getElementById('avatar').style.display = "none";
-    } else {
-        // alert("not null");
-    }
-    </script>
+        var sess = "<?php echo $sess; ?>";
+        if (sess == "null") {
+            // alert("null");
+            document.getElementById('avatar').style.display = "none";
+        } else {
+            // alert("not null");
+        }
+        </script>
 </body>
 
 </html>
