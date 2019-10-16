@@ -198,12 +198,6 @@ function getParam() {
   </header>
     
   <form action="cart.php" method="POST" enctype="multipart/form-data">
-<!-- 
-  <?php
-      session_start();
-      $image= $value['Poster'];
-      $_SESSION['photo']=$image;
-      ?> -->
 
     <div class="event-poster">
       <img
@@ -214,7 +208,8 @@ function getParam() {
       />
 
       <div class="poster-details">
-        <h1><input type="text" id="inputstyle-title" name="price" value="<?php echo  $value['Title']; ?>" disabled="true"></h1>
+        <h1><input type="text" id="inputstyle-title" name="ticket-disabled" value="<?php echo  $value['Title']; ?>" disabled="true"></h1>
+        <h1><input type="text" id="inputstyle-title" name="ticket" value="<?php echo  $value['Title']; ?>" hidden="true"></h1>
          
         <h4>Description:</h4>
         <p id = "description">
@@ -266,10 +261,11 @@ function getParam() {
       
 
       <div class="container" id = "single-price">
-       <input type="text" id="inputstyle-single" name="price" value="<?php echo  $value['Price']; ?>" disabled="true">
+       <input type="text" id="inputstyle-single" name="sprice-disabled" value="<?php echo  $value['Price']; ?>"disabled= "true">
+        <input type="text" id="inputstyle-single" name="sprice" value="<?php echo  $value['Price']; ?>" hidden = "true">
      </div>
       <div class="container">
-        <input type="number" name="input-single-price" id="inputstyle-sq" value = "0" onchange = "getSinglePrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
+        <input type="number" name="squantity" id="inputstyle-sq" value = "0" onchange = "getSinglePrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
       </div>
       <div class="container" id = "single-display"></div>
 
@@ -277,10 +273,11 @@ function getParam() {
       <h4>Group Ticket</h4></div>
       <!--!We need to adjust our DB FOR GROUP-Ticket price-->
       <div class="container" id = "group-price">
-         <input type="text" id="inputstyle-group" name="price" value="<?php echo  $value['Price']; ?>" disabled="true">
+         <input type="text" id="inputstyle-group" name="gprice-disabled" value="<?php echo  $value['Price']; ?>" disabled="true">
+         <input type="text" id="inputstyle-group" name="gprice" value="<?php echo  $value['Price']; ?>" hidden="true">
        </div>
       <div class="container">
-        <input type="number" name="group-price-input" id="inputstyle-gq" value = "0" onchange = "getGroupPrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
+        <input type="number" name="gquantity" id="inputstyle-gq" value = "0" onchange = "getGroupPrice();totalPay();" min="0" max="5" style = "width:60px; height:40px;">
       </div>
       <div class="container" id = "group-display"></div>
     </div>
@@ -293,16 +290,16 @@ function getParam() {
     <div class="subtotal-box" style = "background-color:white"></div>
       <div class="subtotal-box">
         <h4>Total to Pay</h4>
-        <input type="text" id="total-display-input" name="price" value="" disabled="true">
-
+        <input type="text" id="total-display-input" name="totalprice" value="" disabled="true">
       </div>
     </div>
     <script>
     
     </script>
     <center>
-   <button class="button extra_1_button" type="submit" name="add" value='.$description.'><a href="#">add to cart</a></button>
+   <button class="button extra_1_button" type="submit" name="submit" value="add">ADD TO CART</button>
  </center>
+ </form>
 
 
 
@@ -315,7 +312,7 @@ function getParam() {
   <center>
    <div class="button extra_1_button"><a href="#">see more</a></div>
  </center>
-</form>
+
 
 
   <!-- Footer -->
