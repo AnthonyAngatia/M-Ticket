@@ -62,6 +62,7 @@ function upload($sql)
 	if ($result) {
 		echo "<script>alert('Event uploaded successfuly')</script>";
 	}
+	// echo mysqli_error($link);
 	$link->close();
 }
 function retrievePass($insert, $username)
@@ -88,3 +89,4 @@ function retrieveUser($insert, $username)
 	}
 	mysql_close($link);
 }
+?>

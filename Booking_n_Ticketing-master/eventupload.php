@@ -74,8 +74,10 @@ session_start();
       <div class="logo"><a href="Homepage.php">M-ticket</a></div>
       <nav class="main_nav">
         <ul>
-          <li><a href="#">browse events</a></li>
-          <li><a href="#"></a></li>
+          <li><a href="browse.php">browse events</a></li>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">contact</a></li>
+
         </ul>
       </nav>
       <div class="header_content ml-auto">
@@ -104,6 +106,7 @@ session_start();
   </div>
   <br>
   <center>
+
     <form action="upload.php" method="POST" enctype="multipart/form-data">
       <div id="basicinfo">
         <div class="section_title">basic info</div>

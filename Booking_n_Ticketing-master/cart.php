@@ -1,6 +1,6 @@
 <?php
-session_start();
 
+session_start();
 include ("require.php");
 connect();
 
@@ -8,17 +8,40 @@ if (isset($_POST["submit"])) {
   // print_r($_POST);
 $title = ($_POST['ticket']);
 $_SESSION['ticketname']=$title;
-$sql=("SELECT Poster FROM event WHERE Title ='$title'");
+$sql=("SELECT * FROM event WHERE Title ='$title'");
 $link=connect();
 $result=mysqli_query($link,$sql);
+
 while ($row = $result->fetch_assoc()){
   $poster=$row['Poster'];
+  $id=$row['Event_Id'];
 }
+
 $singleticket = ($_POST['sprice']);
 $singlequantity = ($_POST['squantity']);
 $groupticket = ($_POST['gprice']);
 $groupquantity = ($_POST['gquantity']);
-$total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
+$subtotal = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
+
+
+
+if (!isset($_SESSION['cart_tickets'])) {
+  $_SESSION['cart_tickets'] = array();
+}
+$ticket = array('id' => $id,
+                  'squantity' => $_POST['squantity'],
+                  'gquantity' => $_POST['gquantity'],
+                  );
+foreach ($_SESSION['cart_tickets'] as $key => $value) {
+  if (  $value['id'] == $id) {
+      header( 'Location: Homepage.php');
+      exit();
+  }
+}
+array_push($_SESSION['cart_tickets'],$ticket);
+
+
+
 }
 
 
@@ -77,6 +100,16 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
         max-height: 150px;
         max-width: 150px;
       }
+
+      .type{
+        height:200px;
+      }
+      .quantity{
+         height:200px;
+      }
+      .price{
+         height:200px;
+      }
   
     .previous {
       background-color: #ddd;
@@ -108,13 +141,15 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
   <body>
 
 <div class="super_container">
-   <!--     <header class="header" >
+       <header class="header" >
     <div class="header_inner d-flex flex-row align-items-center justify-content-start">
       <div class="logo"><a href="Homepage.php">M-ticket</a></div>
       <nav class="main_nav">
         <ul>
           <li><a href="browse.php">browse events</a></li>
           <li><a href="eventupload.php">create event</a></li>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">contact</a></li>
           
         </ul>
       </nav>    
@@ -125,7 +160,7 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
               <img src="avatar.png" alt="">
             </div>
             
-               <!-- session -->
+              <!--  session -->
             <script>
               if ('<%=Session["username"] == null%>') {
                 //alert('null session');
@@ -142,7 +177,7 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
     </div>
   </header>
 
- -->
+
 
    <div class="whole-cart">
       <div class="headings">
@@ -153,56 +188,74 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
         <div class="section_subtitle" style="font-size: 25px !important;">total</div>
         
       </div>
-      <div class="cart">  
+
+      <?php 
+
+      if (  isset( $_SESSION['cart_tickets']) ) {
+        $link=connect();
+       foreach ($_SESSION['cart_tickets'] as $key => $value) {
+        $eid = $value['id'];
+      $sql=("SELECT * FROM event WHERE Event_Id ='$eid'");
+
+    $result=mysqli_query($link,$sql);
+
+     $row = $result->fetch_assoc();
+        ?>
+
+
+ <div class="cart" style="margin: 10px">  
         <div class="item">
-            <h5><?php echo($title); ?></h5>
-            <img src= "<?php echo $poster ?>" alt="test"/>
+            <h5><?php echo($row['Title']); ?></h5>
+            <img src= "<?php echo $row['Poster']?>" alt="test"/>
         </div>
 
 
         <div class="type">
-          <div style="border-bottom: 1px solid;">
+          <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
               <h5>Single</h5>
             </div>
-            <div style="border-top: 1px solid;">
+            <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
               <h5>Group</h5>
             </div>
         
         </div>
 
-        <div class="quantity">
-          <div style="border-bottom: 1px solid;">
-              <h5><?php echo($singlequantity); ?></h5>
+       <div class="quantity">
+          <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
+              <h5><?php echo($value['squantity']);; ?></h5>
             </div>
-            <div style="border-top: 1px solid;">
-              <h5><?php echo($groupquantity); ?></h5>
+            <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
+              <h5><?php  echo  (isset($value['gquantity'])) ? $value['gquantity'] : 0 ; ?>
+                </h5>
             </div>
         
         </div>
 
         <div class="price">
-            <div style="border-bottom: 1px solid;">
-             <h5><?php echo($singleticket); ?></h5>
+            <div style="height:99px; padding-top: 40px; border-bottom: 1px solid;">
+             <h5><?php echo($row['Price']);; ?></h5>
             </div>
-              <div style="border-top: 1px solid;">
-              <h5><?php echo($groupticket); ?></h5>
+              <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
+              <h5><?php echo($row['Price']);; ?></h5>
             </div>  
         </div>
 
-        <div class="totalprice">
-              <h5><?php echo($total); ?></h5>
+        <div class="totalprice" style="padding-top: 90px;">
+              <h5><?php echo(($value['squantity'] *$row['Price'] ) +($value['gquantity'] *$row['Price'] ) ); ?></h5>
         </div>
         <div class="remove">
-          <button>Remove</button>
+          <button><a href="remove_item.php?key=<?php  echo $key ?>">Remove</a></button>
         </div>
- 
-    </div>
-  </div>
+ </div>
+
+        <?php  
+      } } ?>
+  
 
 
             <center>
             <div class="cart_positioning" style="display:inline-flex; ">
-             <div class="button extra_1_button"><a href="cart.php">clear cart</a></div>&emsp;
+             <div class="button extra_1_button"><a href="clear_cart.php">clear cart</a></div>&emsp;
              <div class="button extra_1_button" style="width:200px !important;"><a href="browse.php">continue shopping</a></div>
               </div>
             </center>
@@ -217,15 +270,23 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
         <div class="col-lg-6" style="">
           <div class="cart_coupon">
             <div class="cart_title">reward points</div>
-            <form action="#" class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
-              <input type="text" class="cart_coupon_input" value="1000"disabled required="required">
-              <input type="text" class="cart_coupon_input" placeholder="Enter points for discount" required="required">
-              <button class="button_clear cart_button_2">apply</button>
-            
+            <form action="cart.php" method="POST" enctype="multipart/form-data" class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
+              <input type="text" class="cart_coupon_input" value="1000"disabled>
+              <input type="text" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required">
+              <button type="submit" name="apply" class="button_clear cart_button_2">apply</button>
+            </form>
           </div>
         </div>
         <br>
         <br>
+
+        <?php
+        if (!empty($_POST['points'])) {
+         $points = $_POST["points"];
+          $discount=($points*100);
+          $total=($subtotal-$discount);
+       }
+        ?>
         <!-- Cart Total -->
         <div class="col-lg-5 offset-lg-1">
           <div class="cart_total">
@@ -233,15 +294,15 @@ $total = (($singleticket*$singlequantity)+($groupticket*$groupquantity));
             <ul>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="cart_total_title">Subtotal</div>
-                <div class="cart_total_price ml-auto">3500.00</div>
+                <div class="cart_total_price ml-auto"><?php echo($subtotal);?></div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
-                <div class="cart_total_title">discount</div> 
-                <div class="cart_total_price ml-auto">500.00</div>
+                <div class="cart_total_title">Discount</div> 
+                <div class="cart_total_price ml-auto"><?php echo($discount);?></div>
               </li>
               <li class="d-flex flex-row align-items-center justify-content-start">
                 <div class="cart_total_title">Total</div>
-                <div class="cart_total_price ml-auto">3000.00</div>
+                <div class="cart_total_price ml-auto"><?php echo($total);?></div>
               </li>
             </ul>
             <button class="cart_total_button"><a href="checkout.php" style="color:black;">proceed to checkout</a></button>
