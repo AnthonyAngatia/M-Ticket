@@ -14,6 +14,7 @@ function setData($sql)
 {
 	$link = connect();
 	if (mysqli_query($link, $sql)) {
+		echo "<script>alert('Your data has been recorded')</script>";
 		return true;
 	} else {
 		return false;
@@ -27,14 +28,14 @@ function getData($sql)
 	$rowData = array();
 	if (mysqli_num_rows($result) > 0) {
 		while ($row = $result->fetch_assoc()) {
-			$rowData[] = $row;
+			array_push($rowData, $row);
 		}
 	}
 	return $rowData;
 }
 function register($sql)
 {
-	echo "<script>alert('Testing')</script>";
+	// echo "<script>alert('Testing')</script>";
 	$link = connect();
 	// $result = mysqli_query($link, $sql);
 	// if ($result) {
@@ -45,7 +46,7 @@ function register($sql)
 	// }
 	// $link->close();
 	if(mysqli_query($link, $sql)){
-		echo "New record created successfully";
+		echo "<script>alert('New record inserted')</script>";
 		header("Location:Homepage.php");
 	}
 	else{

@@ -194,7 +194,13 @@ h4 {
                                 <img src="cart3.png" width="30" height="30" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
-                                        <div class="cart_num">0</div>
+                                        <div class="cart_num"><?php
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?></div>
                                     </div>
                                 </div>
                             </div>
