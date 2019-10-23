@@ -1,3 +1,14 @@
+<?php
+session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+//  echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  // echo "empty";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -62,7 +73,14 @@
                                 <img src="cart3.png" width="27" height="27" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
-                                        <div class="cart_num">0</div>
+                                        <div class="cart_num"><?php 
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?> 
+                                        </div>
                                            </div>
                                   </div>
                                 </div>
@@ -79,7 +97,7 @@
           <div class="cart_coupon">
             <div class="cart_title">return ticket</div>
             <br>
-            <form action="return.php" method="POST" enctype="multipart/form-data">
+            <form action="return2.php" method="POST" enctype="multipart/form-data">
               <input type="text" class="cart_coupon_input" name="tnumber" placeholder="Enter ticket number" required="required">
               <button type="submit" name="return" class="button_clear cart_button_2">return</button>
             </form>
@@ -124,62 +142,18 @@
     <script src="js/popper.min.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
 
+    <script>
+    /*
+    TODO:script to check if session exist
+   */
+    var sess = "<?php echo $sess; ?>";
+    if (sess == "null") {
+        // alert("null");
+        document.getElementById('avatar').style.display = "none";
+    } else {
+        // alert("not null");
+    }
+    </script>
  </body>
 </html>
 
-<?php
-session_start();
-if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-  $sess = $_SESSION["username"];
-//  echo 'Set and not empty, and no undefined index error!';
-}
-else{
-  $sess = "null";
-  // echo "empty";
-}
-
-include ("require.php");
-connect();
-
-
-if (isset($_POST["submit"])) {
-
-$number = ($_POST['tnumber']);
-$_SESSION['ticketnumber']=$number;
-$sql=("SELECT Totalpaid FROM tickets WHERE Ticket_Id ='$number'");
-$link=connect();
-$result=mysqli_query($link,$sql);
-while ($row = $result->fetch_assoc()){
-$total=$row['Totalpaid'];
-}
-$returnpoints=(($total*0.6)/100);
-
-if ($result) {
-    $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
-    $link=connect();
-    $result=mysqli_query($link,$sql);
-    while ($row = $result->fetch_assoc()){
-    $currentpoints=$row['points'];
-    }
-    $newpoints=($currentpoints+$returnpoints);
-
-        if ($result) {
-              $sql=("DELETE * FROM tickets WHERE Ticket_Id ='$number'");
-              $link=connect();
-              $result=mysqli_query($link,$sql);
-                  if ($result) {
-                        $sql = "UPDATE user_table SET Points='$newpoints' WHERE Username=$sess";
-                        $link=connect();
-                        $result=mysqli_query($link,$sql);
-                            if ($result) {
-                                    echo "<script>alert('Ticket returned successfuly')</script>";
-                                          }
-                            $link->close();                 
-                                }
-                  $link->close();
-                      }
-        $link->close();
-              }
- $link->close();
-}
-?>

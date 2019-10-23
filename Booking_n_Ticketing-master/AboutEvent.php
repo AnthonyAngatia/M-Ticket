@@ -2,12 +2,13 @@
 session_start();
 if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
   $sess = $_SESSION["username"];
- echo 'Set and not empty, and no undefined index error!';
+//  echo 'Set and not empty, and no undefined index error!';
 }
 else{
   $sess = "null";
-   echo "empty";
+  // echo "empty";
 } 
+
 require('require.php');
 function getParam() {
  if (!isset($_GET["w1"])){
@@ -188,29 +189,37 @@ h4 {
                 </nav>
                 <div class="header_content ml-auto">
                     <div class="shopping">
-                        <!-- Cart -->
-                        <a href="cart.php">
-                            <div class="cart">
-                                <img src="cart3.png" width="30" height="30" alt="">
-                                <div class="cart_num_container">
-                                    <div class="cart_num_inner">
-                                        <div class="cart_num">0</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                        <!-- Avatar -->
                 <a href="account.php" style="color:black;">
                     <div class="avatar" id="avatar">
                         <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
                         <img src="avatar.png" alt="">
                     </div>
                 </a>
-                <!-- &emsp; -->
-
+                &emsp;
+                        <!-- Cart -->
+                        <a href="cart.php">
+                            <div class="cart">
+                                <img src="cart3.png" width="27" height="27" alt="">
+                                <div class="cart_num_container">
+                                    <div class="cart_num_inner">
+                                        <div class="cart_num"><?php 
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?> 
+                                        </div>
+                                           </div>
+                                  </div>
+                                </div>
+                              </a>
+                        </div>
+                </div>
             </div>
         </header>
+        
         <form action="cart.php" method="POST" enctype="multipart/form-data">
 
             <div class="event-poster">
@@ -304,8 +313,8 @@ h4 {
                 <!--!We need to adjust our DB FOR GROUP-Ticket price-->
                 <div class="container" id="group-price">
                     <input type="text" id="inputstyle-group" name="gprice-disabled"
-                        value="<?php echo  $value['Price']; ?>" disabled="true">
-                    <input type="text" id="inputstyle-group" name="gprice" value="<?php echo  $value['Price']; ?>"
+                        value="<?php echo  $value['Groupprice']; ?>" disabled="true">
+                    <input type="text" id="inputstyle-group" name="gprice" value="<?php echo  $value['Groupprice']; ?>"
                         hidden="true">
                 </div>
                 <div class="container">
@@ -331,13 +340,7 @@ h4 {
             </center>
         </form>
 
-        }
-
-        <center>
-            <div class="section_subtitle" style="font-size: 25px !important;">buy ticket</div>
-        </center>
-
-
+        
         <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events
         </div>
         <div class="similar-events-container">
@@ -432,10 +435,10 @@ h4 {
     getSinglePrice();
     getGroupPrice();
     </script>
-    <script>
+<script>
     /*
-     TODO:script to check if session exist
-     */
+    TODO:script to check if session exist
+   */
     var sess = "<?php echo $sess; ?>";
     if (sess == "null") {
         // alert("null");

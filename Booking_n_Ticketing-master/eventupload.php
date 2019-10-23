@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+//  echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  // echo "empty";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,24 +90,36 @@ session_start();
         </ul>
       </nav>
       <div class="header_content ml-auto">
-      </div>
-       <a href="account.php" style="color:black;">
-            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
-              <img src="avatar.png" alt="">
+       <div class="shopping">
+                        <!-- Avatar -->
+                <a href="account.php" style="color:black;">
+                    <div class="avatar" id="avatar">
+                        <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+                        <img src="avatar.png" alt="">
+                    </div>
+                </a>
+                &emsp;
+                        <!-- Cart -->
+                        <a href="cart.php">
+                            <div class="cart">
+                                <img src="cart3.png" width="27" height="27" alt="">
+                                <div class="cart_num_container">
+                                    <div class="cart_num_inner">
+                                        <div class="cart_num"><?php 
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?> 
+                                        </div>
+                                           </div>
+                                  </div>
+                                </div>
+                              </a>
+                        </div>
+                </div>
             </div>
-
-               <!-- session -->
-            <script>
-              if ('<%=Session["username"] == null%>') {
-                //alert('null session');
-               // document.querySelector('.avatar').style.display = 'none';
-              } else {
-                //alert('Session found');
-              }
-            </script>
-
-          </a>
-    </div>
   </header>
   <br>
 
@@ -204,10 +225,13 @@ session_start();
           <input type="number" class="form-control" name="quantity" placeholder="Quantity (Total  tickets)">
         </div>
         <div class="form-group col-md-6">
-          <input type="number" class="form-control" name="price" placeholder="Price">
+          <input type="number" class="form-control" name="price1" placeholder="Single Ticket Price">
         </div>
         <div class="form-group col-md-6">
           <input type="number" class="form-control" name="group" placeholder="Group Ticket quantity" min ="0">
+        </div>
+        <div class="form-group col-md-6">
+          <input type="number" class="form-control" name="price2" placeholder="Group Ticket Price">
         </div>
 
         <div class="form-row">
@@ -274,6 +298,18 @@ session_start();
     <script src="js/popper.min.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
 
+<script>
+    /*
+    TODO:script to check if session exist
+   */
+    var sess = "<?php echo $sess; ?>";
+    if (sess == "null") {
+        // alert("null");
+        document.getElementById('avatar').style.display = "none";
+    } else {
+        // alert("not null");
+    }
+    </script>
 </body>
 
 </html>

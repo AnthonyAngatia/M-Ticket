@@ -8,7 +8,6 @@ else{
   $sess = "null";
   // echo "empty";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,7 +203,13 @@ else{
                                 <img src="cart3.png" width="27" height="27" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
-                                        <div class="cart_num"><?php echo sizeof($_SESSION['cart_tickets'])?></div>
+                                        <div class="cart_num"><?php 
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?></div>
                                            </div>
                                   </div>
                                 </div>

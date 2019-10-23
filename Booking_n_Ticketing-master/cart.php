@@ -1,6 +1,14 @@
 <?php
-
 session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+//  echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  // echo "empty";
+}
+
 include ("require.php");
 connect();
 
@@ -156,7 +164,7 @@ array_push($_SESSION['cart_tickets'],$ticket);
       <div class="header_content ml-auto">
         <div class="shopping">
           <a href="account.php" style="color:black;">
-            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+            <div class="avatar" id="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
             
@@ -236,15 +244,15 @@ array_push($_SESSION['cart_tickets'],$ticket);
              <h5><?php echo($row['Price']);; ?></h5>
             </div>
               <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
-              <h5><?php echo($row['Price']);; ?></h5>
+              <h5><?php echo($row['Groupprice']);; ?></h5>
             </div>  
         </div>
 
         <div class="totalprice" style="padding-top: 90px;">
-              <h5><?php echo(($value['squantity'] *$row['Price'] ) +($value['gquantity'] *$row['Price'] ) ); ?></h5>
+              <h5><?php echo(($value['squantity'] *$row['Price'] ) +($value['gquantity'] *$row['Groupprice'] ) ); ?></h5>
         </div>
         <div class="remove">
-          <button><a href="remove_item.php?key=<?php  echo $key ?>">Remove</a></button>
+          <button><a href="remove_item.php?key=<?php  echo $key ?>" style="color:white;">Remove</a></button>
         </div>
  </div>
 
@@ -348,5 +356,17 @@ array_push($_SESSION['cart_tickets'],$ticket);
     <script src="js/popper.min.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
 
+     <script>
+    /*
+    TODO:script to check if session exist
+   */
+    var sess = "<?php echo $sess; ?>";
+    if (sess == "null") {
+        // alert("null");
+        document.getElementById('avatar').style.display = "none";
+    } else {
+        // alert("not null");
+    }
+    </script>
  </body>
-</html>
+</html> 
