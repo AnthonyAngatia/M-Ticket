@@ -188,7 +188,7 @@ else{
                 <div class="header_content ml-auto">
                     <div class="shopping">
                         <!-- Avatar -->
-                        <a href="account.php" style="color:black;">
+                        <a href="UserProfile.php" style="color:black;">
                             <div class="avatar" id="avatar">
                                 <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
                                 <img src="avatar.png" alt="">
@@ -205,17 +205,25 @@ else{
                                 <img src="cart3.png" width="27" height="27" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
-                                        <div class="cart_num">0</div>
+                                        <div class="cart_num"><?php
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?></div>
                                     </div>
-
-                                    <div
-                                        class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
-                                        <div></div>
-                                        <div></div>
-                                        <div></div>
-                                    </div>
-
                                 </div>
+                            </div>
+                        </a>
+                        <div class="burger_container d-flex flex-column align-items-center justify-content-around menu_mm">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>      
+                    </div>
+                </div>
+            </div>
         </header>
 
         <!-- Menu -->
@@ -307,11 +315,11 @@ else{
         <div class="carddeck1">
             <!--!PHP funtion to retrieve info to the database and redirect-->
             <?php
-    require('require.php');
-    $sql = "SELECT Poster, Title, Description1, Event_id  FROM event LIMIT 8";
-    $rowsData = getData($sql);
-    foreach ($rowsData as $value) {
-      ?>
+            require('require.php');
+            $sql = "SELECT Poster, Title, Description1, Event_id  FROM event ORDER BY Event_id DESC LIMIT 8 ";
+            $rowsData = getData($sql);
+            foreach ($rowsData as $value){
+            ?>
 
             <div class="card">
                 <a href="AboutEvent.php?w1=<?php echo $value['Event_id']; ?>">
@@ -322,10 +330,8 @@ else{
                         <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
                     </div>
                 </a>
-
             </div>
             <?php } ?>
-
         </div>
         <br>
         <center>

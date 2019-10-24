@@ -35,9 +35,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   //insertData($sql);
   connect();
   upload($sql);
-  echo '<script>alert("New Item inserted successfully ")</script>';
+  // echo '<script>alert("New Item inserted successfully ")</script>';
   //echo '<script>window.location="quantityTable.php"</script>';
   // }
   connect();
+  header("Location: HomePage.php");
+  
   // upload($sql);
 }

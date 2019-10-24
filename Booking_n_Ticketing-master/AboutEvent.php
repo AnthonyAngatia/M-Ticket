@@ -2,11 +2,11 @@
 session_start();
 if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
   $sess = $_SESSION["username"];
- echo 'Set and not empty, and no undefined index error!';
+//  echo 'Set and not empty, and no undefined index error!';
 }
 else{
   $sess = "null";
-   echo "empty";
+//    echo "empty";
 } 
 require('require.php');
 function getParam() {
@@ -194,7 +194,13 @@ h4 {
                                 <img src="cart3.png" width="30" height="30" alt="">
                                 <div class="cart_num_container">
                                     <div class="cart_num_inner">
-                                        <div class="cart_num">0</div>
+                                        <div class="cart_num"><?php
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?></div>
                                     </div>
                                 </div>
                             </div>
