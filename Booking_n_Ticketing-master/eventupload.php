@@ -1,5 +1,14 @@
 <?php
 session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+//  echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  // echo "empty";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,29 +83,40 @@ session_start();
       <div class="logo"><a href="Homepage.php">M-ticket</a></div>
       <nav class="main_nav">
         <ul>
-          <li><a href="#">browse events</a></li>
-          <li><a href="#"></a></li>
+          <li><a href="browse.php">browse events</a></li>
+          <li><a href="#">about us</a></li>
+          <li><a href="#">contact</a></li>
+
         </ul>
       </nav>
       <div class="header_content ml-auto">
-      </div>
-       <a href="account.php" style="color:black;">
-            <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
-              <img src="avatar.png" alt="">
+       <div class="shopping">
+                        <!-- Avatar -->
+                <a href="account.php" style="color:black;">
+                    <div class="avatar" id="avatar">
+                        <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+                        <img src="avatar.png" alt="">
+                    </div>
+                </a>
+                &emsp;
+                        <!-- Cart -->
+                        <a href="cart.php">
+                            <div class="cart">
+                                <img src="cart3.png" width="27" height="27" alt="">
+                                <div class="cart_num_container">
+                                    <div class="cart_num_inner">
+                                        <div class="cart_num"><?php if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }?></div>
+                                           </div>
+                                  </div>
+                                </div>
+                              </a>
+                        </div>
+                </div>
             </div>
-
-               <!-- session -->
-            <script>
-              if ('<%=Session["username"] == null%>') {
-                //alert('null session');
-               // document.querySelector('.avatar').style.display = 'none';
-              } else {
-                //alert('Session found');
-              }
-            </script>
-
-          </a>
-    </div>
   </header>
   <br>
 
@@ -104,6 +124,7 @@ session_start();
   </div>
   <br>
   <center>
+
     <form action="upload.php" method="POST" enctype="multipart/form-data">
       <div id="basicinfo">
         <div class="section_title">basic info</div>

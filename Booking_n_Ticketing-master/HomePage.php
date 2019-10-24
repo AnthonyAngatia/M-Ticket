@@ -316,9 +316,9 @@ else{
             <!--!PHP funtion to retrieve info to the database and redirect-->
             <?php
             require('require.php');
-            $sql = "SELECT Poster, Title, Description1, Event_id  FROM event LIMIT 8";
+            $sql = "SELECT Poster, Title, Description1, Event_id  FROM event ORDER BY Event_id DESC LIMIT 8 ";
             $rowsData = getData($sql);
-            foreach ($rowsData as $value) {
+            foreach ($rowsData as $value){
             ?>
 
             <div class="card">

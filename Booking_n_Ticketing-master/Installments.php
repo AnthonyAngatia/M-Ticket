@@ -21,7 +21,7 @@ if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
         array_push($rowData, $row);
         }
         array_push($ticket_sale_end,getData($sql));
-    }
+    }  
     print_r($rowData);
     //*Extract each item and compare
     $earliest_event = $rowData[0]['Saleend'];

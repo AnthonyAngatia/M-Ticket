@@ -2,11 +2,11 @@
 session_start();
 if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
   $sess = $_SESSION["username"];
- echo 'Set and not empty, and no undefined index error!';
+//  echo 'Set and not empty, and no undefined index error!';
 }
 else{
   $sess = "null";
-   echo "empty";
+//    echo "empty";
 } 
 require('require.php');
 function getParam() {

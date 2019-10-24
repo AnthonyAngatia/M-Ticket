@@ -1,4 +1,8 @@
 <?php 
+//!Getting the phone No.
+$phone_no = $_POST['number'];
+$phone_no =ltrim($phone_no, '0');
+$localIP = getHostByName(getHostName());
 //Access token
 $access_token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
   
@@ -24,11 +28,11 @@ $initiate_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest
 
 $BusinessShortcode = '174379';
 $Timestamp = date('YmdGis');
-$PartyA = '254791278088';//25491278088
-$CallBackURL = 'http://192.168.0.27/M-ticket/Booking_n_Ticketing-master/callback_url.php';
-$AccountReference =  'is-a-test ';
+$PartyA = '254'.$phone_no;//25491278088
+$CallBackURL = 'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
+$AccountReference =  'M-ticket.com ';
 $TransactionDesc =  'Transaction description ';
-$Amount = '5';
+$Amount = $_POST['total-pay'];
 $Passkey = 'bfb279f9aa9bdbcf158e97dd71a467cd2e0c893059b10f78e6b72ada1ed2c919';
 $Password = base64_encode($BusinessShortcode.$Passkey.$Timestamp);
 
@@ -63,4 +67,5 @@ $curl_response = curl_exec($curl);
 //print_r($curl_response);
 
 echo $curl_response;
+header("Location: Test.php");
 ?>

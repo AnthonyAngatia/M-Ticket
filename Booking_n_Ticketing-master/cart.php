@@ -151,15 +151,6 @@
             <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
-            
-              <!--  session -->
-            <script>
-              if ('<%=Session["username"] == null%>') {
-                //alert('null session');
-               // document.querySelector('.avatar').style.display = 'none';
-              } else {
-                //alert('Session found');
-              }
             </script>
 
           </a>
@@ -248,9 +239,11 @@
             <div class="col-lg-6" style="">
               <div class="cart_coupon">
                 <div class="cart_title">reward points</div>
+                <div class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
                   <input type="text" class="cart_coupon_input" value="1000"disabled><!--This one needs to be adjusted to be coming from the database--> 
                   <input type="number" id = "coupon_input" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required" min = "0" >
                   <button name="apply" class="button_clear cart_button_2" onclick = "discountCalculation()">apply</button>
+                  </div>
               </div>
             </div>
             <br>
@@ -280,7 +273,7 @@
                     <div id = "total" class="cart_total_price ml-auto"><?php //echo($total);?></div>
                   </li>
                 </ul>
-                <button class="cart_total_button"><a href="checkout.php" style="color:black;">proceed to checkout</a></button>
+                <a id = "redirect" data-value ="checkout.php"style="color:black;"><button class="cart_total_button" onclick = "redirection();">proceed to checkout</button></a>
               </div>
             </div>
           </div>
@@ -323,13 +316,22 @@
     <script src="js/popper.min.js" ></script>
     <script src="js/bootstrap.min.js" ></script>
     <script>
+    var totDisplay = document.getElementById('total').textContent = "<?php echo($subtotal);?>";//Total display
              function discountCalculation(){
               const subtotal =document.getElementById('subtotal').getAttribute('data-value');
               const discount = document.getElementById('coupon_input').value;
               document.getElementById('discount_display').textContent = discount;
-              const total = subtotal - discount;
+              var total = subtotal - discount;
               document.getElementById('total').textContent = total;//Total display
+              // alert(total);
+              totDisplay = total;
+              // alert(url+"?w1="+total);
              }
+            //  alert(totDisplay);
+             function redirection(){
+              window.location.href = "http://localhost/M-Ticket/Booking_n_Ticketing-master/checkout.php?w1="+totDisplay;
+             }
+
              </script>
 
  </body>

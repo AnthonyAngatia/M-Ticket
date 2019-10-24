@@ -33,6 +33,16 @@ function getData($sql)
 	}
 	return $rowData;
 }
+function pass(){
+    $p = '14711738';
+    return $p;
+}
+function unsetCart(){
+	//session_start();
+	 if (isset($_SESSION['cart_tickets'])) {
+		unset($_SESSION['cart_tickets']);
+	 }
+}
 function register($sql)
 {
 	// echo "<script>alert('Testing')</script>";
