@@ -21,7 +21,6 @@ function getParam() {
      }
 }
 echo getParam();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -112,28 +111,7 @@ echo getParam();
 
     </div>
   </header>
-<?php
-  require_once('Days.php');
-  $days = getNoOfDays();
-  // $days = 90;
-  // echo $days;
-  $installment_number = 0;
-  if($days <= 7){
-    // echo  "Installment is not available";
-  }
-  else if($days > 7 && $days <= 30){
-    // echo "You can have one installment";
-    $installment_number = 1;
-  }
-  else if($days > 30 && $days <= 60){
-    // echo "you have 4 installments";
-    $installment_number = 4;
-  }
-  else{
-    // echo "You have 5 installments";
-    $installment_number = 5;
-  }
-?>
+
     <div class="postnav">
     <div class="section_title_container text-center">
     <div class="section_title" style="font-size: 40px !important;">complete your purchase</div>
@@ -158,7 +136,7 @@ echo getParam();
             <br>
             <div class="section_subtitle" style="margin-bottom: 10px;">confirm mpesa no.</div>
             
-              <form action="DirectPay.php" method="POST" enctype="multipart/form-data">
+              <form action="Lipa-Mpesa.php" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="total-pay" value = "<?php echo getParam(); ?>">
               <input type="text" class="cart_coupon_input" name="number" placeholder="Enter phone number" required="required">
               <button type="submit" name="apply" class="button_clear cart_button_2">make payment</button>
@@ -168,21 +146,17 @@ echo getParam();
           <div id="installment">
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">order summary</div>
             <br>
-            <div class="section_subtitle">total:<?php echo getParam(); ?></div>
-            <div class="section_subtitle">interest:<?php echo (0.1*getParam()); ?></div>
-            <div class="section_subtitle">whole payment:<?php echo (1.1*getParam()); ?></div>
-            <div class="section_subtitle">downpayment:<?php echo ((int)((1.1*getParam())/2)); ?></div>
+            <div class="section_subtitle">total:</div>
+            <div class="section_subtitle">interest:</div>
+            <div class="section_subtitle">total to pay:</div>
+            <div class="section_subtitle">downpayment:</div>
             <br>
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">payment</div>
-            <div class="section_subtitle">Total to pay:<?php echo ((int)((1.1*getParam())/2)); ?></div>
-            <form action="Installments.php" method="POST" enctype="multipart/form-data">
-            <div class="section_subtitle" id = "installment-div">Installments:<input type = "number" name = "installment" min = "0" max = "<?php echo $installment_number; ?>" style="width:60px;" onkeypress="return false;"></div>
             <br>
              <div class="section_subtitle" style="margin-bottom: 10px;">confirm mpesa no.</div>
             
-              
-              <input type="text" class="cart_coupon_input" name="phone_number" placeholder="Enter phone number" required="required">
-              <input type="hidden" name="total-pay" value = "<?php echo ((int)((1.1*getParam())/2)); ?>">
+              <form action="#" method="POST" enctype="multipart/form-data">
+              <input type="text" class="cart_coupon_input" name="number" placeholder="Enter phone number" required="required">
               <button type="submit" name="apply" class="button_clear cart_button_2">make payment</button>
               </form>
           </div>

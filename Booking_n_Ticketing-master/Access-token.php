@@ -13,6 +13,5 @@ $curl_response = curl_exec($curl);//Contains the access token and the time it ta
 
 $access_token = json_decode($curl_response)->access_token;
 //curl_close($curl);
- echo $access_token;// !Testing works.End Of File
-// echo getHostByName(getHostName());
+// *echo $access_token;// !Testing works.End Of File
 ?>

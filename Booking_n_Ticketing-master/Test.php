@@ -1,10 +1,9 @@
 <?php
-session_start();
-require_once('require.php');
-require_once('SendEmail.php');
-set_time_limit ( 300 );
+require('require.php');
+ require('SendEmail.php');
 
-function ticketBody(){  
+session_start();
+function ticketBody(){
     echo "<PRE>";
     $ticket_body = array();
     $path_arr = array();
@@ -95,15 +94,17 @@ function getEmailInfo(){
     array_push( $email_info,$receiverName);
     return $email_info;
 }
-
+// print_r(ticketBody()['0']['0']);//fot the body
+// print_r(ticketBody()['1']['0']);//fot the path
+set_time_limit ( 300 );
 for($i=0; $i<sizeof(ticketBody()['0']); $i++){
 //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
-   sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
+
+   sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
+   print_r(ticketBody()['0']['0']);
 }
 unsetCart();
-echo "here";
-header("Location: Success.php");
-unsetCart();
+header("Location: Success.php")
 
 
 ?>
