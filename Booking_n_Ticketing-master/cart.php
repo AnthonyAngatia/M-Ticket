@@ -320,8 +320,8 @@
              function discountCalculation(){
               const subtotal =document.getElementById('subtotal').getAttribute('data-value');
               const discount = document.getElementById('coupon_input').value;
-              document.getElementById('discount_display').textContent = discount*100;
-              var total = subtotal - (discount*100);
+              document.getElementById('discount_display').textContent = discount;
+              var total = subtotal - discount;
               document.getElementById('total').textContent = total;//Total display
               // alert(total);
               totDisplay = total;

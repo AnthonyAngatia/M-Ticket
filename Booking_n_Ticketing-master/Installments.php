@@ -1,101 +1,49 @@
 <?php
 session_start();
-require_once('require.php');
-require_once('SendEmail.php');
-require_once('Days.php');
-require_once('Lipa-Mpesa.php');
+require('require.php');
 
-$username = $_SESSION['username'];
-$phone_number = $_POST['phone_number'];
-$total_to_pay = $_POST['total-pay'];//DownPayment
-$installment = $_POST['installment'];
-$installment_amt = $total_to_pay/$installment;
-$installment_amt = (int)$installment_amt;
-$total_payable = $total_to_pay *2;
-
-function getEmailInfo(){
-    $email_info = array();
-    $sess = $_SESSION["username"];
-    echo "<pre>";
-    //*Getting email add of user
-    $sql = "SELECT *  FROM user_table WHERE Username = '$sess' ";
-    // print_r(getData($sql)['0']['Email']);
-    $emailAdd = getData($sql)['0']['Email'];
-    array_push( $email_info,$emailAdd);
-    $receiverName = getData($sql)['0']['Name'];
-    array_push( $email_info,$receiverName);
-    return $email_info;
-}
-function getNextInstallment($installment){
-    $days = getNoOfDays();
-    $installment_time_interval = $days/$installment;
-    echo "<br>";
-    $next_installment_date =  date('Y-m-d', strtotime(' + '.$installment_time_interval.'days'));//Add currnet date to time interval
-    return $next_installment_date;
-}
-$next_installment  = getNextInstallment($installment);
-
-function getUserId($username){
-    $sql = "SELECT User_id  FROM user_table WHERE Username = '$username' ";
-    
-    $user_id = getData($sql)['0']['User_id'];
-    return $user_id;
-}
-$user_id = getUserId($username);
-
-
-$access_token =  accessTokenGenerator();
-mpesaSendMoney($phone_number, $total_to_pay, $access_token);
-
-// echo $next_installment;
-$sql = "INSERT INTO installment( DownPayment, No_of_Installments, Total_Payable, Next_Installment, Installment_amt, User_Id) VALUES ( $total_to_pay, $installment, $total_payable ,$next_installment ,$installment_amt, $user_id)";
-setData($sql);
-
-$body ='<style>
-    .wrap {
-    border: 1px solid black;
-    max-width: 50%;
-    margin: auto;
+echo "<pre>";
+//Todo:Check whether session ticket is empty.
+// print_r( $_SESSION['cart_tickets']);
+if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+    // echo sizeof($_SESSION['cart_tickets']);
+    $ticket_sale_end = array();
+    //* Gets info from the database about the sale end and puts it in an array
+    $rowData = array();
+    foreach ( $_SESSION['cart_tickets'] as $key => $value) {
+        // print_r($value);
+        // echo $value['id'];
+        $event_id = $value['id'];
+        $sql = ("SELECT Event_id, Saleend FROM event WHERE Event_id = '$event_id' ");
+        $link=connect();
+        $result=mysqli_query($link,$sql);
+        while ($row = $result->fetch_assoc()){
+        array_push($rowData, $row);
+        }
+        array_push($ticket_sale_end,getData($sql));
+    }  
+    print_r($rowData);
+    //*Extract each item and compare
+    $earliest_event = $rowData[0]['Saleend'];
+    for ($i = 0; $i < sizeof($rowData) ; $i++) {
+        if($earliest_event > $rowData[$i]['Saleend']){
+            // echo "couner".$i;
+            $earliest_event = $rowData[$i]['Saleend'];
+            // print_r($earliest_event);//Earliest event
+        }
     }
-    .wrap h1 {
-    text-align: center;
-    }
-    .wrap p {
-    padding: 5px;
-    }
-    </style>
-    </head>
-    <body>
-    <div class="wrap">
-    <h1>M-ticket.com</h1>
-    <p>Hi customer,</p>
-    <p>
-    You have paid *** amount for the purchase of ticket xyz.You are expected
-    to pay -amt by this day otherwise your installment plan will be
-    nullified.
-    </p>
-    <p>Your other installments will be paid on xyz</p>
-    <p>Email reminders will be sent to you 2 days before the deadline</p>
-    <p>Thank you.</p>
-    </div>';
-
-sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket Installment Pay", $body, null, null );
-
-unsetCart();
-
-
-
-/*
-CREATE TABLE Installmet (
-    Payment_id int AUTO_INCREMENT,
-    DownPayment int,
-    No_of_Installments int,
-    Total_Payable int,
-    Next_Installment DATE,
-    Installment_amt int,
-    User_Id int,
-    PRIMARY KEY(Payment_id),
-    FOREIGN KEY (User_id) REFERENCES user_table(User_id)
-);
-*/ 
+    $today = date("Y-m-d"); 
+    $earliest_event = strtotime($earliest_event);
+    $today = strtotime($today);
+    $diff = ($earliest_event - $today)/ 86400;//*divide to convert to days
+    $diff = (int)$diff;////removing decimals
+    echo $diff." days";
+    //*Find no. of weeks.
+    $weeks = $diff/7;
+    $weeks = (int)$weeks;
+    echo $weeks. "weeks";
+    //TODO:Divide the number of weeks from the total amount
+} else{
+    echo "0";
+}
 ?>
