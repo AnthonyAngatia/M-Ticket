@@ -17,6 +17,9 @@ function setData($sql)
 		echo "<script>alert('Your data has been recorded')</script>";
 		return true;
 	} else {
+		echo "<script>alert('Not working')</script>";
+		"Error: " . $sql . "<br>" . mysqli_error($link);
+		echo mysqli_error($link);
 		return false;
 	}
 }
