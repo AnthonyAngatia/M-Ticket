@@ -1,16 +1,10 @@
 <?php
-<<<<<<< HEAD
-require('require.php');
- require('SendEmail.php');
-=======
 //session_start();
 require_once('require.php');
 require_once('SendEmail.php');
 set_time_limit ( 300 );
->>>>>>> c162bcb887e24a1be38accd614b97b13cef5f91e
 
-session_start();
-function ticketBody(){
+function ticketBody(){  
     echo "<PRE>";
     $ticket_body = array();
     $path_arr = array();
@@ -107,24 +101,13 @@ function getEmailInfo(){
     array_push( $email_info,$receiverName);
     return $email_info;
 }
-// print_r(ticketBody()['0']['0']);//fot the body
-// print_r(ticketBody()['1']['0']);//fot the path
-set_time_limit ( 300 );
+
 for($i=0; $i<sizeof(ticketBody()['0']); $i++){
 //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
-<<<<<<< HEAD
-
-   sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
-   print_r(ticketBody()['0']['0']);
-}
-unsetCart();
-header("Location: Success.php")
-=======
    //sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
 }
 //unsetCart();
 //header("Location: Success.php");
->>>>>>> c162bcb887e24a1be38accd614b97b13cef5f91e
 
 
 ?>

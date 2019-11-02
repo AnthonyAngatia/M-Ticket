@@ -3,8 +3,8 @@ require_once('require.php');
 require_once('PHPMailerAutoload.php');
 // Import PHPMailer classes into the global namespace
 //! These must be at the top of your script, not inside a function
-// use PHPMailer\SMTP;
-// use PHPMailer\Exception;
+use PHPMailer\SMTP;
+use PHPMailer\Exception;
 
 function sendMail($emailAdd, $receiverName, $Subject ,$Body, $path, $cid ){
     // use PHPMailer;
@@ -59,7 +59,7 @@ function sendMail($emailAdd, $receiverName, $Subject ,$Body, $path, $cid ){
 
         $mail->send();
         echo 'Message has been sent';
-        //! We need to create an sfter page to redirect to after message has been sent page
+        // ! We need to create an sfter page to redirect to after message has been sent page
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         // !We need to create a page to handle this error.
