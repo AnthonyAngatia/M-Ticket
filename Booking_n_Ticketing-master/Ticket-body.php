@@ -1,9 +1,10 @@
+
+<?php 
 //*
 //*
 //*!Note This files will be used for debuggin only. After debugging copy the funtion to the file 
 //*
 //*
-<?php 
 require('require.php');
 session_start();
 function ticketBody(){

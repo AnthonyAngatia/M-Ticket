@@ -1,6 +1,13 @@
 <?php
+<<<<<<< HEAD
 require('require.php');
  require('SendEmail.php');
+=======
+//session_start();
+require_once('require.php');
+require_once('SendEmail.php');
+set_time_limit ( 300 );
+>>>>>>> c162bcb887e24a1be38accd614b97b13cef5f91e
 
 session_start();
 function ticketBody(){
@@ -9,7 +16,7 @@ function ticketBody(){
     $path_arr = array();
     foreach ($_SESSION['cart_tickets'] as $key => $value) {
         $id = $value['id'];
-        $sql = "SELECT Tickname, Eventstart, StartTime1, Eventend, EndTime1, Poster  FROM event WHERE Event_id = '$id' ";
+        $sql = "SELECT Tickname, Eventstart, StartTime1, Eventend, EndTime1, Poster, Location  FROM event WHERE Event_id = '$id' ";
         // print_r(getData($sql));
         // print_r(getData($sql)['0']['Tickname']);    
         $body = '<!DOCTYPE html>
@@ -63,15 +70,21 @@ function ticketBody(){
                 $path = getData($sql)['0']['Poster'];
                 $second = '" alt="Poster">
                 <div class="ticket-info">
-                    <h3>Start time:</h3>
-                    <h3>Start time:</h3>
-                    <h3>Location:</h3>
+                    <h3>Start time:';
+                    $third = getData($sql)['0']['Eventstart'];
+                    $fourth = '</h3>
+                    <h3>End time:';$fifth = getData($sql)['0']['Eventend'];
+                    $sixth = '</h3>
+                    <h3>Location:';
+                    $seventh =getData($sql)['0']['Location'];
+                    $eighth ='</h3>
+                    <h3>Ticket Number:</h3>
                 </div>
                 <img class = " qr" src="" alt="Qr code">
             </div>
         </body>
         </html>';
-        $fullbody =  $body.$path.$second;
+        $fullbody =  $body.$path.$second.$third.$fourth.$sixth.$seventh.$eighth;
         array_push($ticket_body, $fullbody);
        array_push($path_arr, $path);
     }
@@ -99,12 +112,19 @@ function getEmailInfo(){
 set_time_limit ( 300 );
 for($i=0; $i<sizeof(ticketBody()['0']); $i++){
 //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
+<<<<<<< HEAD
 
    sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
    print_r(ticketBody()['0']['0']);
 }
 unsetCart();
 header("Location: Success.php")
+=======
+   //sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
+}
+//unsetCart();
+//header("Location: Success.php");
+>>>>>>> c162bcb887e24a1be38accd614b97b13cef5f91e
 
 
 ?>

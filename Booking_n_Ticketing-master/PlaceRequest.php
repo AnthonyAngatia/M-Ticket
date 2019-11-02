@@ -1,5 +1,36 @@
 <?php
-session_start();
+    session_start();
+    require_once('require.php');
+    if(isset($_SESSION['user_id'])){
+        $User_Id = $_SESSION['user_id'];
+    }
+    else{
+        echo "<script>alert('Please Login to use this feature')</script>";
+        exit();
+    }
+    $title = ($_POST['ticket']);
+    // $singleticket = ($_POST['sprice']);
+    $singlequantity = ($_POST['squantity']);
+    // $groupticket = ($_POST['gprice']);
+    $groupquantity = ($_POST['gquantity']);
+    // $subtotal = (($singleticket*$singlequantity)+($groupticket*$groupquantity));//*Not working well Maybe we need to store in an array and then calculate the subtotal
+    $sql = "SELECT Event_id  FROM event WHERE Title = '$title' ";
+    $Event_Id = getData($sql)['0']['Event_id'];
+    $Status = 1;
+    $sql = "INSERT INTO `request`(`User_Id`, `Event_Id`, `Status`, `G_Ticket_Quantity`, `S_Ticket_Quantity`) VALUES ('$User_Id','$Event_Id','$Status','$groupquantity','$singlequantity')";
+    setData($sql);
+    // CREATE TABLE request (
+        // User_Id INT,
+        // Event_Id INT,
+        // Status int NOT NULL,
+        // G_Ticket_Quantity INT,
+        // S_Ticket_Quantity INT,
+        // PRIMARY KEY (User_Id, Event_Id),
+        // FOREIGN KEY (User_Id) REFERENCES  user_table(User_Id),
+        // FOREIGN KEY (Event_Id) REFERENCES  event(Event_Id)
+        // )
+        
+        
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -120,16 +151,8 @@ session_start();
         </div>
       </div>
     </header>
-    <?php
-    function displayMessage($message){
-	  if($message == null){
-		  $message = "No message";
-	  }
-	  return $message;
-    }
-    ?>
     <div class="success">
-      <h2><?php displayMessage($message);?> Waiting Request Set </h2>
+      <h2> Waiting Request Set for<br> <?php echo $title; ?></h2>
       <i class="fa fa-5x fa-ticket"></i>
     </div>
 
@@ -187,3 +210,6 @@ session_start();
     </footer>
   </body>
 </html>
+
+
+

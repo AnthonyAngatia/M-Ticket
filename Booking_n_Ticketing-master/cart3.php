@@ -1,14 +1,5 @@
 <?php
   session_start();
-  if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    $sess = $_SESSION["username"];
-  //  echo 'Set and not empty, and no undefined index error!';
-  }
-  else{
-    $sess = "null";
-    // echo "empty";
-  } 
-
   include ("require.php");
   connect();
   if(isset($_POST["submit"])) {
@@ -160,6 +151,7 @@
             <div class="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
               <img src="avatar.png" alt="">
             </div>
+            </script>
 
           </a>
       
@@ -219,7 +211,7 @@
            <h5><?php echo($row['Price']);; ?></h5>
           </div>
             <div style="height:99px; padding-top: 40px; border-top: 1px solid;">
-            <h5><?php echo($row['Groupprice']);; ?></h5>
+            <h5><?php echo($row['Price']);; ?></h5>
            </div>  
       </div>
 
@@ -227,7 +219,7 @@
           <h5><?php echo $value['subtotal_in_array'];?></h5>
       </div>
       <div class="remove">
-        <button><a href="remove_item.php?key=<?php  echo $key ?>" style="color:white;">Remove</a></button>
+        <button><a href="remove_item.php?key=<?php  echo $key ?>">Remove</a></button>
         <!-- <p><?php  //echo $key ?></p>*For degbugging -->
       </div>
     </div>
@@ -240,18 +232,6 @@
           <div class="button extra_1_button" style="width:200px !important;"><a href="browse.php">continue shopping</a></div>
         </div>
       </center>
-
-          <?php
-              $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
-              $link=connect();
-              $result=mysqli_query($link,$sql);
-              $points =0;
-
-              while ($row = $result->fetch_assoc()){
-              $points=$row['Points'];
-            }
-            ?>
-
       <div class="cart_container" style="padding-top: 25px !important;padding-bottom: 20px !important;">
         <div class="container">
           <div class="row cart_extra">
@@ -260,8 +240,8 @@
               <div class="cart_coupon">
                 <div class="cart_title">reward points</div>
                 <div class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
-                  <input type="text" class="cart_coupon_input" value="<?php echo($points);?>"disabled>
-                  <input type="number" id = "coupon_input" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required" min = "0" max = "<?php echo($points);?>" onkeypress = "false" style="width:350px !important;">
+                  <input type="text" class="cart_coupon_input" value="1000"disabled><!--This one needs to be adjusted to be coming from the database--> 
+                  <input type="number" id = "coupon_input" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required" min = "0" >
                   <button name="apply" class="button_clear cart_button_2" onclick = "discountCalculation()">apply</button>
                   </div>
               </div>
@@ -340,8 +320,8 @@
              function discountCalculation(){
               const subtotal =document.getElementById('subtotal').getAttribute('data-value');
               const discount = document.getElementById('coupon_input').value;
-              document.getElementById('discount_display').textContent = discount;
-              var total = subtotal - discount;
+              document.getElementById('discount_display').textContent = discount*100;
+              var total = subtotal - (discount*100);
               document.getElementById('total').textContent = total;//Total display
               // alert(total);
               totDisplay = total;
