@@ -1,26 +1,26 @@
 <?php
-session_start();
-if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-  $sess = $_SESSION["username"];
-//  echo 'Set and not empty, and no undefined index error!';
-}
-else{
-  $sess = "null";
-  // echo "empty";
-}
-$_SESSION['ticketname'];
-// echo "<pre>";
-// print_r($_SESSION['cart_tickets']);
-function getParam() {
-    if (!isset($_GET["w1"])){
-     echo "<script> alert('No param passed. I will redirect you soon')</script>";
-     }
-     else{
-       $param = $_GET["w1"];
-      return $param;
-     }
-}
-echo getParam();
+  session_start();
+  if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+    $sess = $_SESSION["username"];
+  //  echo 'Set and not empty, and no undefined index error!';
+  }
+  else{
+    $sess = "null";
+    // echo "empty";
+  }
+  $_SESSION['ticketname'];
+  // echo "<pre>";
+  // print_r($_SESSION['cart_tickets']);
+  function getParam() {
+      if (!isset($_GET["w1"])){
+      echo "<script> alert('No param passed. I will redirect you soon')</script>";
+      }
+      else{
+        $param = $_GET["w1"];
+        return $param;
+      }
+  }
+  echo getParam();
 
 ?>
 <!DOCTYPE html>

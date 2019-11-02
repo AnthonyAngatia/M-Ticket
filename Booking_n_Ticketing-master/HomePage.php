@@ -320,7 +320,7 @@ else{
             $rowsData = getData($sql);
             foreach ($rowsData as $value){
             ?>
-
+    
             <div class="card">
                 <a href="AboutEvent.php?w1=<?php echo $value['Event_id']; ?>">
                     <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">

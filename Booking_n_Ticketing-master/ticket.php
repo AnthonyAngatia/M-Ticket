@@ -11,12 +11,13 @@ session_start();
 $user_id = $_SESSION['user_id'];
 $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
 // print_r($_SESSION['cart_tickets']);
-function updateTables($user_id, $Event_id){
+
+function updateTables($user_id, $Event_id, $Totalpaid){
     foreach ($_SESSION['cart_tickets'] as $key => $value) {
         print_r($value);
         $single_tickets = $value['squantity'];
         $group_tickets = $value['gquantity'];
-        //todo:If you buy more than one ticket please put this for loops in the for each loop
+        //*If you buy more than one ticket please put this for loops in the for each loop
         for($x=0; $x < $single_tickets; $x++){
             //*Get the no.of remaining tickets.
             $sql = "SELECT `Single_Quant_Remaining` FROM  event WHERE Event_id = '$Event_id'";
@@ -31,7 +32,7 @@ function updateTables($user_id, $Event_id){
                 $randomnumber = rand(1000, 99000);
                 $ticketNo = generateQr($randomnumber);
                 $status = 1;
-                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id')";
+                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`, `Totalpaid`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id', '$Totalpaid')";
                 setData($sql);
             }
             else{
