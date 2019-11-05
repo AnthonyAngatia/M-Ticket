@@ -102,7 +102,8 @@ function mpesaSendMoney($phone_no, $total_amt, $access_token ){
   $BusinessShortcode = '174379';
   $Timestamp = date('YmdGis');
   $PartyA = '254'.$phone_no;//25491278088
-  $CallBackURL = 'https://579291a3.ngrok.io/M-Ticket/Booking_n_Ticketing-master/callback_url.php';//'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
+  $CallBackURL = 'https://428ce5ba.ngrok.io/M-Ticket/Booking_n_Ticketing-master/callback_url.php';
+  // $CallBackURL = 'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
   $AccountReference =  'M-ticket.com ';
   $TransactionDesc =  'Transaction description ';
   $Amount = $total_amt;
@@ -139,7 +140,7 @@ function mpesaSendMoney($phone_no, $total_amt, $access_token ){
   $curl_response = curl_exec($curl);
   //print_r($curl_response);
 
-  echo $curl_response;
+  // echo $curl_response;
   sleep(5);
 }
 

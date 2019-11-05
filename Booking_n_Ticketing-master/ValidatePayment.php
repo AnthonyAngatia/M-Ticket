@@ -1,61 +1,55 @@
-<?php
+<?php 
 session_start();
-print_r($_POST);
-require_once('require.php');
-// require_once('SendEmail.php');
-require_once('Days.php');
-require_once('Lipa-Mpesa.php');
+require_once('ticket.php');
+require_once('Test.php');
+require_once('TransactionProcessing.php');
 
 $username = $_SESSION['username'];
-$phone_number = $_POST['phone_number'];
-$total_to_pay = 2;//$_POST['total-pay'];//DownPayment
-$installment = $_POST['installment'];
-$installment_amt = $total_to_pay/$installment;
-$installment_amt = (int)$installment_amt;
-$total_payable = $total_to_pay *2;
+//!We need to check wheter the user has paid or cancelled b4 continuing executing
+$obj = getCallBackResponse();
+transactionDetails($obj, $username);
+$total_amt = $_SESSION['total_amount'] ;
+unset($_SESSION['total_amount'] );
 
-// function getEmailInfo($username){
-//     $email_info = array();
-//     echo "<pre>";
-//     //*Getting email add of user
-//     $sql = "SELECT *  FROM user_table WHERE Username = '$username' ";
-//     // print_r(getData($sql)['0']['Email']);
-//     $emailAdd = getData($sql)['0']['Email'];
-//     array_push( $email_info,$emailAdd);
-//     $receiverName = getData($sql)['0']['Name'];
-//     array_push( $email_info,$receiverName);
-//     return $email_info;
-// }
-function getNextInstallment($installment){
-    $days = getNoOfDays();
-    $installment_time_interval = $days/$installment;
-    echo "<br>";
-    $next_installment_date =  date('Y-m-d', strtotime(' + '.$installment_time_interval.'days'));//Add currnet date to time interval
-    return $next_installment_date;
-}
-$next_installment  = getNextInstallment($installment);
 
-if(isset($_SESSION['user_id'])){
+if(isset($_SESSION['paid'])){
+ if($_SESSION['paid'] == 1){
+    echo "<script>alert(' Transaction Successfull')</script>";
+    unset($_SESSION['paid']);
+    //   // //*Updates our table
     $user_id = $_SESSION['user_id'];
+    $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
+    updateTables($user_id, $Event_id, $total_amt);
+
+
+    //*Send the emails
+    //header("Location: Test.php");
+    for($i=0; $i<sizeof(ticketBody()['0']); $i++){
+      //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
+        sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
+      }
+    //*Increase the points
+
+    if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+      $sess = $_SESSION["username"];
+    }
+    $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
+    //getData($sql);
+    $currentpoints = 0;
+    $currentpoints=getData($sql)['0']['Points'];
+    $updatedpoints=($currentpoints+1);
+    $sql = "UPDATE user_table SET Points='$updatedpoints' WHERE Username='$sess'";
+    setData($sql);
+    $message = "Succcessful Transaction. Check your Email for the ticket";
+  }
+  else{
+    //failed transaction
+    // echo "<script>alert('Failed Transaction')</script>";
+    $message = "Failed transaction";
+    header("refresh:10;url=ValidatePayment.php");
+    unset($_SESSION['paid']);
+  }
 }
-else{
-    header('Location: userlogin.php');
-}
-$_SESSION['total-to-pay'] = $total_to_pay;
-$_SESSION['installment'] = $installment;
-$_SESSION['installment-amt'] = $installment_amt;
-$_SESSION['total-payable'] = $total_payable;
-$_SESSION['next-installment'] = $next_installment;
-
-
-
-$access_token =  accessTokenGenerator();
-mpesaSendMoney($phone_number, $total_to_pay, $access_token);
-
-//!Pause for 30 seconds
-header("refresh:30;url=InstallmentPayValidation.php");
-
-// echo $next_installment;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -177,7 +171,7 @@ header("refresh:30;url=InstallmentPayValidation.php");
       </div>
     </header>
     <div class="success">
-      <h2 style ="text-align:center; padding:2px 1em;"> Please wait for the transaction to be processed </h2>
+      <h2> <?php echo $message;?> </h2>
       <i class="fa fa-5x fa-ticket"></i>
     </div>
 

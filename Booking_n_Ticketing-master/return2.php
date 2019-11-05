@@ -42,7 +42,7 @@ if(status == 1){
       $sql = "UPDATE tickets SET Status ='0' WHERE Ticket_Id = '$number'";
       $result=mysqli_query($link,$sql);
       echo mysqli_error($link);
-      //!We need to inntroduce another proccess
+      //!We need to introduce another proccess
 
       if ($result) {
         $sql = "UPDATE user_table SET Points='$newpoints' WHERE Username='$sess'";

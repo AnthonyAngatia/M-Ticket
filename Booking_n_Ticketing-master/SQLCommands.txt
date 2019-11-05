@@ -1,0 +1,13 @@
+CREATE TABLE transactions ( MerchantRequestId varchar (30) NOT NULL, RequestDesc varchar (20) NOT NULL, MpesaReceiptNumber varchar (20), PhoneNumber int NULL, TransactionDatE varchar (20) NULL, Balance double NULL )
+"INSERT INTO `user_table`(`Name`, `Username`, `PhoneNo`, `Email`, `Password`, `Password_Confirmation`) VALUES ('$name','$user','$phoneno','$email','$pass','$conf')";
+CREATE TABLE Installment (
+    Payment_id int AUTO_INCREMENT,
+    DownPayment int,
+    No_of_Installments int,
+    Total_Payable int,
+    Next_Installment DATE,
+    Installment_amt int,
+    User_Id int,
+    PRIMARY KEY(Payment_id),
+    FOREIGN KEY (User_id) REFERENCES user_table(User_id)
+);

@@ -147,12 +147,19 @@
                 <div class="button extra_1_button" onclick = "openInstallment();" style="width:200px !important;"><a href="#">installment payment</a></div>
               </div>
             </center>
+            <?php 
+            $total = getParam();
+            $interest = (0.05*$total);
+            $wholepay = $total + $interest;
+            $downpayment = $wholepay/2;
+            $downpayment = (int)$downpayment;
+            ?>
 
 
           <div id="direct">
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">order summary</div>
             <br>
-            <div class="section_subtitle">total to pay: <?php echo getParam(); ?></div>
+            <div class="section_subtitle">total to pay: <?php echo $total; ?></div>
             <br>
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">payment</div>
             <br>
@@ -168,15 +175,15 @@
           <div id="installment">
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">order summary</div>
             <br>
-            <div class="section_subtitle">total:<?php echo getParam(); ?></div>
-            <div class="section_subtitle">interest:<?php echo (0.1*getParam()); ?></div>
-            <div class="section_subtitle">whole payment:<?php echo (1.1*getParam()); ?></div>
-            <div class="section_subtitle">downpayment:<?php echo ((int)((1.1*getParam())/2)); ?></div>
+            <div class="section_subtitle">total:<?php echo $total; ?></div>
+            <div class="section_subtitle">interest:<?php echo $interest; ?></div>
+            <div class="section_subtitle">whole payment:<?php echo $wholepay; ?></div>
+            <div class="section_subtitle">downpayment:<?php echo $downpayment; ?></div>
             <br>
             <div class="section_subtitle" style="color:black !important; font-size: 16px !important;">payment</div>
-            <div class="section_subtitle">Total to pay:<?php echo ((int)((1.1*getParam())/2)); ?></div>
+            <div class="section_subtitle">Total to pay:<?php echo $downpayment; ?></div>
             <form action="Installments.php" method="POST" enctype="multipart/form-data">
-            <div class="section_subtitle" id = "installment-div">Installments:<input type = "number" name = "installment" min = "0" max = "<?php echo $installment_number; ?>" style="width:60px;" onkeypress="return false;"></div>
+            <div class="section_subtitle" id = "installment-div">Installments:<input type = "number" name = "installment" min = "1" max = "<?php echo $installment_number; ?>" value = "1" style="width:60px;" onkeypress="return false;"></div>
             <br>
              <div class="section_subtitle" style="margin-bottom: 10px;">confirm mpesa no.</div>
             

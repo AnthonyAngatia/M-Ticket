@@ -120,16 +120,8 @@ session_start();
         </div>
       </div>
     </header>
-    <?php
-    function displayMessage($message){
-	  if($message == null){
-		  $message = "No message";
-	  }
-	  return $message;
-    }
-    ?>
     <div class="success">
-      <h2><?php displayMessage($message);?> Waiting Request Set </h2>
+      <h2> Waiting Request Set </h2>
       <i class="fa fa-5x fa-ticket"></i>
     </div>
 

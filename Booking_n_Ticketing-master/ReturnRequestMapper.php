@@ -31,6 +31,8 @@ $returns = getData($sql);
                 $cid = null;
                 // echo "Test.return made";
                 sendMail($emailAdd, $name, $subject, $body, $path, $cid);
+                //Store this data in the data
+                
                 exit();
             }
             else{

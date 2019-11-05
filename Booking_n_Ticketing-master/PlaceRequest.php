@@ -20,15 +20,15 @@
     $sql = "INSERT INTO `request`(`User_Id`, `Event_Id`, `Status`, `G_Ticket_Quantity`, `S_Ticket_Quantity`) VALUES ('$User_Id','$Event_Id','$Status','$groupquantity','$singlequantity')";
     setData($sql);
     // CREATE TABLE request (
-        // User_Id INT,
-        // Event_Id INT,
-        // Status int NOT NULL,
-        // G_Ticket_Quantity INT,
-        // S_Ticket_Quantity INT,
-        // PRIMARY KEY (User_Id, Event_Id),
-        // FOREIGN KEY (User_Id) REFERENCES  user_table(User_Id),
-        // FOREIGN KEY (Event_Id) REFERENCES  event(Event_Id)
-        // )
+    //     User_Id INT,
+    //     Event_Id INT,
+    //     Status int NOT NULL,
+    //     G_Ticket_Quantity INT,
+    //     S_Ticket_Quantity INT,
+    //     PRIMARY KEY (User_Id, Event_Id),
+    //     FOREIGN KEY (User_Id) REFERENCES  user_table(User_Id),
+    //     FOREIGN KEY (Event_Id) REFERENCES  event(Event_Id)
+    //     )
         
         
 ?>
