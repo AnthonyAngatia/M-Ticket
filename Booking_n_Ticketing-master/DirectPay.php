@@ -9,6 +9,13 @@ echo "<script>alert(' Please Check Your Phone To Complete Transaction')</script>
 $username = $_SESSION['username'];
 $phone_no = $_POST['number'];
 $total_amt = $_POST['total-pay'];
+if(isset($_POST['points'])){
+  $points =  $_POST['points'];
+}
+else{
+  $points =  0;
+}
+
 //*Send Money
 $access_token = accessTokenGenerator();
 // mpesaSendMoney($phone_no, $total_amt, $access_token );
@@ -18,6 +25,7 @@ mpesaSendMoney('0791278088', '2', $access_token );
 
 
 $_SESSION['total_amount'] = $total_amt;
+$_SESSION['points'] = $points;
 header("refresh:30;url=ValidatePayment.php");
 ?>
 <!DOCTYPE html>

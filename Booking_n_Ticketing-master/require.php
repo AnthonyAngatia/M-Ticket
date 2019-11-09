@@ -59,8 +59,8 @@ function register($sql)
 	// }
 	// $link->close();
 	if(mysqli_query($link, $sql)){
-		echo "<script>alert('New record inserted')</script>";
-		header("Location:Homepage.php");
+		// echo "<script>alert('New record inserted')</script>";
+		header("Location:userlogin.php");
 	}
 	else{
 		echo "<script>alert('Not working')</script>";

@@ -87,7 +87,7 @@ function accessTokenGenerator(){
 
   $access_token = json_decode($curl_response)->access_token;
 
-  // *echo $access_token; Testing works.
+  echo $access_token; //Testing works.
   curl_close($curl);
   return $access_token;
 
@@ -102,7 +102,7 @@ function mpesaSendMoney($phone_no, $total_amt, $access_token ){
   $BusinessShortcode = '174379';
   $Timestamp = date('YmdGis');
   $PartyA = '254'.$phone_no;//25491278088
-  $CallBackURL = 'https://428ce5ba.ngrok.io/M-Ticket/Booking_n_Ticketing-master/callback_url.php';
+  $CallBackURL = 'https://c22a93c4.ngrok.io/M-ticket/Booking_n_Ticketing-master/callback_url.php';
   // $CallBackURL = 'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
   $AccountReference =  'M-ticket.com ';
   $TransactionDesc =  'Transaction description ';
@@ -138,10 +138,11 @@ function mpesaSendMoney($phone_no, $total_amt, $access_token ){
   curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 
   $curl_response = curl_exec($curl);
-  //print_r($curl_response);
+  print_r($curl_response);
 
   // echo $curl_response;
-  sleep(5);
+  // set_time_limit(40);
+  // sleep(5);
 }
 
 ?>

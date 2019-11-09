@@ -1,6 +1,8 @@
 <?php
     session_start();
     require_once('require.php');
+    require_once('SendEmail.php');
+    require_once('Test.php');
     if(isset($_SESSION['user_id'])){
         $User_Id = $_SESSION['user_id'];
     }
@@ -19,18 +21,12 @@
     $Status = 1;
     $sql = "INSERT INTO `request`(`User_Id`, `Event_Id`, `Status`, `G_Ticket_Quantity`, `S_Ticket_Quantity`) VALUES ('$User_Id','$Event_Id','$Status','$groupquantity','$singlequantity')";
     setData($sql);
-    // CREATE TABLE request (
-    //     User_Id INT,
-    //     Event_Id INT,
-    //     Status int NOT NULL,
-    //     G_Ticket_Quantity INT,
-    //     S_Ticket_Quantity INT,
-    //     PRIMARY KEY (User_Id, Event_Id),
-    //     FOREIGN KEY (User_Id) REFERENCES  user_table(User_Id),
-    //     FOREIGN KEY (Event_Id) REFERENCES  event(Event_Id)
-    //     )
-        
-        
+    $body = "Dear ".$_SESSION['username'].",<br>
+    You have placed a waiting request for ". $title." event. We will notify you when a slot is available.You can cancel the request in your user profile.<br>
+    Thank you";
+    //?Send an email
+    //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
+     sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket. Ticket Request", $body, null, null);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -208,6 +204,19 @@
         </div>
       </div>
     </footer>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
   </body>
 </html>
 

@@ -6,7 +6,7 @@ set_time_limit ( 300 );
 
 // session_start();
 function ticketBody(){
-    echo "<PRE>";
+    // echo "<PRE>";
     $ticket_body = array();
     $path_arr = array();
     foreach ($_SESSION['cart_tickets'] as $key => $value) {

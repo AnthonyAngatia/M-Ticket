@@ -11,3 +11,14 @@ CREATE TABLE Installment (
     PRIMARY KEY(Payment_id),
     FOREIGN KEY (User_id) REFERENCES user_table(User_id)
 );
+CREATE TABLE request (
+        User_Id INT,
+        Event_Id INT,
+        Status int NOT NULL,
+        G_Ticket_Quantity INT,
+        S_Ticket_Quantity INT,
+        PRIMARY KEY (User_Id, Event_Id),
+        FOREIGN KEY (User_Id) REFERENCES  user_table(User_Id),
+        FOREIGN KEY (Event_Id) REFERENCES  event(Event_Id)
+        );
+        

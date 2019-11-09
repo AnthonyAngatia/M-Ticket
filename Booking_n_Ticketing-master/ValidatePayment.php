@@ -1,19 +1,27 @@
 <?php 
+// 
+// *Coming from directpay.php
+// 
 session_start();
 require_once('ticket.php');
 require_once('Test.php');
-require_once('TransactionProcessing.php');
+require_once('SendEmail.php');
+
 
 $username = $_SESSION['username'];
-//!We need to check wheter the user has paid or cancelled b4 continuing executing
-$obj = getCallBackResponse();
-transactionDetails($obj, $username);
+//! check wheter the user has paid or cancelled b4 continuing
+// $obj = getCallBackResponse();
+// transactionDetails($obj, $username);
+//!
+
+//*Get the total amt and points
 $total_amt = $_SESSION['total_amount'] ;
 unset($_SESSION['total_amount'] );
-
-
-if(isset($_SESSION['paid'])){
- if($_SESSION['paid'] == 1){
+$points = $_SESSION['points'];
+unset( $_SESSION['points']);
+//*
+//todo if(isset($_SESSION['paid'])){
+//todo  if($_SESSION['paid'] == 1){
     echo "<script>alert(' Transaction Successfull')</script>";
     unset($_SESSION['paid']);
     //   // //*Updates our table
@@ -25,31 +33,32 @@ if(isset($_SESSION['paid'])){
     //*Send the emails
     //header("Location: Test.php");
     for($i=0; $i<sizeof(ticketBody()['0']); $i++){
+      //* This functions are in Test.php
       //?sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "Subject", $value, $path, $cid);
         sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
       }
-    //*Increase the points
+    //*Increase the points and reduce the points used
 
     if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
       $sess = $_SESSION["username"];
     }
     $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
-    //getData($sql);
-    $currentpoints = 0;
+    // getData($sql);
     $currentpoints=getData($sql)['0']['Points'];
-    $updatedpoints=($currentpoints+1);
+    $updatedpoints=($currentpoints+ 1 - $points);
     $sql = "UPDATE user_table SET Points='$updatedpoints' WHERE Username='$sess'";
     setData($sql);
+    
     $message = "Succcessful Transaction. Check your Email for the ticket";
-  }
-  else{
+  //todo }
+  //todo else{
     //failed transaction
-    // echo "<script>alert('Failed Transaction')</script>";
-    $message = "Failed transaction";
-    header("refresh:10;url=ValidatePayment.php");
+    //todo echo "<script>alert('Failed Transaction')</script>";
+    //todo $message = "Failed transaction";
+    // header("refresh:10;url=ValidatePayment.php");
     unset($_SESSION['paid']);
-  }
-}
+  // }
+//todo }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,21 +80,6 @@ if(isset($_SESSION['paid'])){
       href="plugins/font-awesome-4.7.0/css/font-awesome.min.css"
       rel="stylesheet"
       type="text/css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.carousel.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/animate.css"
     />
     <link
       href="plugins/colorbox/colorbox.css"

@@ -7,7 +7,7 @@
 //!This file is being called in DirectPays
 require_once('generate.php');
 require_once('require.php');
-session_start();
+// session_start();
 $user_id = $_SESSION['user_id'];
 $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
 // print_r($_SESSION['cart_tickets']);
@@ -17,17 +17,24 @@ function updateTables($user_id, $Event_id, $Totalpaid){
         print_r($value);
         $single_tickets = $value['squantity'];
         $group_tickets = $value['gquantity'];
+
         //*If you buy more than one ticket please put this for loops in the for each loop
         for($x=0; $x < $single_tickets; $x++){
+
             //*Get the no.of remaining tickets.
             $sql = "SELECT `Single_Quant_Remaining` FROM  event WHERE Event_id = '$Event_id'";
             $Single_Remainder = getData($sql)['0']['Single_Quant_Remaining'];
-            //*Check if there is no of remaining tickets
+
+
+
+            //*Check if there is remaining tickets
             if($Single_Remainder > 0){
                 //*Update the event table
                 $Single_Remainder = $Single_Remainder - 1;
                 $sql = "UPDATE `event` SET `Single_Quant_Remaining`='$Single_Remainder' WHERE  Event_id = '$Event_id'";
                 setData($sql);
+
+                
                 //*insert into the table of tickets
                 $randomnumber = rand(1000, 99000);
                 $ticketNo = generateQr($randomnumber);

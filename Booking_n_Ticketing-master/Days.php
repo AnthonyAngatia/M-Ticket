@@ -5,8 +5,6 @@ require_once('require.php');
 function getNoOfDays(){
     
     if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
-    //   echo "<script>alert('test')</script>";
-        // echo sizeof($_SESSION['cart_tickets']);
         $ticket_sale_end = array();
         //* Gets info from the database about the sale end and puts it in an array
         $rowData = array(); 

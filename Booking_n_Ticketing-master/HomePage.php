@@ -180,6 +180,7 @@ else{
                     <ul>
                         <li><a href="browse.php">browse events</a></li>
                         <li><a href="eventupload.php">create event</a></li>
+                        <li><a href="return.php">Return Ticket</a></li>
                         <li><a href="#">about us</a></li>
                         <li><a href="#">contact</a></li>
                     </ul>

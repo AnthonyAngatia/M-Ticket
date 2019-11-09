@@ -27,94 +27,25 @@ else{
 
    <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap" rel="stylesheet">
 
-    <title>Browse</title>
+    <title>your events</title>
     <style>
-         p{
-        font-family: 'Lucida', serif;
-      
-             }
-      .card-deck{
-        margin-left:20px;
-        margin-right:20px;
-
-      }
-      .card-body{
-        height:170px; 
-      }
-         #form1{
-        width:400px;
-        color:black;
-        font-family: 'Lucida', serif;
-
+       .postnav{
+        margin-top: 125px;
     }
-    .postnav{
-        margin-top: 120px;
-    }
+
         .carddeck1 {
         margin-left: 20px;
         margin-right: 20px;
         color: black;
         display: grid;
         grid-column-gap: 1em;
-        grid-row-gap: 5em;
+        grid-row-gap: 2em;
         grid-template-columns: 1fr 1fr 1fr 1fr;
+
     }
-    .filterby{
-      margin-left: 20px;
-      display: flex;
-    }
-    /*#result_div
-    {
-     width:555px; 
-     margin-left:220px;
-    }
-    #result_div li
-    { 
-     margin-bottom:20px;
-     list-style-type:none;
-    }
-    #result_div li a
-    {
-     text-decoration:none;
-     display:block;
-     text-align:left;
-    }
-    #result_div li a .title
-    {
-     font-weight:bold;
-     font-size:18px;
-     color:#5882FA;
-    }
-    #result_div li a .desc
-    {
-     color:#6E6E6E;
-    }*/
     </style>
 
-<script type="text/javascript" src="jquery.js"></script>
-<script type="text/javascript">
-function do_search()
-{
- var search_term=$("#search_term").val();
- $.ajax
- ({
-  type:'post',
-  url:'get_results.php',
-  data:{
-   search:"search",
-   search_term:search_term
-  },
-  // success:function(response) 
-  // {
-  //  document.getElementById("result_div").innerHTML=response;
-  // }
- });
- 
- return false;
-}
-</script>
-
-</head>
+    </head>
 <body>
 
 <div class="super_container">
@@ -124,6 +55,7 @@ function do_search()
       <div class="logo"><a href="Homepage.php">M-ticket</a></div>
       <nav class="main_nav">
         <ul>
+          <!-- <li><a href="browse.php">browse events</a></li> -->
           <li><a href="eventupload.php">create event</a></li>
           <li><a href="return.php">return ticket</a></li>
           <li><a href="#">about us</a></li>
@@ -173,82 +105,42 @@ function do_search()
     </div>
   </header>
 
-    <div class="postnav">
+  <div class="postnav">
     <div class="section_title_container text-center">
-    <div class="section_title">upcoming events</div>
+    <div class="section_title">your events</div>
     </div>
-    <br>
+    <br>  
 
-    <center>
-    <div id="form1">
-    <form method="post"action="get_results.php" onsubmit="return do_search();">
-        <input type="search" class="search_input menu_mm" name="search_term" placeholder="Enter event name*"aria-label="Search" onkeyup="do_search();">
-        <button type="submit" class="newsletter_button" name="search" style="width: 80px !important; height: 42px !important;">search</button>
-    </form>
-    </div>
-    <br>
- <!--    <div id="result_div"></div> -->
-    </center>
+<div class="carddeck1">
+    <?php
+ require('require.php');
 
-</div>
-  <br>
-  <br>
+  $sql = "SELECT User_Id  FROM user_table WHERE Username = '$sess'";
 
-
-  <form name="filter" class="filterby" method="GET" action="browse.php">
-  
-<div class="section_subtitle" style="font-size:15px !important; margin-top: 8px !important;">filter by</div>
- <div class="form-group col-md-6">
-          <select id="inputState" class="form-control" name="category" style="color:grey !important; width:220px !important; font-size: 15px !important;" onchange="location = this.value;">
-            <option value="browse.php">-------</option>
-            <option value="browse.php">All</option>
-            <option value="browse.php?category=music">Music</option>
-            <option value="browse.php?category=entertainment">Film, Media & Entertainment</option>
-            <option value="browse.php?category=visual">Visual Arts</option>
-            <option value="browse.php?category=communityculture">Community & Culture</option>
-            <option value="browse.php?category=other">Other</option>
-          </select>
-        </div>
-</form>
-
-<br>
-        <div class="carddeck1">
-            <!--!PHP funtion to retrieve info to the database and redirect-->
-            <?php
-    require('require.php');
-
-
-    $sql = "SELECT Poster, Title, Description1, Event_id  FROM event ORDER BY Event_id DESC";
-    if (isset($_GET['category'])) {
-      
-      $sql = "SELECT Poster, Title, Description1, Event_id  FROM event WHERE category='".$_GET['category']."'  ORDER BY Event_id DESC";
-      
-    }
-
-     $rowsData = getData($sql);
-    foreach ($rowsData as $value) {
-      ?>
-
-            <div class="card">
-                <a href="AboutEvent.php?w1=<?php echo $value['Event_id']; ?>">
+  $rowsData = getData($sql);
+  foreach ($rowsData as $value) {
+    $userid=$value ['User_Id'];
+  }
+    $sql=("SELECT Poster,Title,Event_Id FROM event WHERE User_Id ='$userid' ORDER BY Event_id DESC");
+  $rowsData = getData($sql);
+  foreach ($rowsData as $value) {
+    ?>
+       <div class="card">
                     <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $value['Title']; ?></h5>
-                        <p class="card-text"><?php echo $value['Description1']; ?></p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      <h5 style="color:black;" class="card-title"><?php echo $value['Title']; ?></h5>
+                      <a href="details.php?w1=<?php echo $value['Event_Id']; ?>">View Details........</a>
                     </div>
-                </a>
-
             </div>
-            <?php 
+
+        <?php 
           } 
             ?>
-
-        </div>
+         </div>
   <br>
   <br>
 
-  <!-- Footer -->
+    <!-- Footer -->
 
   <footer class="footer">
     <div class="container">

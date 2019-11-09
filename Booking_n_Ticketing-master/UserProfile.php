@@ -1,5 +1,17 @@
+
+
 <?php 
 session_start();
+if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
+  $sess = $_SESSION["username"];
+//  echo 'Set and not empty, and no undefined index error!';
+}
+else{
+  $sess = "null";
+  // echo "empty";
+}
+require_once('require.php');
+$userid = $_SESSION['user_id'];
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +43,8 @@ session_start();
     margin-top: 9em;
     margin-left: 15em;
     z-index: 9;
-    max-width: 65%;
+    /* max-width: 65%; */
+    max-width: 90%;
     display: flex;
     border: 2px solid black;
 
@@ -49,6 +62,46 @@ session_start();
     flex: 2;
 
 }
+.wrap-dash-userprofile{
+      display:grid;
+        /* grid-column-gap: 1em; */
+        /* grid-row-gap: 5em; */
+        grid-template-columns: 1fr 4fr;
+    }
+    .dashb{
+      display:none;
+      border:2px solid;
+      min-height:300px;
+      max-width:250px;
+      margin-top: 9em;
+          }
+    .dashb li{
+      font-size: 12pt;
+      padding:2em 3em;
+      color: #009fe5;
+      cursor:pointer;
+    }
+        .save_button
+{
+   margin-top: 25px;
+  width: 142px;
+  height: 46px;
+  background: #937c6f;
+  color: #FFFFFF;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+}
+
+    
 </style>
 
 <body>
@@ -57,73 +110,163 @@ session_start();
             <div class="logo"><a href="Homepage.php">M-ticket</a></div>
             <nav class="main_nav">
                 <ul>
+                    <li><a onclick = "dashboardOpen();" style = "color: #009fe5; cursor:pointer;">Dashboard</a></li>
                     <li><a href="browse.php">browse events</a></li>
                     <li><a href="#">about us</a></li>
                     <li><a href="#">contact</a></li>
                 </ul>
             </nav>
-            <div class="header_content ml-auto">
-                <div class="shopping">
-                    <!-- Cart -->
-                    <a href="cart.php">
-                        <div class="cart">
-                            <img src="cart3.png" width="30" height="30" alt="">
-                            <div class="cart_num_container">
-                                <div class="cart_num_inner">
-                                    <div class="cart_num">0</div>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                </div>
+<div class="header_content ml-auto">
+        <div class="shopping">
+           <a href="account.php" style="color:black;">
+            <div class="avatar" id="avatar"><b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+              <img src="avatar.png" alt="">
             </div>
-            <a href="UserProfile.php" style="color:black;">
-                <div class="avatar" id="avatar">
-                    <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
-                    <img src="avatar.png" alt="">
+            
+               <!-- session -->
+            <script>
+              if ('<%=Session["username"] == null%>') {
+                //alert('null session');
+               // document.querySelector('.avatar').style.display = 'none';
+              } else {
+                //alert('Session found');
+              }
+            </script>
+          </a>
+         
+          <!-- Cart -->
+          <a href="cart.php">
+            <div class="cart">
+              <img src="cart3.png" width="30" height="30" alt="">
+              <div class="cart_num_container">
+                <div class="cart_num_inner">
+                  <div class="cart_num"><?php 
+                                        if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                            echo sizeof($_SESSION['cart_tickets']);
+                                        } else{
+                                            echo "0";
+                                        }
+                                        ?> 
+                                        </div>
                 </div>
-            </a>
-            <!-- &emsp; -->
-
+              </div>
+            </div>
+          </a>
         </div>
-    </header>
+      </div>
+    
+
+    </div>
+  </header>
     <?php 
     $session_username =  htmlspecialchars($_SESSION["username"]);
     $sql = "SELECT * FROM user_table WHERE Username='$session_username' LIMIT 1";
-    require('require.php');
     $rowData = getData($sql);
     foreach ($rowData as $value) {
-        ?>
 
-    <div class="user-profile">
-        <img class="poster" id="poster" src="avatar.png" alt="profile" height="250" max-width="250" />
-         <form action="UserProfile.php" method="post" id = "form" style = >
-        <div class="poster-details">
-      
-            <h4>First Name</h4>
-            <input type="text" name="name" id="name"  disabled = "true"style="font-size: 14pt;max-width:500px; height:45px;" value = <?php  echo $value['Name']; ?> >
-            <h4>Username</h4>
-            <input type="text" name="user-name" id="user-name"  disabled = "true"style="font-size: 14pt;max-width:500px; height:45px;" value = <?php  echo $value['Username']; ?>>
-            <h4>Email</h4>
-            <input type="email" name="e-mail" id="e-mail"  disabled = "true"style="font-size: 14pt;max-width:500px; height:45px; " value = <?php  echo $value['Email']; ?>>
-            <h4>Phone Number</h4>
-            <?php  $password = $value['Password']; ?>
-            <input type="tel" name="tel-no" id="tel-no"  disabled = "true"style="font-size: 14pt;max-width:500px; height:45px; " value = <?php  echo $value['PhoneNo']; }?>>
-            <h4>Coupon points</h4>
-            <input type="text" name="coupon-points" id="" disabled = "true" value = "0" style="font-size: 14pt;max-width:500px; height:45px; ">
-            <h4>Password<span id = "message" style = "font-size: 10pt; color:red;"> Enter current password to edit!</span></h4>
-            <input type="password" name="pass" id="input-password" style="font-size: 14pt;max-width:500px; height:45px;" >
-            <p style = "font-size: 10pt; color:red; cursor:pointer;">Forgotten Password?</p>
-            <p id = "validate-click"  onclick = "validation()" style = "font-size: 14pt; cursor:pointer;"> Click to validate</p>
-        </div>
+
+
+        ?>
+    
+    
+    
+    
+    <div class="wrap-dash-userprofile">
+    <div class="dashb">
+    <ul>
+      <a onclick = "dashboardClose();"style = "color: #009fe5; cursor:pointer; margin:8px; float:right;"><i class="fa fa-2x fa-arrow-circle-left"></i></a>
+      <br><br>
+      <li><a href = "view_events.php" id = "events"><div class="section_subtitle">my events</div></a></li>
+      <li><a href = "UsersRequest.php" id = "requests"><div class="section_subtitle">requests</div></a></li>
+      <li><a href = "PayInstallment.php"><div class="section_subtitle">pending tickets</div></a></li>
+    </ul>
+    
     </div>
     <center>
-        <!-- <button class="btn" input = "submit">Save</button> -->
-        <input type="submit" value="Save" class="button extra_1_button">
-    </center>
-   
-    </form>
+    <div class="user-profile">
+        <img class="poster" id="poster" src="avatar.png" alt="profile" height="250" max-width="250" />
+         <form action="UserProfile.php" method="post" id = "form">
+        <div class="poster-details" style="width: 400px;">
+            
+            <div class="section_subtitle" style="font-size: 16px !important;">first name</div>
+            <input type="text" name="name" id="name"  disabled = "true"style="font-size: 14pt; width:300px; height:45px;" value = <?php  echo $value['Name'];?>>
+            <div class="section_subtitle" style="font-size: 16px !important;">user name</div>
+            <input type="text" name="user-name" id="user-name"  disabled = "true"style="font-size: 14pt;width:300px; height:45px;" value = <?php  echo $value['Username']; ?>>
+            <div class="section_subtitle" style="font-size: 16px !important;">email</div>
+            <input type="email" name="e-mail" id="e-mail"  disabled = "true"style="font-size: 14pt;width:300px; height:45px; " value = <?php  echo $value['Email']; ?>>
+          <div class="section_subtitle" style="font-size: 16px !important;">phone number</div>
+            <?php  $password = $value['Password']; ?>
+            <input type="tel" name="tel-no" id="tel-no"  disabled = "true"style="font-size: 14pt;width:300px; height:45px; " value = <?php  echo $value['PhoneNo']; }?>>
+            <div class="section_subtitle" style="font-size: 16px !important;">reward points</div>
+            <input type="text" name="coupon-points" id="" disabled = "true" value = "0" style="font-size: 14pt; width:300px; height:45px; ">
+            <div class="section_subtitle" style="font-size: 16px !important;">password</div>
+            <span id = "message" style = "font-size: 10pt; color:red;"> Enter current password to edit!</span>
+            <input type="password" name="pass" id="input-password" style="font-size: 14pt; width:300px; height:45px;" >
+            <p style = "font-size: 10pt; color:red; cursor:pointer;">Forgotten Password?</p>
+            <p id = "validate-click"  onclick = "validation()" style = "font-size: 14pt; cursor:pointer; color: blue; font-family: timesnewroman;"> Click to validate</p>
+     
+        </div>
     </div>
+  </div>
+</center>
+        <!-- <button class="btn" input = "submit">Save</button> -->
+   <center>
+        <!-- Requests</button> -->
+        <input type="submit" value="Save" class="save_button">
+    </center>  
+    </form>
+    <footer class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <div class="footer_logo"><a href="HomePage.php">M-ticket</a></div>
+            <nav class="footer_nav">
+              <ul>
+                <li><a href="browse.php">events</a></li>
+                <li><a href="HomePage.php">create event</a></li>
+                <li><a href="about.php">about us</a></li>
+                <li><a href="contact.php">contact</a></li>
+              </ul>
+            </nav>
+            <div class="footer_social">
+              <ul>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-pinterest" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-linkedin" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-instagram" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-reddit-alien" aria-hidden="true"></i
+                  ></a>
+                </li>
+                <li>
+                  <a href="#"
+                    ><i class="fa fa-twitter" aria-hidden="true"></i
+                  ></a>
+                </li>
+              </ul>
+            </div>
+            <div class="copyright">
+              Copyright &copy;<script>
+                document.write(new Date().getFullYear());
+              </script>
+              All rights reserved
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
     <script src="js/jquery.min.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -296,6 +439,26 @@ function enableInput(){
         }
 
         </script>
+        <script>
+    function dashboardOpen(){
+      document.querySelector('.dashb').style.display = "unset";
+    }
+    function dashboardClose(){
+      document.querySelector('.dashb').style.display = "none";
+    }
+    </script>
+    <script>
+    /*
+    TODO:script to check if session exist
+   */
+    var sess = "<?php echo $sess; ?>";
+    if (sess == "null") {
+        // alert("null");
+        document.getElementById('avatar').style.display = "none";
+    } else {
+        // alert("not null");
+    }
+    </script>
 
 </body>
 
@@ -320,3 +483,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          }
     }
     ?>
+UserProfile.php
+Displaying UserProfile.php.

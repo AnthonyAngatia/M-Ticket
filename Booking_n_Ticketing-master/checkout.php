@@ -20,7 +20,17 @@
         return $param;
       }
   }
+  function getParam2(){
+    if (!isset($_GET["w2"])){
+      echo "<script> alert('No param passed. I will redirect you soon')</script>";
+      }
+      else{
+        $param2 = $_GET["w2"];
+        return $param2;
+      }
+  }
   echo getParam();
+
 
 ?>
 <!DOCTYPE html>
@@ -112,7 +122,8 @@
 
     </div>
   </header>
-<?php
+<?php 
+
   require_once('Days.php');
   $days = getNoOfDays();
   // $days = 90;
@@ -167,6 +178,8 @@
             
               <form action="DirectPay.php" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="total-pay" value = "<?php echo getParam(); ?>">
+              <input type="hidden" name="points" value = "<?php echo getParam2(); ?>">
+
               <input type="text" class="cart_coupon_input" name="number" placeholder="Enter phone number" required="required">
               <button type="submit" name="apply" class="button_clear cart_button_2">make payment</button>
               </form>
@@ -190,6 +203,7 @@
               
               <input type="text" class="cart_coupon_input" name="phone_number" placeholder="Enter phone number" required="required">
               <input type="hidden" name="total-pay" value = "<?php echo ((int)((1.1*getParam())/2)); ?>">
+              <input type="hidden" name="points" value = "<?php echo getParam2(); ?>">
               <button type="submit" name="apply" class="button_clear cart_button_2">make payment</button>
               </form>
           </div>

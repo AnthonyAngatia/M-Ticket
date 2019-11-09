@@ -11,10 +11,10 @@
 
     require('require.php');
     function getParam() {
-    if (!isset($_GET["w1"])){
-    echo "<script> alert('No param passed')</script>";
-    }
-    else{
+        if (!isset($_GET["w1"])){
+        echo "<script> alert('No param passed')</script>";
+        }
+        else{
         $param = $_GET["w1"];
     return $param;
     }
@@ -125,7 +125,15 @@
         background-color: #ddd;
         box-shadow: 0 8px 6px -6px black;
     }
-
+    .carddeck1 {
+        margin-left: 20px;
+        margin-right: 20px;
+        color: black;
+        display: grid;
+        grid-column-gap: 1em;
+        grid-row-gap: 5em;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
     #inputstyle-sq {
         margin-bottom: 10px;
         margin-top: 10px;
@@ -191,7 +199,7 @@
                 <div class="header_content ml-auto">
                     <div class="shopping">
                         <!-- Avatar -->
-                <a href="account.php" style="color:black;">
+                <a href="UserProfile.php" style="color:black;">
                     <div class="avatar" id="avatar">
                         <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
                         <img src="avatar.png" alt="">
@@ -237,38 +245,17 @@
                     <p id="description">
                         <?php 
                     $description = $value['Description2'];
-                    echo substr($value['Description2'],0,200);} ?>
+                    echo substr($value['Description2'],0,200); ?>
                     </p>
                     <a id="see-more" onclick="seeMore()" style="cursor:pointer; margin-left: 1em;">See more</a>
                     <a id="close" onclick="closeFunc()"
                         style="display:none; cursor:pointer; margin-left: 1em;">Close</a>
-                    <script>
-                    function seeMore() {
-                        document.getElementById('poster').style.display = "none";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php echo $description ?>";
-                        document.getElementById('close').style.display = "unset";
-                        document.getElementById('see-more').style.display = "none";
-
-
-                    }
-
-                    function closeFunc() {
-                        document.getElementById('poster').style.display = "unset";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php  echo substr($value['Description2'],0,200); ?>";
-                        document.getElementById('close').style.display = "none";
-                        document.getElementById('see-more').style.display = "unset";
-
-                    }
-                    </script>
-                   
                     <div class="section_subtitle" style="margin:10px !important;">date:</div>
                     <p><?php echo  $value['Eventstart'];?> - <?php echo  $value['Eventend'];?></p>
                     <div class="section_subtitle" style="margin:10px !important;">location:</div>
                     <p><?php echo  $value['Location'];?></p>
                     <div class="section_subtitle" style="margin:10px !important;">organizers:</div>
-                    <p><?php echo  $value['Organizers'];?></p>
+                    <p><?php echo  $value['Organizers']; }?></p>
                     <!-- <div class="section_subtitle" style="margin:10px !important;">organizers:</div> -->
                     <p id = "sold-out-stmt" style = "color:red;">Sold out!!!<span style = "color:black;"> You can put a waiting request below</span><?php //echo  $value['Single_Quant_Remaining'];?></p>
 
@@ -307,8 +294,7 @@
                         hidden="true">
                 </div>
                 <div class="container">
-                    <input type="number" name="squantity" id="inputstyle-sq" value="0"
-                        onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px; " onkeypress = "false">
+                    <input onkeypress = "false" type="number" name="squantity" id="inputstyle-sq" value="0" onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px; " >
                 </div>
                 <div class="container" id="single-display"></div>
 
@@ -324,7 +310,7 @@
                 </div>
                 <div class="container">
                     <input type="number" name="gquantity" id="inputstyle-gq" value="0"
-                        onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;">
+                        onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;" onkeypress = "false">
                 </div>
                 <div class="container" id="group-display"></div>
             </div>
@@ -352,6 +338,8 @@
                         if(single_ticket_remaining <= 0){
                             document.getElementById('form').action = 'PlaceRequest.php';
                             document.getElementById('cart_btn').style.display = "none";
+                            document.getElementByID('inputstyle-sq').setAttribute('max', 1);
+                            document.getElementById('inputstyle-gq').setAttribute('max', 1);
 
 
                         }
@@ -367,11 +355,35 @@
         
         <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events
         </div>
-        <div class="similar-events-container">
-            <div class="sec1"></div>
-            <div class="sec2"></div>
-            <div class="sec3"></div>
-        </div>
+        <div class="carddeck1">
+        <?php
+        $sql = "SELECT Category,Title FROM event WHERE Event_id = ' $param' ";
+          $rowData = getData($sql);
+         foreach ($rowData as $value) {
+         $category=$value['Category'];
+         $title=$value['Title'];
+
+
+     }
+
+     $sql=("SELECT Poster, Title, Description1,Event_Id FROM event WHERE Category ='$category' AND Title NOT LIKE '$title' ORDER BY Event_Id DESC  LIMIT 4 ");
+      $rowsData = getData($sql); 
+      foreach ($rowsData as $value) {
+    ?>
+       <div class="card">
+                    <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
+                    <div class="card-body">
+                      <h5 style="color:black;" class="card-title"><?php echo $value['Title']; ?></h5>
+                       <p class="card-text"><?php echo $value['Description1']; ?></p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                    </div>
+            </div>
+
+        <?php 
+          } 
+            ?>
+         </div>
+  <br>
         <center>
             <div class="button extra_1_button"><a href="browse.php">see more</a></div>
         </center>
@@ -459,10 +471,28 @@
     getSinglePrice();
     getGroupPrice();
     </script>
+     <script>
+                    function seeMore() {
+                        document.getElementById('poster').style.display = "none";
+                        const description = document.getElementById('description');
+                        description.textContent = "<?php echo $description ?>";
+                        document.getElementById('close').style.display = "unset";
+                        document.getElementById('see-more').style.display = "none";
+
+
+                    }
+
+                    function closeFunc() {
+                        document.getElementById('poster').style.display = "unset";
+                        const description = document.getElementById('description');
+                        description.textContent = "<?php  echo substr($value['Description2'],0,200); ?>";
+                        document.getElementById('close').style.display = "none";
+                        document.getElementById('see-more').style.display = "unset";
+
+                    }
+                    </script>
+                   
 <script>
-    /*
-    TODO:script to check if session exist
-   */
     var sess = "<?php echo $sess; ?>";
     if (sess == "null") {
         // alert("null");

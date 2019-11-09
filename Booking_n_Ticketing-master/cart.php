@@ -45,7 +45,7 @@
       }
     }
     array_push($_SESSION['cart_tickets'],$ticket);
-  }
+  }print_r($_SESSION['cart_tickets']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -180,7 +180,7 @@
         
     </div>
     <?php 
-      if (  isset( $_SESSION['cart_tickets']) ) {
+      if (isset( $_SESSION['cart_tickets']) ) {
       $link=connect();
       foreach ($_SESSION['cart_tickets'] as $key => $value) {
         // print_r($_SESSION['cart_tickets']);
@@ -261,7 +261,7 @@
                 <div class="cart_title">reward points</div>
                 <div class="cart_coupon_form d-flex flex-row align-items-start justify-content-start" id="cart_coupon_form">
                   <input type="text" class="cart_coupon_input" value="<?php echo($points);?>"disabled>
-                  <input type="number" id = "coupon_input" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required" min = "0" max = "<?php echo($points);?>" onkeypress = "false" style="width:350px !important;">
+                  <input type="number" id = "coupon_input" class="cart_coupon_input" name="points" placeholder="Enter points for discount" required="required" min = "0" max = "<?php echo($points);?>" value = "0" onkeypress = "false" style="width:350px !important;">
                   <button name="apply" class="button_clear cart_button_2" onclick = "discountCalculation()">apply</button>
                   </div>
               </div>
@@ -337,19 +337,23 @@
     <script src="js/bootstrap.min.js" ></script>
     <script>
     var totDisplay = document.getElementById('total').textContent = "<?php echo($subtotal);?>";//Total display
+    var point = document.getElementById('coupon_input').value;
              function discountCalculation(){
               const subtotal =document.getElementById('subtotal').getAttribute('data-value');
-              const discount = document.getElementById('coupon_input').value;
+              var discount = document.getElementById('coupon_input').value;
               document.getElementById('discount_display').textContent = discount*100;
               var total = subtotal - (discount*100);
               document.getElementById('total').textContent = total;//Total display
               // alert(total);
               totDisplay = total;
+              points = discount;
               // alert(url+"?w1="+total);
+              
              }
             //  alert(totDisplay);
              function redirection(){
-              window.location.href = "http://localhost/M-Ticket/Booking_n_Ticketing-master/checkout.php?w1="+totDisplay;
+              // alert(point);
+              window.location.href = "http://localhost/M-Ticket/Booking_n_Ticketing-master/checkout.php?w1="+totDisplay+"&w2="+points;
              }
 
              </script>

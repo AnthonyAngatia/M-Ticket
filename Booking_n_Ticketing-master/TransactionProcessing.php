@@ -21,9 +21,8 @@ function transactionDetails($obj, $username){
             $_SESSION['paid'] = 0;
             echo "<script>alert('Failed transaction')</script>";
             header('Location: Cart.php');
+            exit();
             
-
-
         }
         else if($resultcode == 0){
             $MerchantRequestId = $obj->Body->stkCallback->MerchantRequestID;

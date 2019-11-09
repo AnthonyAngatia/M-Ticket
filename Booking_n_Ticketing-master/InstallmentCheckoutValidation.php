@@ -1,72 +1,27 @@
-<?php
-session_start();
-// print_r($_POST);
-require_once('require.php');
-// require_once('SendEmail.php');
-require_once('Days.php');
-require_once('Lipa-Mpesa.php');
+<?php 
+if(isset($_POST['submit'])){
+require_once('TransactionProcessing.php');
+    // *Get the response back//* check wheter the user has paid or cancelled b4 continuing
+    $obj = getCallBackResponse();
+    transactionDetails($obj, $username);
 
-$username = $_SESSION['username'];
-$phone_number = $_POST['phone_number'];
-$total_to_pay = $_POST['total-pay'];//DownPayment//!Remeber to alter this 
-$installment = $_POST['installment'];
-$installment_amt = $total_to_pay/$installment;
-$installment_amt = (int)$installment_amt;
-$total_payable = $total_to_pay *2;
-if(isset($_POST['points'])){
-  $points =  $_POST['points'];
-}
-else{
-  $points =  0;
-}
-
-// function getEmailInfo($username){
-//     $email_info = array();
-//     echo "<pre>";
-//     //*Getting email add of user
-//     $sql = "SELECT *  FROM user_table WHERE Username = '$username' ";
-//     // print_r(getData($sql)['0']['Email']);
-//     $emailAdd = getData($sql)['0']['Email'];
-//     array_push( $email_info,$emailAdd);
-//     $receiverName = getData($sql)['0']['Name'];
-//     array_push( $email_info,$receiverName);
-//     return $email_info;
-// }
-function getNextInstallment($installment){
-    $days = getNoOfDays();
-    $installment_time_interval = $days/$installment;
-    // echo "<br>";
-    $next_installment_date =  date('Y-m-d', strtotime(' + '.$installment_time_interval.'days'));//Add currnet date to time interval
-    return $next_installment_date;
-}
-$next_installment  = getNextInstallment($installment);
-
-if(isset($_SESSION['user_id'])){
-    $user_id = $_SESSION['user_id'];
-}
-else{
-    header('Location: userlogin.php');
-}
-$_SESSION['total-to-pay'] = $total_to_pay;
-$_SESSION['installment'] = $installment;
-$_SESSION['installment-amt'] = $installment_amt;
-$_SESSION['total-payable'] = $total_payable;
-$_SESSION['next-installment'] = $next_installment;
-$_SESSION['points'] = $points;
-print_r($_SESSION);
-
-
-
-//!Remember to return ths
-// $access_token =  accessTokenGenerator();
-// mpesaSendMoney($phone_number, $total_to_pay, $access_token);
-
-//!Pause for 30 seconds
-header("refresh:1;url=InstallmentPayValidation.php");
-
-// echo $next_installment;
-?>
-<!DOCTYPE html>
+    //*If TRUE Update the installment table
+    $balance = $_SESSION['balance'];
+    unset($_SESSION['balance']);
+    $event_id = $_SESSION['event'];
+    unset($_SESSION['event']);
+    $new_balance = $balance - $amount;
+    $message = "Transaction Successful. Your balance is " .$new_balance;
+    $sql = "UPDATE installment SET Balance = '$new_balance', Installment_amt='$new_balance' WHERE Event_Id = '$event_id' AND USER_Id = '$userid'";
+    
+    setData($sql);
+    
+    if($new_balance <= 0){
+      echo "<script>alert('balance 0')</script>";  
+      $sql = "UPDATE installment SET Status = 'Completed' WHERE Event_Id = '$event_id' AND USER_Id = '$userid'";
+      setData($sql);
+    }
+    unset($_POST['submit']);?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -88,28 +43,13 @@ header("refresh:1;url=InstallmentPayValidation.php");
       type="text/css"
     />
     <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.carousel.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
-    />
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="plugins/OwlCarousel2-2.2.1/animate.css"
-    />
-    <link
       href="plugins/colorbox/colorbox.css"
       rel="stylesheet"
       type="text/css"
     />
     <link rel="stylesheet" type="text/css" href="styles/main_styles.css" />
     <link rel="stylesheet" type="text/css" href="styles/responsive.css" />
-    <title>Installments php</title>
+    <title></title>
     <style>
       .success {
         
@@ -158,7 +98,7 @@ header("refresh:1;url=InstallmentPayValidation.php");
             <!-- Cart -->
             <a href="cart.php">
               <div class="cart">
-                <img src="cart3.png" width="27" height="27" alt="" />
+                <!-- <img src="cart3.png" width="27" height="10" alt="" /> -->
                 <div class="cart_num_container">
                   <div class="cart_num_inner">
                     <div class="cart_num">
@@ -186,7 +126,7 @@ header("refresh:1;url=InstallmentPayValidation.php");
       </div>
     </header>
     <div class="success">
-      <h2 style ="text-align:center; padding:2px 1em;"> Please wait for the transaction to be processed </h2>
+      <h2> <?php echo $message;?> </h2>
       <i class="fa fa-5x fa-ticket"></i>
     </div>
 
@@ -244,3 +184,9 @@ header("refresh:1;url=InstallmentPayValidation.php");
     </footer>
   </body>
 </html>
+<?php
+}
+
+?>
+
+?>

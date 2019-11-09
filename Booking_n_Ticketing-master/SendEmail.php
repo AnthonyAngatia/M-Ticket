@@ -58,7 +58,7 @@ function sendMail($emailAdd, $receiverName, $Subject ,$Body, $path, $cid ){
         $mail->AddEmbeddedImage(  $path, $cid );
 
         $mail->send();
-        echo 'Message has been sent';
+        // echo 'Message has been sent';
         // ! We need to create an sfter page to redirect to after message has been sent page
     } catch (Exception $e) {
         echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
