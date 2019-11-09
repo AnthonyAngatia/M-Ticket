@@ -92,7 +92,7 @@ function ticketBody(){
 function getEmailInfo(){
     $email_info = array();
     $sess = $_SESSION["username"];
-    echo "<pre>";
+    // echo "<pre>";
     //*Getting email add of user
     $sql = "SELECT *  FROM user_table WHERE Username = '$sess' ";
     // print_r(getData($sql)['0']['Email']);

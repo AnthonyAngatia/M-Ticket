@@ -12,9 +12,9 @@ $user_id = $_SESSION['user_id'];
 $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
 // print_r($_SESSION['cart_tickets']);
 
-function updateTables($user_id, $Event_id, $Totalpaid){
+function updateTables($user_id, $Event_id, $Totalpaid, $points){
     foreach ($_SESSION['cart_tickets'] as $key => $value) {
-        print_r($value);
+        // print_r($value);
         $single_tickets = $value['squantity'];
         $group_tickets = $value['gquantity'];
 
@@ -39,7 +39,7 @@ function updateTables($user_id, $Event_id, $Totalpaid){
                 $randomnumber = rand(1000, 99000);
                 $ticketNo = generateQr($randomnumber);
                 $status = 1;
-                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`, `Totalpaid`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id', '$Totalpaid')";
+                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`, `PointsUsed`, `Totalpaid`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id', '$points',  '$Totalpaid')";
                 setData($sql);
             }
             else{
@@ -61,7 +61,7 @@ function updateTables($user_id, $Event_id, $Totalpaid){
                 $randomnumber = rand(1000, 99000);
                 $ticketNo = generateQr($randomnumber);
                 $status = 1;
-                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id')";
+                $sql = "INSERT INTO `tickets`(`Ticket_Id`, `Status`, `User_Id`, `Event_id`, `PointsUsed`, `Totalpaid`) VALUES ('$ticketNo', '$status', '$user_id', '$Event_id', '$points',  '$Totalpaid')";
                 setData($sql);
             }
             else{

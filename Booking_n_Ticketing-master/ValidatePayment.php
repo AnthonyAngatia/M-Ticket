@@ -6,13 +6,14 @@ session_start();
 require_once('ticket.php');
 require_once('Test.php');
 require_once('SendEmail.php');
+require_once('TransactionProcessing.php');
 
 
 $username = $_SESSION['username'];
 //! check wheter the user has paid or cancelled b4 continuing
-// $obj = getCallBackResponse();
-// transactionDetails($obj, $username);
-//!
+$obj = getCallBackResponse();
+transactionDetails($obj, $username);
+
 
 //*Get the total amt and points
 $total_amt = $_SESSION['total_amount'] ;
@@ -20,14 +21,14 @@ unset($_SESSION['total_amount'] );
 $points = $_SESSION['points'];
 unset( $_SESSION['points']);
 //*
-//todo if(isset($_SESSION['paid'])){
-//todo  if($_SESSION['paid'] == 1){
-    echo "<script>alert(' Transaction Successfull')</script>";
+ if(isset($_SESSION['paid'])){
+  if($_SESSION['paid'] == 1){
+    echo "<script>alert(' Transaction Successfull at validate payment')</script>";
     unset($_SESSION['paid']);
     //   // //*Updates our table
     $user_id = $_SESSION['user_id'];
     $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
-    updateTables($user_id, $Event_id, $total_amt);
+    updateTables($user_id, $Event_id, $total_amt, $points);
 
 
     //*Send the emails
@@ -38,27 +39,27 @@ unset( $_SESSION['points']);
         sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
       }
     //*Increase the points and reduce the points used
-
-    if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-      $sess = $_SESSION["username"];
-    }
+    $sess = $_SESSION["username"];
     $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
     // getData($sql);
     $currentpoints=getData($sql)['0']['Points'];
-    $updatedpoints=($currentpoints+ 1 - $points);
+    $updatedpoints=($currentpoints + 1 - $points);
     $sql = "UPDATE user_table SET Points='$updatedpoints' WHERE Username='$sess'";
     setData($sql);
-    
+    //*Show how many points were used in the purchase of tickets
+    // $sql = "UPDATE tickets SET PointsUsed='$points' WHERE Username='$sess'";
+    // setData($sql);
+    unsetCart();
     $message = "Succcessful Transaction. Check your Email for the ticket";
-  //todo }
-  //todo else{
+   }
+   else{
     //failed transaction
-    //todo echo "<script>alert('Failed Transaction')</script>";
-    //todo $message = "Failed transaction";
-    // header("refresh:10;url=ValidatePayment.php");
+     echo "<script>alert('Failed Transaction at validate payment')</script>";
+     $message = "Failed transaction";
+    header("refresh:10;url=Cart.php");
     unset($_SESSION['paid']);
-  // }
-//todo }
+   }
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">

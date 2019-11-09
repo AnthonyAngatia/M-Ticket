@@ -18,9 +18,9 @@ else{
 
 //*Send Money
 $access_token = accessTokenGenerator();
-// mpesaSendMoney($phone_no, $total_amt, $access_token );
+mpesaSendMoney($phone_no, $total_amt, $access_token );
 
-mpesaSendMoney('0791278088', '2', $access_token );
+// mpesaSendMoney('0791278088', '2', $access_token );
 //Pause for 35 seconds
 
 
@@ -91,7 +91,7 @@ header("refresh:30;url=ValidatePayment.php");
       }
     </style>
   </head>
-  <body>
+  <body  onclick = "return false;">
     <header class="header">
       <div
         class="header_inner d-flex flex-row align-items-center justify-content-start"

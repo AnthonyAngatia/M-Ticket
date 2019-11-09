@@ -49,136 +49,138 @@
     <title>Event</title>
 </head>
 <style>
-    .event-poster {
-        font-weight: bold;
-        margin-top: 9em;
-        margin-left: 9em;
-        z-index: 9;
-        width: 80%;
-        display: flex;
-        border: 2px solid black;
-    }
+.event-poster {
+    font-weight: bold;
+    margin-top: 9em;
+    margin-left: 9em;
+    z-index: 9;
+    width: 80%;
+    display: flex;
+    border: 2px solid black;
+}
 
-    .poster {
+.poster {
 
-        height: 550px;
-        max-height: 550px;
-        max-width: 450px;
-    }
+    height: 550px;
+    max-height: 550px;
+    max-width: 450px;
+}
 
-    .poster-details {
-        background-color: white;
-        font-family: helvetica;
-    }
+.poster-details {
+    background-color: white;
+    font-family: helvetica;
+}
 
-    .poster-details h1,
-    h4 {
-        margin: 10px;
-    }
+.poster-details h1,
+h4 {
+    margin: 10px;
+}
 
-    .poster-details p {
-        margin: 20px;
-        color: grey;
-    }
+.poster-details p {
+    margin: 20px;
+    color: grey;
+}
 
-    .get-ticket-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        margin: 1em 5em;
-        grid-auto-rows: minmax(50px, auto);
-        grid-gap: 1px;
-        font-size: 18px;
+.get-ticket-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin: 1em 5em;
+    grid-auto-rows: minmax(50px, auto);
+    grid-gap: 1px;
+    font-size: 18px;
 
-    }
+}
 
-    .get-ticket-container>div {
-        background-color: #ddd;
-        padding: 0em;
-        text-align: center;
+.get-ticket-container>div {
+    background-color: #ddd;
+    padding: 0em;
+    text-align: center;
 
-    }
+}
 
-    .previous {
-        background-color: #ddd;
-        color: black;
-    }
+.previous {
+    background-color: #ddd;
+    color: black;
+}
 
-    .next {
-        background-color: #ddd;
-        color: black;
-    }
+.next {
+    background-color: #ddd;
+    color: black;
+}
 
-    .similar-events-heading {
-        margin-top: 2em;
-        text-align: center;
-    }
+.similar-events-heading {
+    margin-top: 2em;
+    text-align: center;
+}
 
-    .similar-events-container {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        grid-auto-rows: minmax(300px, auto);
-        margin: 1em;
-        grid-gap: 1em;
-    }
+.similar-events-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(300px, auto);
+    margin: 1em;
+    grid-gap: 1em;
+}
 
-    .similar-events-container>div {
-        background-color: #ddd;
-        box-shadow: 0 8px 6px -6px black;
-    }
-    .carddeck1 {
-        margin-left: 20px;
-        margin-right: 20px;
-        color: black;
-        display: grid;
-        grid-column-gap: 1em;
-        grid-row-gap: 5em;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-    #inputstyle-sq {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        text-align: center;
-        border: none;
-        background-color: #ddd;
-    }
+.similar-events-container>div {
+    background-color: #ddd;
+    box-shadow: 0 8px 6px -6px black;
+}
 
-    #inputstyle-gq {
-        margin-bottom: 10px;
-        margin-top: 10px;
-        text-align: center;
-        border: none;
-        background-color: #ddd;
-    }
+.carddeck1 {
+    margin-left: 20px;
+    margin-right: 20px;
+    color: black;
+    display: grid;
+    grid-column-gap: 1em;
+    grid-row-gap: 5em;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
-    #inputstyle-single {
-        margin-top: 18px;
-        text-align: center;
-        border: none;
-        background-color: #ddd;
-    }
+#inputstyle-sq {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    border: none;
+    background-color: #ddd;
+}
 
-    #inputstyle-group {
-        margin-top: 18px;
-        text-align: center;
-        border: none;
-        background-color: #ddd;
-    }
+#inputstyle-gq {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    text-align: center;
+    border: none;
+    background-color: #ddd;
+}
 
-    #total-display-input {
-        margin-bottom: 10px;
-        text-align: center;
-        border: none;
-        background-color: #ddd;
+#inputstyle-single {
+    margin-top: 18px;
+    text-align: center;
+    border: none;
+    background-color: #ddd;
+}
 
-    }
+#inputstyle-group {
+    margin-top: 18px;
+    text-align: center;
+    border: none;
+    background-color: #ddd;
+}
 
-    #inputstyle-title {
-        color: black;
-        width: 95%;
-        font-family: timesnewroman;
-        border: none;
-        background-color: white;
-    }
+#total-display-input {
+    margin-bottom: 10px;
+    text-align: center;
+    border: none;
+    background-color: #ddd;
+
+}
+
+#inputstyle-title {
+    color: black;
+    width: 95%;
+    font-family: timesnewroman;
+    border: none;
+    background-color: white;
+}
 </style>
 
 <body>
@@ -199,13 +201,13 @@
                 <div class="header_content ml-auto">
                     <div class="shopping">
                         <!-- Avatar -->
-                <a href="UserProfile.php" style="color:black;">
-                    <div class="avatar" id="avatar">
-                        <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
-                        <img src="avatar.png" alt="">
-                    </div>
-                </a>
-                &emsp;
+                        <a href="UserProfile.php" style="color:black;">
+                            <div class="avatar" id="avatar">
+                                <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+                                <img src="avatar.png" alt="">
+                            </div>
+                        </a>
+                        &emsp;
                         <!-- Cart -->
                         <a href="cart.php">
                             <div class="cart">
@@ -218,19 +220,19 @@
                                         } else{
                                             echo "0";
                                         }
-                                        ?> 
+                                        ?>
                                         </div>
-                                           </div>
-                                  </div>
+                                    </div>
                                 </div>
-                              </a>
-                        </div>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </header>
-        
+
         <!-- <form action="cart.php" method="POST" enctype="multipart/form-data" id = "form"> -->
-        <form  method="POST" enctype="multipart/form-data" id = "form">
+        <form method="POST" enctype="multipart/form-data" id="form">
 
             <div class="event-poster">
                 <img class="poster" id="poster" src="<?php echo  $value['Poster'];?>" alt="poster" />
@@ -257,7 +259,8 @@
                     <div class="section_subtitle" style="margin:10px !important;">organizers:</div>
                     <p><?php echo  $value['Organizers']; }?></p>
                     <!-- <div class="section_subtitle" style="margin:10px !important;">organizers:</div> -->
-                    <p id = "sold-out-stmt" style = "color:red;">Sold out!!!<span style = "color:black;"> You can put a waiting request below</span><?php //echo  $value['Single_Quant_Remaining'];?></p>
+                    <p id="sold-out-stmt" style="color:red;">Sold out!!!<span style="color:black;"> You can put a
+                            waiting request below</span><?php //echo  $value['Single_Quant_Remaining'];?></p>
 
                 </div>
             </div>
@@ -294,7 +297,8 @@
                         hidden="true">
                 </div>
                 <div class="container">
-                    <input onkeypress = "false" type="number" name="squantity" id="inputstyle-sq" value="0" onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px; " >
+                    <input onkeypress="return false;" type="number" name="squantity" id="inputstyle-sq" value="0"
+                        onchange="getSinglePrice();totalPay();" min="0" max="5" style="width:60px; height:40px; ">
                 </div>
                 <div class="container" id="single-display"></div>
 
@@ -310,7 +314,8 @@
                 </div>
                 <div class="container">
                     <input type="number" name="gquantity" id="inputstyle-gq" value="0"
-                        onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;" onkeypress = "false">
+                        onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;"
+                        onkeypress="false">
                 </div>
                 <div class="container" id="group-display"></div>
             </div>
@@ -324,39 +329,42 @@
                     <input type="text" id="total-display-input" name="totalprice" value="" disabled="true">
                 </div>
             </div>
-                    
+
             <center>
-            <button id = "request_btn" class="button extra_1_button" type="submit" name="submit" value="add">PLACE REQUEST</button>
-                <button id = "cart_btn" class="button extra_1_button" type="submit" name="submit" value="add">ADD TO CART</button>
+                <button id="request_btn" class="button extra_1_button" type="submit" name="submit" value="add">PLACE
+                    REQUEST</button>
+                <button id="cart_btn" class="button extra_1_button" type="submit" name="submit" value="add">ADD TO
+                    CART</button>
             </center>
         </form>
-        <script>
-            function checkRemainingTickets(){
-                        // alert("here");
-                        const single_ticket_remaining = '<?php echo $value['Single_Quant_Remaining'];?>';
-                        // alert(single_ticket_remaining);
-                        if(single_ticket_remaining <= 0){
-                            document.getElementById('form').action = 'PlaceRequest.php';
-                            document.getElementById('cart_btn').style.display = "none";
-                            document.getElementByID('inputstyle-sq').setAttribute('max', 1);
-                            document.getElementById('inputstyle-gq').setAttribute('max', 1);
-
-
-                        }
-                        else{
-                            document.getElementById('form').action = 'cart.php';
-                            document.getElementById('request_btn').style.display = "none";
-                            document.getElementById('sold-out-stmt').style.display = "none";
-                        }
-                    }
-                    checkRemainingTickets();
-            </script>
-
         
+        
+        <script>
+        function checkRemainingTickets() {
+            // alert("here");
+            const single_ticket_remaining = <?php echo $value['Single_Quant_Remaining'];?>;
+            // alert(single_ticket_remaining);
+            if (single_ticket_remaining <= 0) {
+                document.getElementById('form').action = 'PlaceRequest.php';
+                document.getElementById('cart_btn').style.display = "none";
+                document.getElementByID('inputstyle-sq').setAttribute('max', 1);
+                document.getElementById('inputstyle-gq').setAttribute('max', 1);
+
+
+            } else {
+                document.getElementById('form').action = 'cart.php';
+                document.getElementById('request_btn').style.display = "none";
+                document.getElementById('sold-out-stmt').style.display = "none";
+            }
+        }
+        checkRemainingTickets();
+        </script>
+
+
         <div class="section_title" style="text-align:center !important; margin-top: 40px !important; ">similar events
         </div>
         <div class="carddeck1">
-        <?php
+            <?php
         $sql = "SELECT Category,Title FROM event WHERE Event_id = ' $param' ";
           $rowData = getData($sql);
          foreach ($rowData as $value) {
@@ -370,20 +378,20 @@
       $rowsData = getData($sql); 
       foreach ($rowsData as $value) {
     ?>
-       <div class="card">
-                    <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
-                    <div class="card-body">
-                      <h5 style="color:black;" class="card-title"><?php echo $value['Title']; ?></h5>
-                       <p class="card-text"><?php echo $value['Description1']; ?></p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-                    </div>
+            <div class="card">
+                <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
+                <div class="card-body">
+                    <h5 style="color:black;" class="card-title"><?php echo $value['Title']; ?></h5>
+                    <p class="card-text"><?php echo $value['Description1']; ?></p>
+                    <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                </div>
             </div>
 
-        <?php 
+            <?php 
           } 
             ?>
-         </div>
-  <br>
+        </div>
+        <br>
         <center>
             <div class="button extra_1_button"><a href="browse.php">see more</a></div>
         </center>
@@ -422,8 +430,8 @@
             </div>
         </footer>
     </div>
-    <script src="js/jquery.min.js"></script>
-    <script src="js/popper.min.js"></script>
+    <!-- <script src="js/jquery.min.js"></script> -->
+    <!-- <script src="js/popper.min.js"></script> -->
     <script src="js/bootstrap.min.js"></script>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
@@ -471,28 +479,28 @@
     getSinglePrice();
     getGroupPrice();
     </script>
-     <script>
-                    function seeMore() {
-                        document.getElementById('poster').style.display = "none";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php echo $description ?>";
-                        document.getElementById('close').style.display = "unset";
-                        document.getElementById('see-more').style.display = "none";
+    <script>
+    function seeMore() {
+        document.getElementById('poster').style.display = "none";
+        const description = document.getElementById('description');
+        description.textContent = "<?php echo $description ?>";
+        document.getElementById('close').style.display = "unset";
+        document.getElementById('see-more').style.display = "none";
 
 
-                    }
+    }
 
-                    function closeFunc() {
-                        document.getElementById('poster').style.display = "unset";
-                        const description = document.getElementById('description');
-                        description.textContent = "<?php  echo substr($value['Description2'],0,200); ?>";
-                        document.getElementById('close').style.display = "none";
-                        document.getElementById('see-more').style.display = "unset";
+    function closeFunc() {
+        document.getElementById('poster').style.display = "unset";
+        const description = document.getElementById('description');
+        description.textContent = "<?php  echo substr($value['Description2'],0,200); ?>";
+        document.getElementById('close').style.display = "none";
+        document.getElementById('see-more').style.display = "unset";
 
-                    }
-                    </script>
-                   
-<script>
+    }
+    </script>
+
+    <script>
     var sess = "<?php echo $sess; ?>";
     if (sess == "null") {
         // alert("null");

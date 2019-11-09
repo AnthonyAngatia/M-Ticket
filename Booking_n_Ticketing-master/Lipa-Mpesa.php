@@ -71,7 +71,7 @@
 // echo $curl_response;
 // //header("Location: Test.php");
 
-function accessTokenGenerator(){
+function accessTokenGenerator(){  
   //Access token
   $access_token_url = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials';
     
@@ -87,23 +87,22 @@ function accessTokenGenerator(){
 
   $access_token = json_decode($curl_response)->access_token;
 
-  echo $access_token; //Testing works.
+  // echo $access_token; //Testing works.
   curl_close($curl);
   return $access_token;
 
 }
 
-function mpesaSendMoney($phone_no, $total_amt, $access_token ){
+function mpesaSendMoney($phone_no, $total_amt, $access_token){
   //define variables
   $phone_no =ltrim($phone_no, '0');
   $localIP = getHostByName(getHostName());
   $initiate_url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
-
   $BusinessShortcode = '174379';
-  $Timestamp = date('YmdGis');
+  $Timestamp = date('Ymdhis');//date('Ymdis');
   $PartyA = '254'.$phone_no;//25491278088
-  $CallBackURL = 'https://c22a93c4.ngrok.io/M-ticket/Booking_n_Ticketing-master/callback_url.php';
-  // $CallBackURL = 'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
+  $CallBackURL = 'https://570ea50c.ngrok.io/M-ticket/Booking_n_Ticketing-master/callback_url.php';
+  //   $CallBackURL = 'http://'.$localIP.'/M-ticket/Booking_n_Ticketing-master/callback_url.php';
   $AccountReference =  'M-ticket.com ';
   $TransactionDesc =  'Transaction description ';
   $Amount = $total_amt;
@@ -138,7 +137,7 @@ function mpesaSendMoney($phone_no, $total_amt, $access_token ){
   curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);
 
   $curl_response = curl_exec($curl);
-  print_r($curl_response);
+  // print_r($curl_response);
 
   // echo $curl_response;
   // set_time_limit(40);

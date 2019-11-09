@@ -5,12 +5,25 @@ function getCallBackResponse(){
     $url = 'CallBackResponse.json';
     $data = file_get_contents($url);
     $obj = json_decode($data);
-    unlink('CallbackResponse.json');
+    if(file_exists('CallbackResponse.json')){
+        unlink('CallbackResponse.json');
+    }
+    else {
+        echo  "<script>alert('Please make sure that you have entered the correct pin on your phone.')</script>";
+    }
+    
     return $obj;
 }
 
 
 function transactionDetails($obj, $username){
+    if(!isset($obj)){
+        echo "<script>alert(' Transaction Failed Transaction processing')</script>";
+        header("refresh:10;url = Cart.php");
+
+    exit();
+
+    }
         $resultcode = $obj->Body->stkCallback->ResultCode;
         // echo $resultcode;
         if($resultcode == 1032){
@@ -19,8 +32,8 @@ function transactionDetails($obj, $username){
             $sql = "INSERT INTO `transactions`(`MerchantRequestId`, `RequestDesc`, `UserName`) VALUES ('$MerchantRequestId','$ResultDescription','$username')";
             setData($sql);
             $_SESSION['paid'] = 0;
-            echo "<script>alert('Failed transaction')</script>";
-            header('Location: Cart.php');
+            echo "<script>alert('Failed transaction at transaction processing')</script>";
+            header('refresh:10;url=Cart.php');
             exit();
             
         }
