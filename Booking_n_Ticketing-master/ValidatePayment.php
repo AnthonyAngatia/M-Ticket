@@ -10,13 +10,22 @@ require_once('TransactionProcessing.php');
 
 
 $username = $_SESSION['username'];
-//! check wheter the user has paid or cancelled b4 continuing
+$user_id = $_SESSION['user_id'];
+//! check whether the user has paid or cancelled b4 continuing
 $obj = getCallBackResponse();
 transactionDetails($obj, $username);
 
-
-//*Get the total amt and points
-$total_amt = $_SESSION['total_amount'] ;
+if(isset($_SESSION['request'])){
+  // echo "<script>alert(' zsxfcgvbhjnhgfdxfcbhjnnhbfcdx vbnt')</script>";
+  $sql = "UPDATE request SET Status = '0' WHERE User_Id='$user_id'";
+  setData($sql);
+  unset($_SESSION['request']);
+  // unsetCart();
+  $message = "Succcessful Transaction. Check your Email for the ticket";
+}
+else{
+  //*Get the total amt and points
+$total_amt = $_SESSION['total_amount'];
 unset($_SESSION['total_amount'] );
 $points = $_SESSION['points'];
 unset( $_SESSION['points']);
@@ -26,7 +35,6 @@ unset( $_SESSION['points']);
     echo "<script>alert(' Transaction Successfull at validate payment')</script>";
     unset($_SESSION['paid']);
     //   // //*Updates our table
-    $user_id = $_SESSION['user_id'];
     $Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
     updateTables($user_id, $Event_id, $total_amt, $points);
 
@@ -60,6 +68,10 @@ unset( $_SESSION['points']);
     unset($_SESSION['paid']);
    }
  }
+}
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

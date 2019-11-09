@@ -78,6 +78,7 @@ $userid = $_SESSION['user_id'];
         <th>Group Tickets</th>
         <th>Single Tickets</th>
         <th>TimeStamp</th>
+        <th>Availability</th>
         <th>Cancel Request</th>
         <th>Buy ticket</th>
       </tr>
@@ -86,6 +87,7 @@ $userid = $_SESSION['user_id'];
     $requests =  getData($sql);
     foreach ($requests as $key => $value) { 
       $eventid = $value['Event_Id'];
+      $status = $value['Status'];
       $sql = "SELECT Title FROM event WHERE Event_Id='$eventid'";
       $row = getData($sql);
       foreach ($row as $key => $value2) {
@@ -101,8 +103,25 @@ $userid = $_SESSION['user_id'];
       <td><?php echo $value['S_Ticket_Quantity'];?></td>
       <td><?php echo $value['TimeStamp'];?></td>
       <form action="" method="post">
+      <?php if($status == 2)
+      { ?>
+      <td> <?php echo "available"; ?></td>
       <td><input id = 'delete' type = 'submit' name = 'cancel' value = 'Cancel'></td>
-      <td><input id = 'buy' type = 'submit' name = 'Buy' value = 'Buy' style = "display:none"></td>
+      <td><input id = 'buy' type = 'submit' name = 'Buy' value = 'Buy' style = "  "></td>
+      <?php
+       }
+      elseif ($status == 0) 
+      {?>
+      <td><?php echo "Paid";?></td>
+      <td><input id = 'delete' type = 'submit' name = 'cancel' value = 'Cancel'></td> <?php 
+      }
+      else{ 
+        ?>
+      <td><?php echo "Not Availbale";?>
+      <td><input id = 'delete' type = 'submit' name = 'cancel' value = 'Cancel'></td> <?php 
+       }?>
+       </td>
+      
       </form>
       </tr>
     <?php } ?>
@@ -139,6 +158,7 @@ $userid = $_SESSION['user_id'];
         'subtotal_in_array' => $subtotal
         );
         array_push($_SESSION['cart_tickets'],$ticket);
+        $_SESSION['request'] = 'paid';
         header("Location: cart.php");
 
     }

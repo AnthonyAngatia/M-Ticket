@@ -313,7 +313,7 @@ h4 {
                         hidden="true">
                 </div>
                 <div class="container">
-                    <input type="number" name="gquantity" id="inputstyle-gq" value="0"
+                    <input onkeypress="return false;" type="number" name="gquantity" id="inputstyle-gq" value="0"
                         onchange="getGroupPrice();totalPay();" min="0" max="5" style="width:60px; height:40px;"
                         onkeypress="false">
                 </div>
@@ -340,6 +340,7 @@ h4 {
         
         
         <script>
+        
         function checkRemainingTickets() {
             // alert("here");
             const single_ticket_remaining = <?php echo $value['Single_Quant_Remaining'];?>;
@@ -347,8 +348,8 @@ h4 {
             if (single_ticket_remaining <= 0) {
                 document.getElementById('form').action = 'PlaceRequest.php';
                 document.getElementById('cart_btn').style.display = "none";
-                document.getElementByID('inputstyle-sq').setAttribute('max', 1);
-                document.getElementById('inputstyle-gq').setAttribute('max', 1);
+                document.getElementById('inputstyle-sq').max = 1;
+                document.getElementById('inputstyle-gq').max = 1;
 
 
             } else {

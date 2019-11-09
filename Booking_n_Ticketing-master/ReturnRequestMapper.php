@@ -12,6 +12,7 @@ $request = getData($sql);
 $sql = "SELECT * FROM tickets WHERE Status = '0' ";// from the  ticket tble
 $returns = getData($sql);
 // echo "<pre>";
+echo "return ticket is. Not yet returned";
 print_r($returns);
 
 
@@ -44,6 +45,7 @@ print_r($returns);
                     break;
                 }
                 $emailAdd = $requester_info['0']['Email'];
+                echo $emailAdd;
                 $name = $requester_info['0']['Name'];
                 $subject = "M-Ticket.Available ticket!!";
                 $body = "Dear ".$_SESSION['username'].",<br>
