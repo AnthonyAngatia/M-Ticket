@@ -20,8 +20,12 @@ if(isset($_SESSION['request'])){
   $sql = "UPDATE request SET Status = '0' WHERE User_Id='$user_id'";
   setData($sql);
   unset($_SESSION['request']);
-  // unsetCart();
+  
   $message = "Succcessful Transaction. Check your Email for the ticket";
+  for($i=0; $i<sizeof(ticketBody()['0']); $i++){
+    sendMail(getEmailInfo()['0'], getEmailInfo()['1'], "M-ticket", ticketBody()['0'][$i], ticketBody()['1'][$i], ticketBody()['1'][$i]);
+  }
+  unsetCart();
 }
 else{
   //*Get the total amt and points
@@ -29,8 +33,11 @@ $total_amt = $_SESSION['total_amount'];
 unset($_SESSION['total_amount'] );
 $points = $_SESSION['points'];
 unset( $_SESSION['points']);
+echo "<script>alert(' Gotten total amt and points')</script>";
 //*
  if(isset($_SESSION['paid'])){
+   echo "<script>alert(' Sessiion paid isset')</script>";
+
   if($_SESSION['paid'] == 1){
     echo "<script>alert(' Transaction Successfull at validate payment')</script>";
     unset($_SESSION['paid']);

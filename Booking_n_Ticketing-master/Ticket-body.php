@@ -34,7 +34,7 @@ function ticketBody(){
             }
             .wrap img{
                 margin:1em;
-                border:1px solid red;
+                border:1px solid white;
                 height:100px;
                 max-width:150px;
                 min-width:100px;

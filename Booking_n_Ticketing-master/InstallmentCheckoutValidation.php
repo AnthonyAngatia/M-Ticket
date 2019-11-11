@@ -1,15 +1,21 @@
 <?php 
-if(isset($_POST['submit'])){
+// if(isset($_POST['submit'];
+session_start();
+
 require_once('TransactionProcessing.php');
     // *Get the response back//* check wheter the user has paid or cancelled b4 continuing
+    $username = $_SESSION["username"];
     $obj = getCallBackResponse();
     transactionDetails($obj, $username);
-
+print_r($_SESSION);
     //*If TRUE Update the installment table
     $balance = $_SESSION['balance'];
     unset($_SESSION['balance']);
     $event_id = $_SESSION['event'];
     unset($_SESSION['event']);
+    $amount = $_SESSION['amt'];
+    unset($_SESSION['amt']);
+    $userid = $_SESSION['user_id'];
     $new_balance = $balance - $amount;
     $message = "Transaction Successful. Your balance is " .$new_balance;
     $sql = "UPDATE installment SET Balance = '$new_balance', Installment_amt='$new_balance' WHERE Event_Id = '$event_id' AND USER_Id = '$userid'";
@@ -21,7 +27,7 @@ require_once('TransactionProcessing.php');
       $sql = "UPDATE installment SET Status = 'Completed' WHERE Event_Id = '$event_id' AND USER_Id = '$userid'";
       setData($sql);
     }
-    unset($_POST['submit']);?>
+    // unset($_POST['submit']);?>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -185,7 +191,7 @@ require_once('TransactionProcessing.php');
   </body>
 </html>
 <?php
-}
+// }
 
 ?>
 

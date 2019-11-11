@@ -23,9 +23,9 @@ function getEmailInfo($username){
     return $email_info;
 }
 
-//!Remember to return this to normal
-// $obj = getCallBackResponse();
-// transactionDetails($obj, $username);
+// !Remember to return this to normal
+$obj = getCallBackResponse();
+transactionDetails($obj, $username);
 
 $total_to_pay = $_SESSION['total-to-pay'] ;
 unset($_SESSION['total-to-pay'] );
@@ -55,24 +55,23 @@ $event_id = $_SESSION['cart_tickets']['0']['id'];
 
 
 
-
+//*Instert info into the database
 $sql = "INSERT INTO installment( DownPayment, No_of_Installments, Total_Payable, Balance, Next_Installment, Installment_amt, User_Id, Event_Id) VALUES ( $total_to_pay, $installment, $total_payable , $balance, '$next_installment' ,$installment_amt, $user_id, $event_id)";
 // $sql = "INSERT INTO installment( DownPayment, No_of_Installments, Total_Payable, Balance, Next_Installment, Installment_amt, User_Id, Event_Id) VALUES ( $total_to_pay, $installment, $total_payable , $balance,'2019-12-02' ,$installment_amt, $user_id, $event_id)";
 setData($sql);
+//*Update points
+  $sess = $_SESSION["username"];
 
-if(isset($_SESSION['username']) && !empty($_SESSION['username'])) {
-    $sess = $_SESSION["username"];
-  }
   $sql=("SELECT Points FROM user_table WHERE Username ='$sess'");
   //getData($sql);
   $currentpoints = 0;
   $currentpoints=getData($sql)['0']['Points'];
-  $updatedpoints=($currentpoints+1- $points);
+  $updatedpoints=($currentpoints + 1 - $points);
   $sql = "UPDATE user_table SET Points='$updatedpoints' WHERE Username='$sess'";
   setData($sql);
   $message = "Transaction Successful";
 
-
+//*Send Email
 $body ='<style>
     .wrap {
     border: 1px solid black;

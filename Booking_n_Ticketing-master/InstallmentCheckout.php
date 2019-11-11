@@ -118,9 +118,11 @@ if(isset($_POST['submit'])){
     $amount = $_POST['amount'];
     $phone_no = $_POST['phone_no'];
     $access_token = accessTokenGenerator();
-    mpesaSendMoney($phone_no, $amount, $access_token);
-   
+    // mpesaSendMoney($phone_no, $amount, $access_token);
+    mpesaSendMoney($phone_no, '2', $access_token);
+    $_SESSION['amt'] = $amount;
     $message = "Please check your phone to complete the transaction";
+    header("refresh:30;url=InstallmentCheckoutValidation.php");
    ?>
 <html lang="en">
   <head>
@@ -299,8 +301,7 @@ if(isset($_POST['submit'])){
     </footer>
   </body>
 </html>
-<?php
- header("refresh: 30 InstallmentCheckoutValidation.php");
-}
 
+<?php 
+}
 ?>

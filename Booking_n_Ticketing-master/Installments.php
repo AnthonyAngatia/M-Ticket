@@ -20,18 +20,6 @@ else{
   $points =  0;
 }
 
-// function getEmailInfo($username){
-//     $email_info = array();
-//     echo "<pre>";
-//     //*Getting email add of user
-//     $sql = "SELECT *  FROM user_table WHERE Username = '$username' ";
-//     // print_r(getData($sql)['0']['Email']);
-//     $emailAdd = getData($sql)['0']['Email'];
-//     array_push( $email_info,$emailAdd);
-//     $receiverName = getData($sql)['0']['Name'];
-//     array_push( $email_info,$receiverName);
-//     return $email_info;
-// }
 function getNextInstallment($installment){
     $days = getNoOfDays();
     $installment_time_interval = $days/$installment;
@@ -58,11 +46,12 @@ print_r($_SESSION);
 
 
 //!Remember to return ths
-// $access_token =  accessTokenGenerator();
+$access_token =  accessTokenGenerator();
 // mpesaSendMoney($phone_number, $total_to_pay, $access_token);
+mpesaSendMoney($phone_number, '2', $access_token);
 
 //!Pause for 30 seconds
-header("refresh:1;url=InstallmentPayValidation.php");
+header("refresh:20;url=InstallmentPayValidation.php");
 
 // echo $next_installment;
 ?>

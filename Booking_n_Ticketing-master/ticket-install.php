@@ -9,7 +9,7 @@ require_once('generate.php');
 require_once('require.php');
 // session_start();
 $user_id = $_SESSION['user_id'];
-$Event_id = $_SESSION['cart_tickets']['0']['id'];//Event id for the first item in the cart
+$Event_id = $_SESSION['cart_tickets']['1']['id'];//Event id for the first item in the cart
 print_r($_SESSION['cart_tickets']);
 
 function updateTables($user_id, $Event_id, $Totalpaid, $points){
