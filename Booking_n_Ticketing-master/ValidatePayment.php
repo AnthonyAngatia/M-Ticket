@@ -36,7 +36,7 @@ unset( $_SESSION['points']);
 echo "<script>alert(' Gotten total amt and points')</script>";
 //*
  if(isset($_SESSION['paid'])){
-   echo "<script>alert(' Sessiion paid isset')</script>";
+  //  echo "<script>alert(' Sessiion paid isset')</script>";
 
   if($_SESSION['paid'] == 1){
     echo "<script>alert(' Transaction Successfull at validate payment')</script>";

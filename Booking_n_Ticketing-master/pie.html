@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Pie Chart with Chart.js</title>
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <!-- External CSS -->
+    <link rel="stylesheet" type="text/css" href="css/mticket.css" />
+
+    <!-- Load an icon library -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Nunito:400,600,700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    .chart-wrapper1 {
+      max-height: 800px;
+      min-height: 300px;
+    }
+  </style>
+
+  <body>
+    <header class="header">
+      <div
+        class="header_inner d-flex flex-row align-items-center justify-content-start"
+      >
+        <div class="logo"><a href="Homepage.php">M-ticket</a></div>
+        <nav class="main_nav">
+          <ul>
+            <!-- <li><a href="browse.php">browse events</a></li> -->
+            <li><a href="eventupload.php">create event</a></li>
+            <li><a href="return.php">return ticket</a></li>
+            <li><a href="#">about us</a></li>
+            <li><a href="#">contact</a></li>
+          </ul>
+        </nav>
+        <div class="header_content ml-auto">
+          <div class="shopping">
+            <a href="account.php" style="color:black;">
+              <div class="avatar" id="avatar">
+                <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>
+                <img src="avatar.png" alt="" />
+              </div>
+
+              <!-- session -->
+            </a>
+
+            <!-- Cart -->
+            <a href="cart.php">
+              <div class="cart">
+                <img src="cart3.png" width="30" height="30" alt="" />
+                <div class="cart_num_container">
+                  <div class="cart_num_inner">
+                    <div class="cart_num">
+                      <?php 
+                                              if (  isset( $_SESSION['cart_tickets'])  && !empty($_SESSION['cart_tickets'])) {
+                                                  echo sizeof($_SESSION['cart_tickets']);
+                                              } else{
+                                                  echo "0";
+                                              }
+                                              ?>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class="wrapper">
+      <div
+        class="container d-flex flex-column justify-content-center align-items-center"
+      >
+        <div
+          class="title text-center mb-5"
+          style="max-height: 300px; margin-top: 9em;"
+        >
+          <h1>Ticket Sales</h1>
+        </div>
+        <!-- <div class="chart-wrapper1"> -->
+        <canvas id="myChart"></canvas>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+    <script src="./js2.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script>
+      /*
+    TODO:script to check if session exist
+   */
+      var sess = "<?php echo $sess; ?>";
+      if (sess == "null") {
+        // alert("null");
+        document.getElementById("avatar").style.display = "none";
+      } else {
+        // alert("not null");
+      }
+    </script>
+  </body>
+</html>

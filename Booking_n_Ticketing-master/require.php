@@ -14,7 +14,7 @@ function setData($sql)
 {
 	$link = connect();
 	if (mysqli_query($link, $sql)) {
-		echo "<script>alert('Your data has been recorded')</script>";
+		// echo "<script>alert('Your data has been recorded')</script>";
 		return true;
 	} else {
 		echo "<script>alert('Not working')</script>";

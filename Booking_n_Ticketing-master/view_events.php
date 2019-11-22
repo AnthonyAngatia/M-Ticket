@@ -70,14 +70,6 @@ else{
             </div>
             
                <!-- session -->
-            <script>
-              if ('<%=Session["username"] == null%>') {
-                //alert('null session');
-               // document.querySelector('.avatar').style.display = 'none';
-              } else {
-                //alert('Session found');
-              }
-            </script>
           </a>
          
           <!-- Cart -->
@@ -129,7 +121,9 @@ else{
                     <img src="<?php echo $value['Poster']; ?>" class="card-img-top" height="420" alt="...">
                     <div class="card-body">
                       <h5 style="color:black;" class="card-title"><?php echo $value['Title']; ?></h5>
-                      <a href="details.php?w1=<?php echo $value['Event_Id']; ?>">View Details........</a>
+                      <a href="details.php?w1=<?php echo $value['Event_Id']; ?>">View Details........</a><br>
+                      <a href="Pie.html?w1=<?php echo $value['Event_Id']; ?>">View Stats</a>
+
                     </div>
             </div>
 
